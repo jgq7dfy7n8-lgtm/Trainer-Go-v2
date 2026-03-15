@@ -9,7 +9,85 @@
 <body style="background:#060608;color:#00e5ff;padding:40px 20px;font-family:sans-serif;">
 <div id="app">Starting...</div>
 <script type="text/javascript">
-document.getElementById("app").textContent = "JS works";
+var app = document.getElementById("app");
+app.textContent = "Step 1 - vars ok";
+
+var curKey = null;
+var slideIdx = 0;
+var setsDoneA = 0;
+var setsDoneB = 0;
+var prs = {};
+var restTimer = null;
+var restLeft = 0;
+var plankTimer = null;
+var plankLeft = 180;
+var plankRunning = false;
+
+app.textContent = “Step 2 - state ok”;
+
+function sg(k, d) {
+try {
+var v = localStorage.getItem(k);
+return v ? JSON.parse(v) : d;
+} catch(err) {
+return d;
+}
+}
+function ss(k, v) {
+try {
+localStorage.setItem(k, JSON.stringify(v));
+} catch(err) {}
+}
+
+app.textContent = “Step 3 - storage ok”;
+
+var WK = {};
+
+WK.push = {
+name: “Push Day”,
+tag: “Chest / Shoulders / Triceps”,
+color: “#e8533a”,
+slides: []
+};
+WK.pull = {
+name: “Pull Day”,
+tag: “Back / Biceps”,
+color: “#2a7aaa”,
+slides: []
+};
+WK.lower = {
+name: “Lower Body”,
+tag: “Quads / Hamstrings / Glutes”,
+color: “#5a8a3a”,
+slides: []
+};
+WK.upper = {
+name: “Upper Body”,
+tag: “Chest / Back / Arms”,
+color: “#8a5ac8”,
+slides: []
+};
+WK.recovery = {
+name: “Active Recovery”,
+tag: “Mobility / Flexibility”,
+color: “#c8882a”,
+slides: []
+};
+
+app.textContent = “Step 4 - WK object ok”;
+
+var keys = [“push”, “pull”, “lower”, “upper”, “recovery”];
+var html = “<h1 style='font-size:36px;margin-bottom:20px;'>TRAINER GO</h1>”;
+for (var i = 0; i < keys.length; i++) {
+var k = keys[i];
+var w = WK[k];
+html += “<div style='background:#12121a;border-left:4px solid " + w.color + ";border-radius:12px;padding:16px;margin-bottom:10px;'>”;
+html += “<div style='font-size:18px;color:#fff;'>” + w.name + “</div>”;
+html += “<div style='font-size:12px;color:#6a6a8a;'>” + w.tag + “</div>”;
+html += “</div>”;
+}
+app.innerHTML = html;
 </script>
+
 </body>
 </html>
