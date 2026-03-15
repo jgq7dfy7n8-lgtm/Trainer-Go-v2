@@ -98,6 +98,7 @@ body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height
   <div class="restlbl">seconds</div>
   <button class="restskip" id="restskip">SKIP REST</button>
 </div>
+<script type="text/javascript">window.onerror=function(msg,url,line,col,err){document.body.style.background="#fff";document.body.style.color="#000";document.body.style.padding="40px";document.body.style.fontSize="14px";document.body.innerHTML="<h2>JS ERROR</h2><p>"+msg+"</p><p>Line: "+line+" Col: "+col+"</p><pre>"+(err?err.stack:"no stack")+"</pre>";return true;};</script>
 <script type="text/javascript">
 var CK=null,SI=0,SDA=0,SDB=0,PRS={},RT=null,RL=0,PT=null,PL=180,PIR=false;
 
@@ -292,8 +293,8 @@ h+=”<button class='stprev' id='stprev'>← BACK</button>”;
 h+=”<button class='stnext' id='stnext' style='background:"+w.color+";'>”+(SI===tot-1?“FINISH”:“NEXT ›”)+”</button>”;
 h+=”</div></div></div>”;
 el.innerHTML=h;
-document.getElementById(“stprev”).onclick=function(){if(SI<=0){goOv(CK);}else{SI–;SDA=0;SDB=0;goStory();}};
-document.getElementById(“stnext”).onclick=function(){if(SI>=WK[CK].slides.length-1){goDone();}else{SI++;SDA=0;SDB=0;goStory();}};
+document.getElementById(“stprev”).onclick=function(){if(SI<=0){goOv(CK);}else{SI-=1;SDA=0;SDB=0;goStory();}};
+document.getElementById(“stnext”).onclick=function(){if(SI>=WK[CK].slides.length-1){goDone();}else{SI+=1;SDA=0;SDB=0;goStory();}};
 var pb=document.getElementById(“plankbtn”);
 if(pb)pb.onclick=function(){toggleP();};
 bDots();bPR();
@@ -378,7 +379,7 @@ var b=document.getElementById(“plankbtn”);if(b)b.textContent=“RESUME”;
 PIR=true;if(PL<=0)PL=180;
 var b2=document.getElementById(“plankbtn”);if(b2)b2.textContent=“PAUSE”;
 PT=setInterval(function(){
-PL–;
+PL-=1;
 var d=document.getElementById(“plankdisp”);
 if(d){var m=Math.floor(PL/60),sc=PL%60;d.textContent=m+”:”+(sc<10?“0”:””)+sc;}
 if(PL<=0){
@@ -398,7 +399,7 @@ ov.className=“restov on”;
 var rn=document.getElementById(“restnum”);if(rn)rn.textContent=RL;
 if(RT)clearInterval(RT);
 RT=setInterval(function(){
-RL–;
+RL-=1;
 var rn2=document.getElementById(“restnum”);if(rn2)rn2.textContent=RL;
 if(RL<=0){clearInterval(RT);RT=null;var o=document.getElementById(“restov”);if(o)o.className=“restov”;}
 },1000);
