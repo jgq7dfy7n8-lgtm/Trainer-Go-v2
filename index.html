@@ -1,65 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trainer Go</title>
-<style>
-body{background:#060608;color:#00e5ff;font-family:sans-serif;padding:40px 20px;}
-</style>
 </head>
-<body>
+<body style="background:#060608;color:#00e5ff;padding:40px 20px;font-family:sans-serif;">
 <div id="app">Starting...</div>
-<script>
-document.getElementById('app').innerHTML = 'Step 1 OK';
-
-var WK = {};
-
-WK.push = {};
-WK.push.name = ‘Push Day’;
-WK.push.color = ‘#e8533a’;
-WK.push.tag = ‘Chest / Shoulders / Triceps’;
-WK.push.slides = [];
-
-WK.pull = {};
-WK.pull.name = ‘Pull Day’;
-WK.pull.color = ‘#2a7aaa’;
-WK.pull.tag = ‘Back / Biceps’;
-WK.pull.slides = [];
-
-WK.lower = {};
-WK.lower.name = ‘Lower Body’;
-WK.lower.color = ‘#5a8a3a’;
-WK.lower.tag = ‘Quads / Hamstrings / Glutes’;
-WK.lower.slides = [];
-
-WK.upper = {};
-WK.upper.name = ‘Upper Body’;
-WK.upper.color = ‘#8a5ac8’;
-WK.upper.tag = ‘Chest / Back / Arms’;
-WK.upper.slides = [];
-
-WK.recovery = {};
-WK.recovery.name = ‘Active Recovery’;
-WK.recovery.color = ‘#c8882a’;
-WK.recovery.tag = ‘Mobility / Flexibility’;
-WK.recovery.slides = [];
-
-document.getElementById(‘app’).innerHTML = ‘Step 2 OK - WK built’;
-
-var html = ‘<h1 style="font-size:36px;margin-bottom:20px;">TRAINER GO</h1>’;
-var keys = [‘push’,‘pull’,‘lower’,‘upper’,‘recovery’];
-for (var i = 0; i < keys.length; i++) {
-var k = keys[i];
-html += ‘<div style="background:#12121a;border:1px solid #2a2a3e;border-radius:12px;padding:16px;margin-bottom:10px;border-left:4px solid ' + WK[k].color + ';">’;
-html += ‘<div style="font-size:18px;font-weight:700;color:#fff;">’ + WK[k].name + ‘</div>’;
-html += ‘<div style="font-size:12px;color:#6a6a8a;">’ + WK[k].tag + ‘</div>’;
-html += ‘</div>’;
-}
-
-document.getElementById(‘app’).innerHTML = html;
+<script type="text/javascript">
+document.getElementById("app").textContent = "JS works";
 </script>
-
 </body>
 </html>
