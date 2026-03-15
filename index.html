@@ -8,9 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html,body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height:100%;}
-#app{min-height:100vh;padding:0;}
-.page{display:none;}
+html{background:#060608;}
+body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height:100vh;}
+/* NO position:fixed on pages - use display none/block only */
+.page{display:none;min-height:100vh;width:100%;background:#060608;}
 .page.on{display:block;}
 /* HOME */
 .home{padding:60px 18px 60px;}
@@ -24,12 +25,11 @@ html,body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-h
 .wtag{font-size:11px;color:#6a6a8a;margin-top:3px;}
 .warr{margin-left:auto;font-size:22px;flex-shrink:0;}
 /* OVERVIEW */
-.ovpage{padding:0 0 120px;}
-.ovhero{padding:52px 20px 20px;background:#060608;border-bottom:1px solid #1e1e2e;margin-bottom:0;}
-.ovback{font-size:12px;color:#6a6a8a;cursor:pointer;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;}
+.ovhero{padding:52px 20px 20px;background:#060608;border-bottom:1px solid #1e1e2e;}
+.ovback{font-size:12px;color:#6a6a8a;cursor:pointer;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;display:inline-block;}
 .ovtitle{font-family:"Black Ops One",sans-serif;font-size:34px;letter-spacing:2px;line-height:1;}
 .ovtag{font-size:11px;color:#6a6a8a;margin-top:5px;letter-spacing:2px;text-transform:uppercase;}
-.ovlist{padding:16px 18px;}
+.ovlist{padding:16px 18px 140px;}
 .ovphase{font-size:9px;font-weight:700;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;padding:16px 0 8px;}
 .ovgroup{border-radius:14px;background:#12121a;border:1px solid #2a2a3e;margin-bottom:10px;overflow:hidden;}
 .ovpair{padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid #1e1e2e;}
@@ -41,12 +41,11 @@ html,body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-h
 .ovbot{padding:16px 18px 40px;}
 .ovbtn{width:100%;padding:17px;border:none;border-radius:14px;font-family:"Black Ops One",sans-serif;font-size:20px;letter-spacing:4px;color:#000;cursor:pointer;}
 /* STORY */
-.stpage{padding:0 0 40px;}
-.stbars{display:flex;gap:4px;padding:52px 16px 0;}
+.stbars{display:flex;gap:4px;padding:52px 16px 12px;background:#060608;}
 .stbar{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;}
 .stfill{height:100%;border-radius:999px;}
-.stbody{padding:16px 18px 20px;}
-.sthud{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.stbody{padding:0 18px 40px;}
+.sthud{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-top:16px;}
 .stbadge{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid;}
 .ststep{font-size:11px;color:#6a6a8a;letter-spacing:1px;}
 .exblock{border-radius:14px;padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid #2a2a3e;}
@@ -65,18 +64,19 @@ html,body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-h
 .plankbtn{display:inline-block;padding:11px 28px;border-radius:10px;font-family:"Black Ops One",sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;border:1.5px solid;}
 .prrow{display:flex;gap:7px;margin-top:8px;}
 .prinp{flex:1;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.5);border:1.5px solid #2a2a3e;color:#f0f0ff;font-size:14px;font-family:Rajdhani,sans-serif;font-weight:600;-webkit-appearance:none;}
+.prinp:focus{outline:none;border-color:#00e5ff;}
 .prsave{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.25);border-radius:10px;padding:9px 14px;color:#00e5ff;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
-.navrow{display:flex;gap:10px;margin-top:8px;}
+.navrow{display:flex;gap:10px;margin-top:16px;}
 .stprev{flex:1;padding:15px;border:1.5px solid #2a2a3e;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:16px;letter-spacing:2px;color:#6a6a8a;cursor:pointer;background:transparent;text-align:center;}
 .stnext{flex:2;padding:15px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:4px;color:#000;cursor:pointer;text-align:center;}
-/* REST */
-.restov{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.96);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
-.restov.on{display:flex;}
+/* REST - position fixed still needed here but with the iOS26 fix */
+.restov{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.restov.on{display:flex;background-color:#000000;}
 .restlbl{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#6a6a8a;}
 .restnum{font-family:"Black Ops One",sans-serif;font-size:110px;line-height:1;color:#00e5ff;}
-.restskip{margin-top:28px;padding:13px 40px;background:rgba(255,255,255,.05);border:1px solid #2a2a3e;border-radius:12px;color:#6a6a8a;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;text-transform:uppercase;}
+.restskip{margin-top:28px;padding:13px 40px;background:#1a1a1a;border:1px solid #2a2a3e;border-radius:12px;color:#6a6a8a;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;text-transform:uppercase;}
 /* DONE */
-.donepage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;}
+.donepage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;background:#060608;}
 .doneicon{font-size:64px;margin-bottom:12px;}
 .donetitle{font-family:"Black Ops One",sans-serif;font-size:52px;letter-spacing:5px;margin-bottom:6px;}
 .donestat{font-family:"Black Ops One",sans-serif;font-size:36px;color:#00e5ff;margin-bottom:4px;}
@@ -99,7 +99,7 @@ html,body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-h
   <button class="restskip" id="restskip">SKIP REST</button>
 </div>
 <script type="text/javascript">
-var CK=null,SI=0,SDA=0,SDB=0,PRS={},RT=null,RL=0,PT=null,PL=180,PR=false;
+var CK=null,SI=0,SDA=0,SDB=0,PRS={},RT=null,RL=0,PT=null,PL=180,PIR=false;
 
 function sg(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -108,9 +108,9 @@ function mk(p,e){return {phase:p,exs:e};}
 
 var WK={
 push:{name:“Push Day”,tag:“Chest / Shoulders / Triceps”,color:”#e8533a”,slides:[
-mk(“WARMUP”,[ex(“Arm Circles”,“2 x 10 each”,0,“reps”,2,“Roll shoulders forward 10 times then backward.”)]),
-mk(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Squeeze everything. 3 full minutes.”)]),
-mk(“WARMUP”,[ex(“Pushup Warm-Up”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo. Gets blood into chest and shoulders.”)]),
+mk(“WARMUP”,[ex(“Arm Circles”,“2 x 10 each”,0,“reps”,2,“Roll shoulders forward 10 times then backward. Opens the rotator cuff.”)]),
+mk(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Squeeze glutes and abs. 3 full minutes, no breaks.”)]),
+mk(“WARMUP”,[ex(“Pushup Warm-Up”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo. Gets blood into chest, shoulders, and triceps.”)]),
 mk(“WORKOUT”,[
 ex(“Bench Press”,“4 sets x 8-10 reps”,90,“weighted”,4,“Bar to mid-chest, elbows 45 degrees. Lower 2 seconds, press explosively.”),
 ex(“Incline DB Press”,“3 sets x 10-12 reps”,75,“weighted”,3,“30-45 degree bench. Feel the stretch at the bottom.”)
@@ -151,7 +151,7 @@ ex(“Romanian Deadlift”,“3 sets x 10 reps”,90,“weighted”,3,“Hinge a
 ]),
 mk(“WORKOUT”,[
 ex(“Walking Lunges”,“3 sets x 10 each leg”,75,“weighted”,3,“Torso upright. Front knee over toes.”),
-ex(“Leg Press”,“3 sets x 12-15 reps”,75,“weighted”,3,“Do not lock out at top. Keep tension on the muscle.”)
+ex(“Leg Press”,“3 sets x 12-15 reps”,75,“weighted”,3,“Do not lock out at top. Keep tension.”)
 ]),
 mk(“WORKOUT”,[
 ex(“Leg Curl”,“3 sets x 12-15 reps”,60,“weighted”,3,“2 seconds up, 3 seconds down. Full range.”),
@@ -186,7 +186,8 @@ mk(“WORKOUT”,[
 ex(“Hamstring Stretch”,“2 x 45s each side”,30,“timed”,2,“Flat back. Hinge from hips not spine.”),
 ex(“Foam Roll”,“5 minutes”,0,“timed”,1,“Hold 20-30 seconds on tender spots.”)
 ])
-]}
+]
+}
 };
 
 var EM={push:”💪”,pull:”🔗”,lower:”🦵”,upper:”🏋”,recovery:”🧘”};
@@ -235,8 +236,7 @@ CK=key;
 var w=WK[key];
 var el=document.getElementById(“p-ov”);
 if(!el)return;
-var h=”<div class='ovpage'>”;
-h+=”<div class='ovhero'>”;
+var h=”<div class='ovhero'>”;
 h+=”<div class='ovback' id='ovback'>← BACK</div>”;
 h+=”<div class='ovtitle' style='color:"+w.color+";'>”+EM[key]+” “+w.name.toUpperCase()+”</div>”;
 h+=”<div class='ovtag'>”+w.tag+”</div>”;
@@ -260,7 +260,6 @@ h+=”</div>”;
 }
 h+=”</div>”;
 h+=”<div class='ovbot'><button class='ovbtn' id='ovstart' style='background:"+w.color+";'>START WORKOUT</button></div>”;
-h+=”</div>”;
 el.innerHTML=h;
 document.getElementById(“ovback”).onclick=function(){goHome();};
 document.getElementById(“ovstart”).onclick=function(){SI=0;SDA=0;SDB=0;goStory();};
@@ -276,50 +275,39 @@ var bars=””;
 for(var i=0;i<tot;i++){
 bars+=”<div class='stbar'><div class='stfill' style='width:"+(i<SI?100:0)+"%;background:"+w.color+";'></div></div>”;
 }
-var h=”<div class='stpage' style='background:linear-gradient(170deg,"+w.color+"20 0%,#060608 45%);'>”;
+var h=”<div style='background:linear-gradient(180deg,"+w.color+"20 0%,#060608 40%);'>”;
 h+=”<div class='stbars'>”+bars+”</div>”;
 h+=”<div class='stbody'>”;
-h+=”<div class='sthud'>”;
-h+=”<span class='stbadge' style='color:"+w.color+";border-color:"+w.color+"40;'>”+slide.phase+”</span>”;
-h+=”<span class='ststep'>”+(SI+1)+” OF “+tot+”</span>”;
-h+=”</div>”;
+h+=”<div class='sthud'><span class='stbadge' style='color:"+w.color+";border-color:"+w.color+"40;'>”+slide.phase+”</span>”;
+h+=”<span class='ststep'>”+(SI+1)+” OF “+tot+”</span></div>”;
 if(slide.exs.length===1){
-h+=buildEx(slide.exs[0],“A”,w.color,0,SDA,true);
+h+=bEx(slide.exs[0],“A”,w.color,0,SDA,true);
 }else{
-h+=buildEx(slide.exs[0],“A”,w.color,0,SDA,false);
+h+=bEx(slide.exs[0],“A”,w.color,0,SDA,false);
 h+=”<div class='pdiv'>THEN</div>”;
-h+=buildEx(slide.exs[1],“B”,w.color,1,SDB,false);
+h+=bEx(slide.exs[1],“B”,w.color,1,SDB,false);
 }
 h+=”<div class='navrow'>”;
 h+=”<button class='stprev' id='stprev'>← BACK</button>”;
 h+=”<button class='stnext' id='stnext' style='background:"+w.color+";'>”+(SI===tot-1?“FINISH”:“NEXT ›”)+”</button>”;
-h+=”</div>”;
-h+=”</div></div>”;
+h+=”</div></div></div>”;
 el.innerHTML=h;
-document.getElementById(“stprev”).onclick=function(){
-if(SI<=0){goOv(CK);}else{SI–;SDA=0;SDB=0;goStory();}
-};
-document.getElementById(“stnext”).onclick=function(){
-if(SI>=WK[CK].slides.length-1){goDone();}else{SI++;SDA=0;SDB=0;goStory();}
-};
+document.getElementById(“stprev”).onclick=function(){if(SI<=0){goOv(CK);}else{SI–;SDA=0;SDB=0;goStory();}};
+document.getElementById(“stnext”).onclick=function(){if(SI>=WK[CK].slides.length-1){goDone();}else{SI++;SDA=0;SDB=0;goStory();}};
 var pb=document.getElementById(“plankbtn”);
 if(pb)pb.onclick=function(){toggleP();};
-bindDots();
-bindPR();
+bDots();bPR();
 pg(“p-story”);
-PL=180;PR=false;
+PL=180;PIR=false;
 }
 
-function buildEx(e,label,color,idx,done,big){
+function bEx(e,label,color,idx,done,big){
 var h=”<div class='exblock' style='border-left:3px solid "+color+";'>”;
-h+=”<div style='margin-bottom:8px;'>”;
-h+=”<span class='exltr' style='background:"+color+"20;border:1px solid "+color+"50;color:"+color+";'>”+label+”</span>”;
-h+=”<span class='exname' style='font-size:"+(big?"28":"22")+"px;color:"+color+";'>”+e.name+”</span>”;
-h+=”</div>”;
+h+=”<div style='margin-bottom:8px;'><span class='exltr' style='background:"+color+"20;border:1px solid "+color+"50;color:"+color+";'>”+label+”</span>”;
+h+=”<span class='exname' style='font-size:"+(big?"28":"22")+"px;color:"+color+";'>”+e.name+”</span></div>”;
 var pi=PRS[e.name];
 if(pi)h+=”<div class='prbadge' style='background:"+color+"15;color:"+color+";border-color:"+color+"35;'>PR: “+pi.weight+“lb x “+pi.reps+”</div>”;
-h+=”<div class='exmeta'>”+e.meta+”</div>”;
-h+=”<div class='excue'>”+e.cue+”</div>”;
+h+=”<div class='exmeta'>”+e.meta+”</div><div class='excue'>”+e.cue+”</div>”;
 if(e.type===“plank”){
 h+=”<div class='plankwrap' style='border-color:"+color+"30;'>”;
 h+=”<div class='planktime' id='plankdisp' style='color:"+color+";'>3:00</div>”;
@@ -330,33 +318,24 @@ h+=”</div>”;
 if(e.type===“weighted”||e.type===“reps”){
 h+=”<div class='setrow' id='dr-"+idx+"'>”;
 for(var s=0;s<e.sets;s++){
-var hit=(s<done);
-var ds=hit?“border-color:”+color+”;color:#000;background:”+color+”;”  :””;
+var hit=(s<done),ds=hit?“border-color:”+color+”;color:#000;background:”+color+”;”  :””;
 h+=”<div class='dot' id='d-"+idx+"-"+s+"' style='"+ds+"' data-i='"+idx+"' data-s='"+s+"' data-t='"+e.sets+"' data-r='"+e.rest+"'>”+( s+1)+”</div>”;
 }
 h+=”</div>”;
-h+=”<div class='prrow'>”;
-h+=”<input class='prinp' id='pw"+idx+"' type='number' placeholder='lbs'>”;
+h+=”<div class='prrow'><input class='prinp' id='pw"+idx+"' type='number' placeholder='lbs'>”;
 h+=”<input class='prinp' id='prr"+idx+"' type='number' placeholder='reps'>”;
-h+=”<div class='prsave' id='prs"+idx+"'>Save PR</div>”;
-h+=”</div>”;
+h+=”<div class='prsave' id='prs"+idx+"'>Save PR</div></div>”;
 }
-h+=”</div>”;
-return h;
+return h+”</div>”;
 }
 
-function bindDots(){
+function bDots(){
 var dots=document.querySelectorAll(”.dot”);
 for(var i=0;i<dots.length;i++){
 (function(d){
 d.onclick=function(){
-var idx=parseInt(d.getAttribute(“data-i”));
-var s=parseInt(d.getAttribute(“data-s”));
-var t=parseInt(d.getAttribute(“data-t”));
-var r=parseInt(d.getAttribute(“data-r”));
-var color=WK[CK].color;
-var cur=(idx===0?SDA:SDB);
-var nd=(s<cur?s:s+1);
+var idx=parseInt(d.getAttribute(“data-i”)),s=parseInt(d.getAttribute(“data-s”)),t=parseInt(d.getAttribute(“data-t”)),r=parseInt(d.getAttribute(“data-r”));
+var color=WK[CK].color,cur=(idx===0?SDA:SDB),nd=(s<cur?s:s+1);
 if(idx===0)SDA=nd;else SDB=nd;
 for(var x=0;x<t;x++){
 var dot=document.getElementById(“d-”+idx+”-”+x);
@@ -370,23 +349,20 @@ if(nd>0&&nd<t&&r>0)showRest(r);
 }
 }
 
-function bindPR(){
+function bPR(){
 for(var i=0;i<2;i++){
 (function(idx){
 var btn=document.getElementById(“prs”+idx);
 if(!btn)return;
 btn.onclick=function(){
-var slide=WK[CK].slides[SI];
-if(!slide||!slide.exs[idx])return;
-var nm=slide.exs[idx].name;
-var we=document.getElementById(“pw”+idx);
-var re=document.getElementById(“prr”+idx);
+var sl=WK[CK].slides[SI];
+if(!sl||!sl.exs[idx])return;
+var we=document.getElementById(“pw”+idx),re=document.getElementById(“prr”+idx);
 if(!we||!re)return;
 var wv=parseFloat(we.value),rv=parseInt(re.value);
 if(!wv||!rv)return;
-PRS[nm]={weight:wv,reps:rv,date:new Date().toISOString().split(“T”)[0]};
-ss(“wt_prs”,PRS);
-we.value=””;re.value=””;
+PRS[sl.exs[idx].name]={weight:wv,reps:rv,date:new Date().toISOString().split(“T”)[0]};
+ss(“wt_prs”,PRS);we.value=””;re.value=””;
 btn.textContent=“Saved!”;
 setTimeout(function(){btn.textContent=“Save PR”;},1200);
 };
@@ -395,24 +371,19 @@ setTimeout(function(){btn.textContent=“Save PR”;},1200);
 }
 
 function toggleP(){
-if(PR){
-PR=false;
-if(PT){clearInterval(PT);PT=null;}
-var b=document.getElementById(“plankbtn”);
-if(b)b.textContent=“RESUME”;
+if(PIR){
+PIR=false;if(PT){clearInterval(PT);PT=null;}
+var b=document.getElementById(“plankbtn”);if(b)b.textContent=“RESUME”;
 }else{
-PR=true;
-if(PL<=0)PL=180;
-var b2=document.getElementById(“plankbtn”);
-if(b2)b2.textContent=“PAUSE”;
+PIR=true;if(PL<=0)PL=180;
+var b2=document.getElementById(“plankbtn”);if(b2)b2.textContent=“PAUSE”;
 PT=setInterval(function(){
 PL–;
 var d=document.getElementById(“plankdisp”);
 if(d){var m=Math.floor(PL/60),sc=PL%60;d.textContent=m+”:”+(sc<10?“0”:””)+sc;}
 if(PL<=0){
-clearInterval(PT);PT=null;PR=false;
-var d2=document.getElementById(“plankdisp”);
-if(d2)d2.textContent=“DONE!”;
+clearInterval(PT);PT=null;PIR=false;
+var d2=document.getElementById(“plankdisp”);if(d2)d2.textContent=“DONE!”;
 var b3=document.getElementById(“plankbtn”);
 if(b3){b3.textContent=“RESET”;b3.onclick=function(){PL=180;var d3=document.getElementById(“plankdisp”);if(d3)d3.textContent=“3:00”;b3.textContent=“START TIMER”;b3.onclick=function(){toggleP();};};}
 }
@@ -422,16 +393,13 @@ if(b3){b3.textContent=“RESET”;b3.onclick=function(){PL=180;var d3=document.g
 
 function showRest(secs){
 RL=secs;
-var ov=document.getElementById(“restov”);
-if(!ov)return;
+var ov=document.getElementById(“restov”);if(!ov)return;
 ov.className=“restov on”;
-var rn=document.getElementById(“restnum”);
-if(rn)rn.textContent=RL;
+var rn=document.getElementById(“restnum”);if(rn)rn.textContent=RL;
 if(RT)clearInterval(RT);
 RT=setInterval(function(){
 RL–;
-var rn2=document.getElementById(“restnum”);
-if(rn2)rn2.textContent=RL;
+var rn2=document.getElementById(“restnum”);if(rn2)rn2.textContent=RL;
 if(RL<=0){clearInterval(RT);RT=null;var o=document.getElementById(“restov”);if(o)o.className=“restov”;}
 },1000);
 }
@@ -439,26 +407,20 @@ if(RL<=0){clearInterval(RT);RT=null;var o=document.getElementById(“restov”);
 function stopT(){
 if(RT){clearInterval(RT);RT=null;}
 if(PT){clearInterval(PT);PT=null;}
-PR=false;
-var ov=document.getElementById(“restov”);
-if(ov)ov.className=“restov”;
+PIR=false;
+var ov=document.getElementById(“restov”);if(ov)ov.className=“restov”;
 }
 
 function goDone(){
 stopT();
-var w=WK[CK];
-var el=document.getElementById(“p-done”);
-if(!el)return;
+var w=WK[CK],el=document.getElementById(“p-done”);if(!el)return;
 var tot=0;
 for(var i=0;i<w.slides.length;i++)for(var j=0;j<w.slides[i].exs.length;j++)tot+=w.slides[i].exs[j].sets;
-var h=”<div class='donepage'>”;
-h+=”<div class='doneicon'>⚡</div>”;
+var h=”<div class='donepage'><div class='doneicon'>⚡</div>”;
 h+=”<div class='donetitle' style='color:"+w.color+";'>DONE!</div>”;
-h+=”<div class='donestat'>”+tot+”</div>”;
-h+=”<div class='donelbl'>sets completed</div>”;
+h+=”<div class='donestat'>”+tot+”</div><div class='donelbl'>sets completed</div>”;
 h+=”<div class='donesub'>”+w.name+” complete.</div>”;
-h+=”<button class='donehome' id='donehome'>BACK HOME</button>”;
-h+=”</div>”;
+h+=”<button class='donehome' id='donehome'>BACK HOME</button></div>”;
 el.innerHTML=h;
 document.getElementById(“donehome”).onclick=function(){goHome();};
 pg(“p-done”);
@@ -466,8 +428,7 @@ pg(“p-done”);
 
 document.getElementById(“restskip”).onclick=function(){
 if(RT){clearInterval(RT);RT=null;}
-var ov=document.getElementById(“restov”);
-if(ov)ov.className=“restov”;
+var ov=document.getElementById(“restov”);if(ov)ov.className=“restov”;
 };
 
 goHome();
