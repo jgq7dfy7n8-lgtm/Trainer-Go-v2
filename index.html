@@ -431,7 +431,7 @@ if(RT){clearInterval(RT);RT=null;}
 var ov=document.getElementById(“restov”);if(ov)ov.className=“restov”;
 };
 
-goHome();
+try{goHome();}catch(err){document.body.style.background=”#fff”;document.body.style.color=”#000”;document.body.style.padding=“40px”;document.body.style.fontSize=“16px”;document.body.innerHTML=”<h2>JS Error</h2><pre>”+err.message+”</pre><pre>”+err.stack+”</pre>”;}
 </script>
 
 </body>
