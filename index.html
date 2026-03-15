@@ -3,20 +3,535 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>Trainer Go</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-body{background:#060608;color:#00e5ff;font-family:sans-serif;padding:40px 20px;}
-h1{font-size:40px;margin-bottom:20px;}
-.card{background:#12121a;border:1px solid #2a2a3e;border-radius:16px;padding:20px;margin-bottom:12px;border-left:4px solid #00e5ff;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;background:#060608;color:#f0f0ff;font-family:'Rajdhani',sans-serif;}
+.screen{display:none;position:fixed;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.screen.active{display:block;}
+.home-wrap{padding:60px 18px 48px;}
+.home-eyebrow{font-size:10px;letter-spacing:6px;color:#00e5ff;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
+.home-title{font-family:'Black Ops One',sans-serif;font-size:58px;letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:4px;}
+.home-title span{color:#00e5ff;text-shadow:0 0 20px #00e5ff;}
+.home-sub{font-size:12px;color:#6a6a8a;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;}
+.wcard{position:relative;overflow:hidden;cursor:pointer;margin-bottom:10px;border-radius:16px;padding:18px 18px 18px 22px;background:#12121a;border:1px solid #2a2a3e;display:flex;align-items:center;gap:14px;}
+.wcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 12px var(--c);}
+.wcard:active{opacity:.7;}
+.wcard-emoji{font-size:30px;flex-shrink:0;}
+.wcard-name{font-family:'Black Ops One',sans-serif;font-size:18px;letter-spacing:1px;color:#fff;line-height:1.2;}
+.wcard-tag{font-size:11px;color:#6a6a8a;margin-top:3px;}
+.wcard-arrow{margin-left:auto;font-size:20px;color:var(--c);flex-shrink:0;}
+.ov-wrap{padding-bottom:130px;}
+.ov-hero{padding:52px 20px 20px;background:#060608;position:sticky;top:0;z-index:5;border-bottom:1px solid #1e1e2e;}
+.ov-back{font-size:12px;color:#6a6a8a;cursor:pointer;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;display:inline-block;}
+.ov-title{font-family:'Black Ops One',sans-serif;font-size:36px;letter-spacing:2px;line-height:1;}
+.ov-tag{font-size:11px;color:#6a6a8a;margin-top:5px;letter-spacing:2px;text-transform:uppercase;}
+.ov-list{padding:16px 18px;}
+.ov-phase-lbl{font-size:9px;font-weight:700;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;padding:16px 0 8px;}
+.ov-group{border-radius:14px;background:#12121a;border:1px solid #2a2a3e;margin-bottom:10px;overflow:hidden;}
+.ov-pair-header{padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid #1e1e2e;}
+.ov-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #1e1e2e;}
+.ov-item:last-child{border-bottom:none;}
+.ov-ltr{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;font-family:'Black Ops One',sans-serif;}
+.ov-iname{font-size:14px;font-weight:600;}
+.ov-imeta{font-size:11px;color:#6a6a8a;margin-top:2px;}
+.ov-start-wrap{position:fixed;bottom:0;left:0;right:0;padding:16px 18px 40px;background:linear-gradient(0deg,#060608 60%,transparent);}
+.ov-start{width:100%;padding:17px;border:none;border-radius:14px;font-family:'Black Ops One',sans-serif;font-size:20px;letter-spacing:4px;color:#000;cursor:pointer;}
+.story-wrap{min-height:100vh;display:flex;flex-direction:column;position:relative;}
+.story-bars{display:flex;gap:4px;padding:16px 16px 0;position:absolute;top:0;left:0;right:0;z-index:10;pointer-events:none;}
+.sbar{flex:1;height:2px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;}
+.sbar-fill{height:100%;border-radius:999px;}
+.story-tap-prev{position:absolute;left:0;top:0;bottom:0;width:28%;z-index:8;}
+.story-tap-next{position:absolute;right:0;top:0;bottom:0;width:28%;z-index:8;}
+.story-content{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:52px 18px 20px;position:relative;z-index:9;}
+.story-hud{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.story-phase-badge{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid;}
+.story-step{font-size:11px;color:#6a6a8a;letter-spacing:1px;}
+.ex-block{border-radius:14px;padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid #2a2a3e;position:relative;overflow:hidden;}
+.ex-name-big{font-family:'Black Ops One',sans-serif;font-size:24px;letter-spacing:1px;line-height:1.1;margin-bottom:3px;}
+.ex-ltr{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;font-size:9px;font-weight:700;font-family:'Black Ops One',sans-serif;margin-right:8px;vertical-align:middle;}
+.ex-meta-sm{font-size:12px;color:#6a6a8a;margin-bottom:8px;}
+.ex-cue-sm{font-size:12px;line-height:1.6;color:rgba(255,255,255,.5);background:rgba(0,0,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.pr-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:8px;letter-spacing:1px;border:1px solid;}
+.set-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
+.s-dot{width:44px;height:44px;border-radius:10px;border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:rgba(255,255,255,.25);cursor:pointer;position:relative;z-index:15;font-family:'Rajdhani',sans-serif;}
+.s-dot:active{opacity:.6;}
+.pair-div{text-align:center;font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin:4px 0;display:flex;align-items:center;gap:8px;}
+.pair-div::before,.pair-div::after{content:'';flex:1;height:1px;background:#1e1e2e;}
+.plank-block{border-radius:14px;padding:20px;margin-bottom:10px;text-align:center;background:rgba(0,0,0,.4);border:1px solid #2a2a3e;}
+.plank-time{font-family:'Black Ops One',sans-serif;font-size:68px;line-height:1;margin-bottom:4px;}
+.plank-lbl{font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin-bottom:14px;}
+.plank-btn{display:inline-block;padding:11px 28px;border-radius:10px;font-family:'Black Ops One',sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;border:1.5px solid;position:relative;z-index:15;}
+.pr-row{display:flex;gap:7px;margin-top:8px;position:relative;z-index:15;}
+.pr-inp{flex:1;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.5);border:1.5px solid #2a2a3e;color:#f0f0ff;font-size:13px;font-family:'Rajdhani',sans-serif;font-weight:600;-webkit-appearance:none;}
+.pr-inp:focus{outline:none;border-color:#00e5ff;}
+.pr-save{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.25);border-radius:10px;padding:9px 12px;color:#00e5ff;font-size:11px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;white-space:nowrap;letter-spacing:1px;position:relative;z-index:15;}
+.story-next{width:100%;padding:15px;border:none;border-radius:13px;font-family:'Black Ops One',sans-serif;font-size:18px;letter-spacing:4px;color:#000;cursor:pointer;margin-top:8px;position:relative;z-index:15;}
+.rest-over{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.rest-over.on{display:flex;}
+.rest-lbl{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#6a6a8a;}
+.rest-num{font-family:'Black Ops One',sans-serif;font-size:110px;line-height:1;color:#00e5ff;text-shadow:0 0 40px #00e5ff;}
+.rest-skip{margin-top:28px;padding:13px 40px;background:rgba(255,255,255,.05);border:1px solid #2a2a3e;border-radius:12px;color:#6a6a8a;font-size:13px;font-weight:700;cursor:pointer;font-family:'Rajdhani',sans-serif;letter-spacing:2px;text-transform:uppercase;}
+.done-wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;}
+.done-icon{font-size:64px;margin-bottom:12px;}
+.done-title{font-family:'Black Ops One',sans-serif;font-size:52px;letter-spacing:5px;margin-bottom:6px;}
+.done-stat{font-family:'Black Ops One',sans-serif;font-size:36px;color:#00e5ff;text-shadow:0 0 20px #00e5ff;margin-bottom:4px;}
+.done-stat-lbl{font-size:10px;letter-spacing:3px;color:#4a4a6a;text-transform:uppercase;margin-bottom:32px;}
+.done-sub{font-size:14px;color:#6a6a8a;margin-bottom:40px;line-height:1.7;}
+.done-home{padding:15px 44px;border:none;border-radius:13px;font-family:'Black Ops One',sans-serif;font-size:18px;letter-spacing:3px;color:#000;cursor:pointer;background:#00e5ff;}
 </style>
 </head>
 <body>
-<h1>TRAINER GO</h1>
-<div id="out"></div>
+<div id="s-home" class="screen active"></div>
+<div id="s-overview" class="screen"></div>
+<div id="s-story" class="screen"></div>
+<div id="s-done" class="screen"></div>
+<div class="rest-over" id="rest-over">
+  <div class="rest-lbl">Rest</div>
+  <div class="rest-num" id="rest-num">90</div>
+  <div class="rest-lbl">seconds</div>
+  <button class="rest-skip" onclick="skipRest()">SKIP REST</button>
+</div>
 <script>
-var el = document.getElementById('out');
-el.innerHTML = '<div class="card">JS is working</div>';
+// All strings use NO emoji, NO special chars, NO apostrophes inside single-quoted strings
+// Emoji rendered via HTML entities only in innerHTML
+
+var WK = (function(){
+function e(name, meta, rest, type, sets, cue) {
+return {name:name, meta:meta, rest:rest, type:type, sets:sets, cue:cue};
+}
+function s(phase, exs) {
+return {phase:phase, exs:exs};
+}
+return {
+push:{
+name:‘Push Day’, tag:‘Chest / Shoulders / Triceps’, color:’#e8533a’,
+slides:[
+s(‘WARMUP’,[e(‘Arm Circles and Band Pull-Aparts’,‘2 x 10 each’,0,‘reps’,2,‘Roll shoulders forward 10 times then backward. Then pull a band or towel apart at shoulder width. Opens the rotator cuff before pressing.’)]),
+s(‘WARMUP’,[e(‘Plank’,‘3 minutes’,0,‘plank’,1,‘Elbows under shoulders. Squeeze glutes and abs. Do not let hips sag. 3 full minutes, no breaks.’)]),
+s(‘WARMUP’,[e(‘Pushup Warm-Up’,‘2 x 10 reps’,30,‘reps’,2,‘Controlled tempo, chest to floor. Gets blood into chest, shoulders, and triceps before loading them.’)]),
+s(‘WORKOUT’,[
+e(‘Bench Press’,‘4 sets x 8-10 reps’,90,‘weighted’,4,‘Bar to mid-chest, elbows 45 degrees. Lower 2 seconds, press explosively. Squeeze the bar like bending it.’),
+e(‘Incline DB Press’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘30-45 degree bench. Feel the stretch at the bottom. Each side works independently.’)
+]),
+s(‘WORKOUT’,[
+e(‘Lateral Raise’,‘3 sets x 15 reps’,60,‘weighted’,3,‘Lead with elbows not hands. Lighter than you think. Slow it down and feel the shoulder burn.’),
+e(‘Tricep Pushdown’,‘3 sets x 12-15 reps’,60,‘weighted’,3,‘Elbows pinned to sides. Full lockout every rep. Squeeze hard at the bottom.’)
+]),
+s(‘WORKOUT’,[
+e(‘Overhead Tricep Ext’,‘3 sets x 12 reps’,60,‘weighted’,3,‘Elbows forward, do not flare. Deep stretch at the top hits the long head of the tricep.’),
+e(‘Core’,‘10 minutes’,0,‘timed’,1,‘Plank, dead bugs, hollow holds. Non-negotiable. Finish every push day with core work.’)
+])
+]
+},
+pull:{
+name:‘Pull Day’, tag:‘Back / Biceps’, color:’#2a7aaa’,
+slides:[
+s(‘WARMUP’,[e(‘Shoulder Rolls and Cat-Cow’,‘10 rolls, 10 cat-cows’,0,‘reps’,1,‘Big slow shoulder circles forward then back. Then on all fours arch spine up then sink it down. Mobilizes the whole upper body.’)]),
+s(‘WARMUP’,[e(‘Plank’,‘3 minutes’,0,‘plank’,1,‘Elbows under shoulders. Core braced. 3 full minutes. Core stability is essential before heavy rows.’)]),
+s(‘WARMUP’,[e(‘Light Pulldowns’,‘2 x 15 reps’,30,‘reps’,2,‘Light weight, full range. Depress shoulder blades before each pull. Activates the lats before loading them.’)]),
+s(‘WORKOUT’,[
+e(‘Wide Grip Pulldown’,‘4 sets x 8-10 reps’,90,‘weighted’,4,‘Depress shoulder blades before pulling. Drive elbows to hip pockets. Dead hang between every rep.’),
+e(‘Seated Cable Row’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘Pull to navel. Elbows must travel behind your torso. 1 second pause at full contraction.’)
+]),
+s(‘WORKOUT’,[
+e(‘Close Grip Pulldown’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘Chest tall, pull to sternum. Hits lower lats that wide grip misses.’),
+e(‘Cable Bicep Curl’,‘3 sets x 12-15 reps’,60,‘weighted’,3,‘Elbows pinned. Full extension at the bottom. Cables keep tension where dumbbells go slack.’)
+]),
+s(‘WORKOUT’,[
+e(‘Hammer Curl’,‘3 sets x 12 reps’,60,‘weighted’,3,‘Neutral grip, palms facing each other. Builds the brachialis which pushes the bicep up.’),
+e(‘Core’,‘10 minutes’,0,‘timed’,1,‘Core after back protects your spine. Plank, dead bugs, hollow holds.’)
+])
+]
+},
+lower:{
+name:‘Lower Body’, tag:‘Quads / Hamstrings / Glutes’, color:’#5a8a3a’,
+slides:[
+s(‘WARMUP’,[e(‘Leg Swings and Glute Bridges’,‘10 swings each, 15 bridges’,0,‘reps’,1,‘Swing each leg forward-back then side-to-side. Then lie on back and drive hips up squeezing glutes at top. Opens hips and activates glutes.’)]),
+s(‘WARMUP’,[e(‘Plank’,‘3 minutes’,0,‘plank’,1,‘Elbows under shoulders, brace hard. 3 full minutes. Core must be strong and stable for heavy squats.’)]),
+s(‘WARMUP’,[e(‘Bodyweight Squat’,‘2 x 15 reps’,30,‘reps’,2,‘Full depth, slow and controlled. Warms up knees, hips, and ankles before adding any load.’)]),
+s(‘WORKOUT’,[
+e(‘Back Squat’,‘4 sets x 6-8 reps’,120,‘weighted’,4,‘Big breath into belly, brace hard. Knees out over toes always. Hit parallel every single rep.’),
+e(‘Romanian Deadlift’,‘3 sets x 10 reps’,90,‘weighted’,3,‘This is a hinge, not a squat. Push hips back. Feel hamstrings fully load at the bottom.’)
+]),
+s(‘WORKOUT’,[
+e(‘Walking Lunges’,‘3 sets x 10 each leg’,75,‘weighted’,3,‘Torso upright throughout. Front knee tracks over toes. Step forward into the next rep.’),
+e(‘Leg Press’,‘3 sets x 12-15 reps’,75,‘weighted’,3,‘Do not lock out at the top. Keep tension on muscle by stopping just short of full extension.’)
+]),
+s(‘WORKOUT’,[
+e(‘Leg Curl’,‘3 sets x 12-15 reps’,60,‘weighted’,3,‘2 seconds up, 3 seconds down. Full range. Most people have weak hamstrings from sitting.’),
+e(‘Calf Raises’,‘3 sets x 20 reps’,45,‘weighted’,3,‘Full stretch at the bottom is critical. 2s up, 1s hold at top, 2s down. Feel the full range.’)
+])
+]
+},
+upper:{
+name:‘Upper Body’, tag:‘Chest / Back / Arms’, color:’#8a5ac8’,
+slides:[
+s(‘WARMUP’,[e(‘Arm Circles and Band Rows’,‘10 circles, 2 x 12 rows’,0,‘reps’,1,‘Arm circles forward and back. Then light resistance rows squeezing shoulder blades together. Warms up the whole upper body.’)]),
+s(‘WARMUP’,[e(‘Plank’,‘3 minutes’,0,‘plank’,1,‘Elbows under shoulders. Squeeze glutes and abs hard. 3 full minutes. Spine must be stable for pressing and pulling.’)]),
+s(‘WARMUP’,[e(‘Pushups’,‘2 x 10 reps’,30,‘reps’,2,‘Controlled tempo, full range. Warms up chest, shoulders, and triceps together before loading.’)]),
+s(‘WORKOUT’,[
+e(‘Bench Press’,‘4 sets x 8-10 reps’,90,‘weighted’,4,‘Chest drives the bar, not shoulders or triceps. Retract shoulder blades before every rep.’),
+e(‘Wide Grip Pulldown’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘Shoulder blades down before pulling. Full dead hang between reps.’)
+]),
+s(‘WORKOUT’,[
+e(‘DB Shoulder Press’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘Brace core before every rep. Full lockout overhead. Each shoulder works independently.’),
+e(‘Seated Cable Row’,‘3 sets x 10-12 reps’,75,‘weighted’,3,‘1 second pause at contraction. Elbows must get behind your torso at full contraction.’)
+]),
+s(‘WORKOUT’,[
+e(‘Bicep and Tricep Superset’,‘3 sets x 12 each’,75,‘weighted’,3,‘12 curls then immediately 12 pushdowns, zero rest between. Then rest 75 seconds. That is one set.’),
+e(‘Core’,‘10 minutes’,0,‘timed’,1,‘Plank, dead bugs, hollow holds. Spine needs to be fresh for max effect.’)
+])
+]
+},
+recovery:{
+name:‘Active Recovery’, tag:‘Mobility / Flexibility’, color:’#c8882a’,
+slides:[
+s(‘WARMUP’,[e(‘Easy Walk’,‘5 minutes easy’,0,‘timed’,1,‘Slow and easy. Gets blood moving before stretching. Cold muscles do not stretch well.’)]),
+s(‘WARMUP’,[e(‘Plank’,‘3 minutes’,0,‘plank’,1,‘Even on recovery days. 3 full minutes. Core work every day builds the foundation.’)]),
+s(‘WORKOUT’,[
+e(‘Hip Flexor Stretch’,‘2 x 45s each side’,30,‘timed’,2,‘Kneeling lunge, shift hips forward until you feel the stretch at front of back hip. Hold and breathe.’),
+e(‘Pigeon Pose’,‘2 x 60s each side’,30,‘timed’,2,‘Breathe deeply and let gravity pull you down. The single most effective hip stretch you can do.’)
+]),
+s(‘WORKOUT’,[
+e(‘Hamstring Stretch’,‘2 x 45s each side’,30,‘timed’,2,‘Flat back is mandatory. Hinge from hips not your spine. Feel it deep in the back of the thigh.’),
+e(‘Foam Roll’,‘5 minutes’,0,‘timed’,1,‘Hold 20-30 seconds on tender spots. Quads, glutes, upper back, calves. That discomfort is the point.’)
+])
+]
+}
+};
+}());
+
+var EMOJIS = {push:’💪’, pull:’🔗’, lower:’🦵’, upper:’🏋’, recovery:’🧘’};
+
+var curKey=null, slideIdx=0, setsDoneA=0, setsDoneB=0;
+var prs={}, restTimer=null, restLeft=0, plankTimer=null, plankLeft=180, plankRunning=false;
+
+function sg(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(err){return d;}}
+function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(err){}}
+
+function show(id){
+var ids=[‘s-home’,‘s-overview’,‘s-story’,‘s-done’];
+for(var i=0;i<ids.length;i++){
+var el=document.getElementById(ids[i]);
+if(el){el.className=‘screen’+(ids[i]===id?’ active’:’’);}
+}
+window.scrollTo(0,0);
+}
+
+function renderHome(){
+prs=sg(‘wt_prs’,{});
+stopTimers();
+var el=document.getElementById(‘s-home’);
+if(!el){return;}
+var keys=[‘push’,‘pull’,‘lower’,‘upper’,‘recovery’];
+var html=’<div class="home-wrap">’;
+html+=’<div class="home-eyebrow">Your Training System</div>’;
+html+=’<div class="home-title">TRAINER<span>GO</span></div>’;
+html+=’<div class="home-sub">Select your program</div>’;
+for(var i=0;i<keys.length;i++){
+var k=keys[i];
+var w=WK[k];
+html+=’<div class="wcard" onclick="openOverview(\''+k+'\')" style="--c:'+w.color+';">’;
+html+=’<span class="wcard-emoji">’+EMOJIS[k]+’</span>’;
+html+=’<div><div class="wcard-name">’+w.name+’</div><div class="wcard-tag">’+w.tag+’</div></div>’;
+html+=’<div class="wcard-arrow">›</div>’;
+html+=’</div>’;
+}
+html+=’</div>’;
+el.innerHTML=html;
+show(‘s-home’);
+}
+
+function openOverview(key){
+curKey=key;
+var w=WK[key];
+var el=document.getElementById(‘s-overview’);
+if(!el){return;}
+var html=’<div class="ov-wrap">’;
+html+=’<div class="ov-hero">’;
+html+=’<div class="ov-back" onclick="renderHome()">← BACK</div>’;
+html+=’<div class="ov-title" style="color:'+w.color+';">’+EMOJIS[key]+’ ‘+w.name.toUpperCase()+’</div>’;
+html+=’<div class="ov-tag">’+w.tag+’</div>’;
+html+=’</div>’;
+html+=’<div class="ov-list">’;
+var lastPhase=’’;
+for(var i=0;i<w.slides.length;i++){
+var sl=w.slides[i];
+if(sl.phase!==lastPhase){
+lastPhase=sl.phase;
+html+=’<div class="ov-phase-lbl">’+sl.phase+’</div>’;
+}
+html+=’<div class="ov-group">’;
+if(sl.exs.length===2){
+html+=’<div class="ov-pair-header" style="color:'+w.color+';background:'+w.color+'10;">PAIRED EXERCISES</div>’;
+}
+for(var j=0;j<sl.exs.length;j++){
+var ex=sl.exs[j];
+var prInfo=prs[ex.name];
+html+=’<div class="ov-item">’;
+html+=’<div class="ov-ltr" style="background:'+w.color+'15;border:1px solid '+w.color+'40;color:'+w.color+';">’+(j===0?‘A’:‘B’)+’</div>’;
+html+=’<div><div class="ov-iname">’+ex.name+’</div>’;
+html+=’<div class="ov-imeta">’+ex.meta+(prInfo?’ · PR: ‘+prInfo.weight+‘lb x ‘+prInfo.reps:’’)+’</div></div>’;
+html+=’</div>’;
+}
+html+=’</div>’;
+}
+html+=’</div><div style="height:120px;"></div></div>’;
+html+=’<div class="ov-start-wrap">’;
+html+=’<button class="ov-start" style="background:'+w.color+';" onclick="startStory()">START WORKOUT</button>’;
+html+=’</div>’;
+el.innerHTML=html;
+show(‘s-overview’);
+}
+
+function startStory(){
+slideIdx=0;setsDoneA=0;setsDoneB=0;
+renderStory();
+}
+
+function renderStory(){
+stopTimers();
+var w=WK[curKey];
+var slide=w.slides[slideIdx];
+var total=w.slides.length;
+var el=document.getElementById(‘s-story’);
+if(!el){return;}
+var bars=’’;
+for(var i=0;i<total;i++){
+var pct=(i<slideIdx?100:0);
+bars+=’<div class="sbar"><div class="sbar-fill" id="bar-'+i+'" style="width:'+pct+'%;background:'+w.color+';box-shadow:0 0 6px '+w.color+';"></div></div>’;
+}
+var isLast=(slideIdx===total-1);
+var nextLbl=isLast?‘FINISH’:‘NEXT ›’;
+var bg=‘linear-gradient(170deg,’+w.color+‘28 0%,#060608 50%)’;
+var html=’<div class="story-wrap" style="background:'+bg+';">’;
+html+=’<div class="story-bars">’+bars+’</div>’;
+html+=’<div class="story-tap-prev" onclick="prevSlide()"></div>’;
+html+=’<div class="story-tap-next" onclick="nextSlide()"></div>’;
+html+=’<div class="story-content">’;
+html+=’<div class="story-hud"><span class="story-phase-badge" style="color:'+w.color+';border-color:'+w.color+'40;">’+slide.phase+’</span>’;
+html+=’<span class="story-step">’+( slideIdx+1)+’ OF ‘+total+’</span></div>’;
+html+=buildSlideBody(slide,w.color);
+html+=’<button class="story-next" style="background:'+w.color+';" onclick="nextSlide()">’+nextLbl+’</button>’;
+html+=’</div></div>’;
+el.innerHTML=html;
+show(‘s-story’);
+plankLeft=180;plankRunning=false;
+}
+
+function buildSlideBody(slide,color){
+var html=’’;
+if(slide.exs.length===1){
+html+=buildExBlock(slide.exs[0],‘A’,color,0,setsDoneA,true);
+}else{
+html+=buildExBlock(slide.exs[0],‘A’,color,0,setsDoneA,false);
+html+=’<div class="pair-div">THEN</div>’;
+html+=buildExBlock(slide.exs[1],‘B’,color,1,setsDoneB,false);
+}
+return html;
+}
+
+function buildExBlock(ex,label,color,exIdx,doneSets,isSingle){
+var isPlank=(ex.type===‘plank’);
+var isWeighted=(ex.type===‘weighted’||ex.type===‘reps’);
+var fs=(isSingle?‘28’:‘22’);
+var html=’<div class="ex-block" style="border-left:2px solid '+color+';">’;
+html+=’<div style="margin-bottom:8px;">’;
+html+=’<span class="ex-ltr" style="background:'+color+'20;border:1px solid '+color+'50;color:'+color+';">’+label+’</span>’;
+html+=’<span class="ex-name-big" style="font-size:'+fs+'px;color:'+color+';">’+ex.name+’</span>’;
+html+=’</div>’;
+var prInfo=prs[ex.name];
+if(prInfo){
+html+=’<div class="pr-badge" style="background:'+color+'15;color:'+color+';border-color:'+color+'35;">PR: ‘+prInfo.weight+‘lb x ‘+prInfo.reps+’</div>’;
+}
+html+=’<div class="ex-meta-sm">’+ex.meta+’</div>’;
+html+=’<div class="ex-cue-sm">’+ex.cue+’</div>’;
+if(isPlank){
+html+=’<div class="plank-block" style="border-color:'+color+'30;">’;
+html+=’<div class="plank-time" id="plank-disp" style="color:'+color+';">3:00</div>’;
+html+=’<div class="plank-lbl">hold</div>’;
+html+=’<div class="plank-btn" id="plank-btn" onclick="togglePlank()" style="color:'+color+';border-color:'+color+'50;background:'+color+'10;">START TIMER</div>’;
+html+=’</div>’;
+}
+if(isWeighted){
+html+=’<div class="set-row" id="dots-'+exIdx+'">’;
+for(var s=0;s<ex.sets;s++){
+var hit=(s<doneSets);
+var dotStyle=hit?‘border-color:’+color+’;color:#000;background:’+color+’;box-shadow:0 0 10px ‘+color+‘70;’:’’;
+html+=’<div class="s-dot'+(hit?' hit':'')+'" id="dot-'+exIdx+'-'+s+'" style="'+dotStyle+'" onclick="hitDot('+exIdx+','+s+','+ex.sets+','+ex.rest+')">’+( s+1)+’</div>’;
+}
+html+=’</div>’;
+html+=’<div class="pr-row">’;
+html+=’<input class="pr-inp" id="pw-'+exIdx+'" type="number" placeholder="lbs">’;
+html+=’<input class="pr-inp" id="pr-'+exIdx+'" type="number" placeholder="reps">’;
+var safeName=ex.name.replace(/[^a-zA-Z0-9 ]/g,’’);
+html+=’<div class="pr-save" onclick="savePR('+exIdx+')">Save PR</div>’;
+html+=’</div>’;
+}
+html+=’</div>’;
+return html;
+}
+
+function hitDot(exIdx,dotIdx,totalSets,restSecs){
+var color=WK[curKey].color;
+var cur=(exIdx===0?setsDoneA:setsDoneB);
+var newDone=(dotIdx<cur?dotIdx:dotIdx+1);
+if(exIdx===0){setsDoneA=newDone;}else{setsDoneB=newDone;}
+for(var s=0;s<totalSets;s++){
+var dot=document.getElementById(‘dot-’+exIdx+’-’+s);
+if(!dot){continue;}
+if(s<newDone){
+dot.className=‘s-dot hit’;
+dot.style.borderColor=color;
+dot.style.color=’#000’;
+dot.style.background=color;
+dot.style.boxShadow=‘0 0 10px ‘+color+‘70’;
+}else{
+dot.className=‘s-dot’;
+dot.style.borderColor=’’;
+dot.style.color=’’;
+dot.style.background=’’;
+dot.style.boxShadow=’’;
+}
+}
+if(newDone>0&&newDone<totalSets&&restSecs>0){showRest(restSecs);}
+}
+
+function savePR(exIdx){
+var slide=WK[curKey].slides[slideIdx];
+if(!slide||!slide.exs[exIdx]){return;}
+var name=slide.exs[exIdx].name;
+var wEl=document.getElementById(‘pw-’+exIdx);
+var rEl=document.getElementById(‘pr-’+exIdx);
+if(!wEl||!rEl){return;}
+var wv=parseFloat(wEl.value);
+var rv=parseInt(rEl.value);
+if(!wv||!rv){return;}
+prs[name]={weight:wv,reps:rv,date:new Date().toISOString().split(‘T’)[0]};
+ss(‘wt_prs’,prs);
+wEl.value=’’;rEl.value=’’;
+var btn=document.querySelector(’.pr-save’);
+if(btn){
+btn.textContent=‘Saved!’;
+setTimeout(function(){var b=document.querySelector(’.pr-save’);if(b){b.textContent=‘Save PR’;}},1200);
+}
+}
+
+function togglePlank(){
+var color=WK[curKey].color;
+if(plankRunning){
+plankRunning=false;
+if(plankTimer){clearInterval(plankTimer);plankTimer=null;}
+var btn=document.getElementById(‘plank-btn’);
+if(btn){btn.textContent=‘RESUME’;}
+}else{
+plankRunning=true;
+if(plankLeft<=0){plankLeft=180;}
+var btn2=document.getElementById(‘plank-btn’);
+if(btn2){btn2.textContent=‘PAUSE’;}
+plankTimer=setInterval(function(){
+plankLeft–;
+var disp=document.getElementById(‘plank-disp’);
+if(disp){
+var m=Math.floor(plankLeft/60);
+var sc=plankLeft%60;
+disp.textContent=m+’:’+(sc<10?‘0’:’’)+sc;
+}
+if(plankLeft<=0){
+clearInterval(plankTimer);plankTimer=null;plankRunning=false;
+var d2=document.getElementById(‘plank-disp’);
+if(d2){d2.textContent=‘DONE!’;}
+var b3=document.getElementById(‘plank-btn’);
+if(b3){
+b3.textContent=‘RESET’;
+b3.onclick=function(){
+plankLeft=180;
+var d3=document.getElementById(‘plank-disp’);
+if(d3){d3.textContent=‘3:00’;}
+b3.textContent=‘START TIMER’;
+b3.onclick=togglePlank;
+};
+}
+}
+},1000);
+}
+}
+
+function nextSlide(){
+var total=WK[curKey].slides.length;
+if(slideIdx>=total-1){showDone();return;}
+slideIdx++;setsDoneA=0;setsDoneB=0;
+renderStory();
+}
+
+function prevSlide(){
+if(slideIdx<=0){openOverview(curKey);return;}
+slideIdx–;setsDoneA=0;setsDoneB=0;
+renderStory();
+}
+
+function showRest(secs){
+restLeft=secs;
+var ov=document.getElementById(‘rest-over’);
+if(!ov){return;}
+ov.className=‘rest-over on’;
+updateRestDisplay();
+if(restTimer){clearInterval(restTimer);}
+restTimer=setInterval(function(){
+restLeft–;
+if(restLeft<=0){
+clearInterval(restTimer);restTimer=null;
+var ov2=document.getElementById(‘rest-over’);
+if(ov2){ov2.className=‘rest-over’;}
+}else{updateRestDisplay();}
+},1000);
+}
+
+function updateRestDisplay(){
+var el=document.getElementById(‘rest-num’);
+if(el){el.textContent=restLeft;}
+}
+
+function skipRest(){
+if(restTimer){clearInterval(restTimer);restTimer=null;}
+var ov=document.getElementById(‘rest-over’);
+if(ov){ov.className=‘rest-over’;}
+}
+
+function stopTimers(){
+if(restTimer){clearInterval(restTimer);restTimer=null;}
+if(plankTimer){clearInterval(plankTimer);plankTimer=null;}
+plankRunning=false;
+var ov=document.getElementById(‘rest-over’);
+if(ov){ov.className=‘rest-over’;}
+}
+
+function showDone(){
+stopTimers();
+var w=WK[curKey];
+var el=document.getElementById(‘s-done’);
+if(!el){return;}
+var totalSets=0;
+for(var i=0;i<w.slides.length;i++){
+for(var j=0;j<w.slides[i].exs.length;j++){totalSets+=w.slides[i].exs[j].sets;}
+}
+var html=’<div class="done-wrap">’;
+html+=’<div class="done-icon">⚡</div>’;
+html+=’<div class="done-title" style="color:'+w.color+';">DONE!</div>’;
+html+=’<div class="done-stat">’+totalSets+’</div>’;
+html+=’<div class="done-stat-lbl">sets completed</div>’;
+html+=’<div class="done-sub">’+w.name+’ complete.</div>’;
+html+=’<button class="done-home" onclick="renderHome()">BACK HOME</button>’;
+html+=’</div>’;
+el.innerHTML=html;
+show(‘s-done’);
+}
+
+renderHome();
 </script>
+
 </body>
 </html>
