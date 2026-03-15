@@ -13,9 +13,9 @@ html,body{height:100%;background:#060608;color:#f0f0ff;font-family:Rajdhani,sans
 .active{display:block;}
 .home-wrap{padding:60px 18px 48px;}
 .eyebrow{font-size:10px;letter-spacing:6px;color:#00e5ff;text-transform:uppercase;margin-bottom:6px;}
-.title{font-family:"Black Ops One",sans-serif;font-size:56px;letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:4px;}
-.title span{color:#00e5ff;text-shadow:0 0 20px #00e5ff;}
-.subtitle{font-size:12px;color:#6a6a8a;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;}
+.htitle{font-family:"Black Ops One",sans-serif;font-size:56px;letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:4px;}
+.htitle span{color:#00e5ff;text-shadow:0 0 20px #00e5ff;}
+.hsub{font-size:12px;color:#6a6a8a;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;}
 .wcard{position:relative;overflow:hidden;cursor:pointer;margin-bottom:10px;border-radius:16px;padding:18px 18px 18px 22px;background:#12121a;border:1px solid #2a2a3e;display:flex;align-items:center;gap:14px;}
 .wcard:active{opacity:.7;}
 .wcard-bar{position:absolute;left:0;top:0;bottom:0;width:3px;}
@@ -48,7 +48,7 @@ html,body{height:100%;background:#060608;color:#f0f0ff;font-family:Rajdhani,sans
 .st-hud{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
 .st-badge{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid;}
 .st-step{font-size:11px;color:#6a6a8a;letter-spacing:1px;}
-.ex-block{border-radius:14px;padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid #2a2a3e;position:relative;overflow:hidden;}
+.ex-block{border-radius:14px;padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid #2a2a3e;}
 .ex-ltr{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;font-size:9px;font-weight:700;margin-right:8px;vertical-align:middle;}
 .ex-name{font-family:"Black Ops One",sans-serif;font-size:24px;letter-spacing:1px;line-height:1.1;margin-bottom:3px;}
 .ex-meta{font-size:12px;color:#6a6a8a;margin-bottom:8px;}
@@ -57,17 +57,17 @@ html,body{height:100%;background:#060608;color:#f0f0ff;font-family:Rajdhani,sans
 .set-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
 .dot{width:44px;height:44px;border-radius:10px;border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:rgba(255,255,255,.25);cursor:pointer;position:relative;z-index:15;}
 .dot:active{opacity:.6;}
-.pair-div{text-align:center;font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin:4px 0;display:flex;align-items:center;gap:8px;}
-.pair-div::before,.pair-div::after{content:"";flex:1;height:1px;background:#1e1e2e;}
+.pdiv{text-align:center;font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin:4px 0;display:flex;align-items:center;gap:8px;}
+.pdiv::before,.pdiv::after{content:"";flex:1;height:1px;background:#1e1e2e;}
 .plank-wrap{border-radius:14px;padding:20px;margin-bottom:10px;text-align:center;background:rgba(0,0,0,.4);border:1px solid #2a2a3e;}
 .plank-time{font-family:"Black Ops One",sans-serif;font-size:68px;line-height:1;margin-bottom:4px;}
 .plank-lbl{font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin-bottom:14px;}
 .plank-btn{display:inline-block;padding:11px 28px;border-radius:10px;font-family:"Black Ops One",sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;border:1.5px solid;position:relative;z-index:15;}
-.pr-row{display:flex;gap:7px;margin-top:8px;position:relative;z-index:15;}
+.pr-row{display:flex;gap:7px;margin-top:8px;}
 .pr-inp{flex:1;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.5);border:1.5px solid #2a2a3e;color:#f0f0ff;font-size:13px;font-family:Rajdhani,sans-serif;font-weight:600;-webkit-appearance:none;}
 .pr-inp:focus{outline:none;border-color:#00e5ff;}
-.pr-save{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.25);border-radius:10px;padding:9px 12px;color:#00e5ff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:1px;position:relative;z-index:15;}
-.st-btn{width:100%;padding:15px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:4px;color:#000;cursor:pointer;margin-top:8px;position:relative;z-index:15;}
+.pr-save{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.25);border-radius:10px;padding:9px 12px;color:#00e5ff;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;letter-spacing:1px;}
+.st-btn{width:100%;padding:15px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:4px;color:#000;cursor:pointer;margin-top:8px;}
 .rest-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
 .rest-ov.on{display:flex;}
 .rest-lbl{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#6a6a8a;}
@@ -84,116 +84,115 @@ html,body{height:100%;background:#060608;color:#f0f0ff;font-family:Rajdhani,sans
 </head>
 <body>
 <div id="s-home" class="screen active"></div>
-<div id="s-overview" class="screen"></div>
+<div id="s-ov" class="screen"></div>
 <div id="s-story" class="screen"></div>
 <div id="s-done" class="screen"></div>
 <div class="rest-ov" id="rest-ov">
   <div class="rest-lbl">Rest</div>
   <div class="rest-num" id="rest-num">90</div>
   <div class="rest-lbl">seconds</div>
-  <button class="rest-skip" onclick="skipRest()">SKIP REST</button>
+  <button class="rest-skip" id="rest-skip">SKIP REST</button>
 </div>
 <script type="text/javascript">
+(function() {
 
-var curKey=null,slideIdx=0,setsDoneA=0,setsDoneB=0,prs={},restTimer=null,restLeft=0,plankTimer=null,plankLeft=180,plankRunning=false;
+var CK=null, SI=0, SDA=0, SDB=0, PRS={}, RT=null, RL=0, PT=null, PL=180, PR=false;
 
 function sg(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
-function mkEx(name,meta,rest,type,sets,cue){return {name:name,meta:meta,rest:rest,type:type,sets:sets,cue:cue};}
-function mkSl(phase,exs){return {phase:phase,exs:exs};}
+function ex(name,meta,rest,type,sets,cue){
+return {name:name,meta:meta,rest:rest,type:type,sets:sets,cue:cue};
+}
+function sl(phase,exs){return {phase:phase,exs:exs};}
 
-var WK = {};
-
-WK.push = {name:“Push Day”,tag:“Chest / Shoulders / Triceps”,color:”#e8533a”,slides:[
-mkSl(“WARMUP”,[mkEx(“Arm Circles”,“2 x 10 each”,0,“reps”,2,“Roll shoulders forward 10 times then backward. Opens the rotator cuff before pressing.”)]),
-mkSl(“WARMUP”,[mkEx(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Squeeze glutes and abs. Do not let hips sag. 3 full minutes, no breaks.”)]),
-mkSl(“WARMUP”,[mkEx(“Pushup Warm-Up”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo, chest to floor. Gets blood into chest, shoulders, and triceps.”)]),
-mkSl(“WORKOUT”,[
-mkEx(“Bench Press”,“4 sets x 8-10 reps”,90,“weighted”,4,“Bar to mid-chest, elbows 45 degrees. Lower 2 seconds, press explosively.”),
-mkEx(“Incline DB Press”,“3 sets x 10-12 reps”,75,“weighted”,3,“30-45 degree bench. Feel the stretch at the bottom. Each side works independently.”)
+var WK = {
+push:{name:“Push Day”,tag:“Chest / Shoulders / Triceps”,color:”#e8533a”,slides:[
+sl(“WARMUP”,[ex(“Arm Circles”,“2 x 10 each”,0,“reps”,2,“Roll shoulders forward 10 times then backward. Opens the rotator cuff.”)]),
+sl(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Squeeze glutes and abs. 3 full minutes, no breaks.”)]),
+sl(“WARMUP”,[ex(“Pushup Warm-Up”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo. Gets blood into chest, shoulders, and triceps.”)]),
+sl(“WORKOUT”,[
+ex(“Bench Press”,“4 sets x 8-10 reps”,90,“weighted”,4,“Bar to mid-chest, elbows 45 degrees. Lower 2 seconds, press explosively.”),
+ex(“Incline DB Press”,“3 sets x 10-12 reps”,75,“weighted”,3,“30-45 degree bench. Feel the stretch at the bottom.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Lateral Raise”,“3 sets x 15 reps”,60,“weighted”,3,“Lead with elbows not hands. Lighter than you think. Slow it down.”),
-mkEx(“Tricep Pushdown”,“3 sets x 12-15 reps”,60,“weighted”,3,“Elbows pinned to sides. Full lockout every rep. Squeeze hard at the bottom.”)
+sl(“WORKOUT”,[
+ex(“Lateral Raise”,“3 sets x 15 reps”,60,“weighted”,3,“Lead with elbows not hands. Lighter than you think.”),
+ex(“Tricep Pushdown”,“3 sets x 12-15 reps”,60,“weighted”,3,“Elbows pinned to sides. Full lockout every rep.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Overhead Tricep Ext”,“3 sets x 12 reps”,60,“weighted”,3,“Elbows forward, do not flare. Deep stretch at the top.”),
-mkEx(“Core”,“10 minutes”,0,“timed”,1,“Plank, dead bugs, hollow holds. Non-negotiable.”)
+sl(“WORKOUT”,[
+ex(“Overhead Tricep Ext”,“3 sets x 12 reps”,60,“weighted”,3,“Elbows forward, do not flare. Deep stretch at the top.”),
+ex(“Core”,“10 minutes”,0,“timed”,1,“Plank, dead bugs, hollow holds. Non-negotiable.”)
 ])
-]};
-
-WK.pull = {name:“Pull Day”,tag:“Back / Biceps”,color:”#2a7aaa”,slides:[
-mkSl(“WARMUP”,[mkEx(“Shoulder Rolls”,“10 each direction”,0,“reps”,1,“Big slow circles forward then back. Warms the shoulder joint.”)]),
-mkSl(“WARMUP”,[mkEx(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Core braced. 3 full minutes.”)]),
-mkSl(“WARMUP”,[mkEx(“Light Pulldowns”,“2 x 15 reps”,30,“reps”,2,“Light weight, full range. Depress shoulder blades before each pull.”)]),
-mkSl(“WORKOUT”,[
-mkEx(“Wide Grip Pulldown”,“4 sets x 8-10 reps”,90,“weighted”,4,“Depress shoulder blades before pulling. Drive elbows to hip pockets.”),
-mkEx(“Seated Cable Row”,“3 sets x 10-12 reps”,75,“weighted”,3,“Pull to navel. Elbows must travel behind your torso. 1 second pause.”)
+]},
+pull:{name:“Pull Day”,tag:“Back / Biceps”,color:”#2a7aaa”,slides:[
+sl(“WARMUP”,[ex(“Shoulder Rolls”,“10 each direction”,0,“reps”,1,“Big slow circles forward then back. Warms the shoulder joint.”)]),
+sl(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. Core braced. 3 full minutes.”)]),
+sl(“WARMUP”,[ex(“Light Pulldowns”,“2 x 15 reps”,30,“reps”,2,“Light weight, full range. Depress shoulder blades before each pull.”)]),
+sl(“WORKOUT”,[
+ex(“Wide Grip Pulldown”,“4 sets x 8-10 reps”,90,“weighted”,4,“Depress shoulder blades before pulling. Drive elbows to hip pockets.”),
+ex(“Seated Cable Row”,“3 sets x 10-12 reps”,75,“weighted”,3,“Pull to navel. Elbows behind torso. 1 second pause.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Close Grip Pulldown”,“3 sets x 10-12 reps”,75,“weighted”,3,“Chest tall, pull to sternum. Hits lower lats that wide grip misses.”),
-mkEx(“Cable Bicep Curl”,“3 sets x 12-15 reps”,60,“weighted”,3,“Elbows pinned. Full extension at the bottom.”)
+sl(“WORKOUT”,[
+ex(“Close Grip Pulldown”,“3 sets x 10-12 reps”,75,“weighted”,3,“Chest tall, pull to sternum. Hits lower lats.”),
+ex(“Cable Bicep Curl”,“3 sets x 12-15 reps”,60,“weighted”,3,“Elbows pinned. Full extension at the bottom.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Hammer Curl”,“3 sets x 12 reps”,60,“weighted”,3,“Neutral grip, palms facing each other. Builds the brachialis.”),
-mkEx(“Core”,“10 minutes”,0,“timed”,1,“Core after back protects your spine.”)
+sl(“WORKOUT”,[
+ex(“Hammer Curl”,“3 sets x 12 reps”,60,“weighted”,3,“Neutral grip. Builds the brachialis which pushes the bicep up.”),
+ex(“Core”,“10 minutes”,0,“timed”,1,“Core after back protects your spine.”)
 ])
-]};
-
-WK.lower = {name:“Lower Body”,tag:“Quads / Hamstrings / Glutes”,color:”#5a8a3a”,slides:[
-mkSl(“WARMUP”,[mkEx(“Leg Swings”,“10 each direction”,0,“reps”,1,“Swing each leg forward-back then side-to-side. Opens the hips.”)]),
-mkSl(“WARMUP”,[mkEx(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders, brace hard. 3 full minutes. Core stability for squats.”)]),
-mkSl(“WARMUP”,[mkEx(“Bodyweight Squat”,“2 x 15 reps”,30,“reps”,2,“Full depth, slow and controlled. Warms knees, hips, and ankles.”)]),
-mkSl(“WORKOUT”,[
-mkEx(“Back Squat”,“4 sets x 6-8 reps”,120,“weighted”,4,“Big breath, brace hard. Knees out over toes. Hit parallel every rep.”),
-mkEx(“Romanian Deadlift”,“3 sets x 10 reps”,90,“weighted”,3,“Hinge at hips, push them back. Feel hamstrings load at the bottom.”)
+]},
+lower:{name:“Lower Body”,tag:“Quads / Hamstrings / Glutes”,color:”#5a8a3a”,slides:[
+sl(“WARMUP”,[ex(“Leg Swings”,“10 each direction”,0,“reps”,1,“Swing each leg forward-back then side-to-side. Opens the hips.”)]),
+sl(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. 3 full minutes. Core stability for squats.”)]),
+sl(“WARMUP”,[ex(“Bodyweight Squat”,“2 x 15 reps”,30,“reps”,2,“Full depth, slow. Warms knees, hips, and ankles.”)]),
+sl(“WORKOUT”,[
+ex(“Back Squat”,“4 sets x 6-8 reps”,120,“weighted”,4,“Big breath, brace hard. Knees out over toes. Hit parallel every rep.”),
+ex(“Romanian Deadlift”,“3 sets x 10 reps”,90,“weighted”,3,“Hinge at hips, push them back. Feel hamstrings load.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Walking Lunges”,“3 sets x 10 each leg”,75,“weighted”,3,“Torso upright. Front knee over toes. Step forward into next rep.”),
-mkEx(“Leg Press”,“3 sets x 12-15 reps”,75,“weighted”,3,“Do not lock out at top. Keep tension by stopping short of full extension.”)
+sl(“WORKOUT”,[
+ex(“Walking Lunges”,“3 sets x 10 each leg”,75,“weighted”,3,“Torso upright. Front knee over toes. Step forward into next rep.”),
+ex(“Leg Press”,“3 sets x 12-15 reps”,75,“weighted”,3,“Do not lock out at top. Keep tension on the muscle.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Leg Curl”,“3 sets x 12-15 reps”,60,“weighted”,3,“2 seconds up, 3 seconds down. Full range of motion.”),
-mkEx(“Calf Raises”,“3 sets x 20 reps”,45,“weighted”,3,“Full stretch at the bottom. 2s up, 1s hold, 2s down.”)
+sl(“WORKOUT”,[
+ex(“Leg Curl”,“3 sets x 12-15 reps”,60,“weighted”,3,“2 seconds up, 3 seconds down. Full range of motion.”),
+ex(“Calf Raises”,“3 sets x 20 reps”,45,“weighted”,3,“Full stretch at bottom. 2s up, 1s hold, 2s down.”)
 ])
-]};
-
-WK.upper = {name:“Upper Body”,tag:“Chest / Back / Arms”,color:”#8a5ac8”,slides:[
-mkSl(“WARMUP”,[mkEx(“Arm Circles”,“10 each direction”,0,“reps”,1,“Forward and backward. Gets the shoulder joint warm.”)]),
-mkSl(“WARMUP”,[mkEx(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. 3 full minutes. Spine must be stable.”)]),
-mkSl(“WARMUP”,[mkEx(“Pushups”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo. Warms chest, shoulders, and triceps.”)]),
-mkSl(“WORKOUT”,[
-mkEx(“Bench Press”,“4 sets x 8-10 reps”,90,“weighted”,4,“Chest drives the bar, not shoulders or triceps.”),
-mkEx(“Wide Grip Pulldown”,“3 sets x 10-12 reps”,75,“weighted”,3,“Shoulder blades down before pulling. Full dead hang between reps.”)
+]},
+upper:{name:“Upper Body”,tag:“Chest / Back / Arms”,color:”#8a5ac8”,slides:[
+sl(“WARMUP”,[ex(“Arm Circles”,“10 each direction”,0,“reps”,1,“Forward and backward. Gets the shoulder joint warm.”)]),
+sl(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Elbows under shoulders. 3 full minutes. Spine must be stable.”)]),
+sl(“WARMUP”,[ex(“Pushups”,“2 x 10 reps”,30,“reps”,2,“Controlled tempo. Warms chest, shoulders, and triceps.”)]),
+sl(“WORKOUT”,[
+ex(“Bench Press”,“4 sets x 8-10 reps”,90,“weighted”,4,“Chest drives the bar, not shoulders or triceps.”),
+ex(“Wide Grip Pulldown”,“3 sets x 10-12 reps”,75,“weighted”,3,“Shoulder blades down before pulling. Full dead hang.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“DB Shoulder Press”,“3 sets x 10-12 reps”,75,“weighted”,3,“Brace core before every rep. Full lockout overhead.”),
-mkEx(“Seated Cable Row”,“3 sets x 10-12 reps”,75,“weighted”,3,“1 second pause at contraction. Elbows behind torso.”)
+sl(“WORKOUT”,[
+ex(“DB Shoulder Press”,“3 sets x 10-12 reps”,75,“weighted”,3,“Brace core before every rep. Full lockout overhead.”),
+ex(“Seated Cable Row”,“3 sets x 10-12 reps”,75,“weighted”,3,“1 second pause at contraction. Elbows behind torso.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Bicep and Tricep Superset”,“3 sets x 12 each”,75,“weighted”,3,“12 curls then immediately 12 pushdowns. Zero rest between. Then rest 75 seconds.”),
-mkEx(“Core”,“10 minutes”,0,“timed”,1,“Plank, dead bugs, hollow holds.”)
+sl(“WORKOUT”,[
+ex(“Bicep and Tricep Superset”,“3 sets x 12 each”,75,“weighted”,3,“12 curls then immediately 12 pushdowns. Zero rest between. Then rest 75 seconds.”),
+ex(“Core”,“10 minutes”,0,“timed”,1,“Plank, dead bugs, hollow holds.”)
 ])
-]};
-
-WK.recovery = {name:“Active Recovery”,tag:“Mobility / Flexibility”,color:”#c8882a”,slides:[
-mkSl(“WARMUP”,[mkEx(“Easy Walk”,“5 minutes”,0,“timed”,1,“Slow pace. Gets blood moving before stretching.”)]),
-mkSl(“WARMUP”,[mkEx(“Plank”,“3 minutes”,0,“plank”,1,“Even on recovery days. 3 full minutes.”)]),
-mkSl(“WORKOUT”,[
-mkEx(“Hip Flexor Stretch”,“2 x 45s each side”,30,“timed”,2,“Kneeling lunge, shift hips forward. Hold and breathe.”),
-mkEx(“Pigeon Pose”,“2 x 60s each side”,30,“timed”,2,“Let gravity pull you down. The best hip stretch you can do.”)
+]},
+recovery:{name:“Active Recovery”,tag:“Mobility / Flexibility”,color:”#c8882a”,slides:[
+sl(“WARMUP”,[ex(“Easy Walk”,“5 minutes”,0,“timed”,1,“Slow pace. Gets blood moving before stretching.”)]),
+sl(“WARMUP”,[ex(“Plank”,“3 minutes”,0,“plank”,1,“Even on recovery days. 3 full minutes.”)]),
+sl(“WORKOUT”,[
+ex(“Hip Flexor Stretch”,“2 x 45s each side”,30,“timed”,2,“Kneeling lunge, shift hips forward. Hold and breathe.”),
+ex(“Pigeon Pose”,“2 x 60s each side”,30,“timed”,2,“Let gravity pull you down. Best hip stretch available.”)
 ]),
-mkSl(“WORKOUT”,[
-mkEx(“Hamstring Stretch”,“2 x 45s each side”,30,“timed”,2,“Flat back. Hinge from hips not spine.”),
-mkEx(“Foam Roll”,“5 minutes”,0,“timed”,1,“Hold 20-30 seconds on tender spots.”)
+sl(“WORKOUT”,[
+ex(“Hamstring Stretch”,“2 x 45s each side”,30,“timed”,2,“Flat back. Hinge from hips not spine.”),
+ex(“Foam Roll”,“5 minutes”,0,“timed”,1,“Hold 20-30 seconds on tender spots.”)
 ])
-]};
+]}
+};
 
-var EMOJIS = {push:”💪”,pull:”🔗”,lower:”🦵”,upper:”🏋”,recovery:”🧘”};
+var EM={push:”💪”,pull:”🔗”,lower:”🦵”,upper:”🏋”,recovery:”🧘”};
 
 function show(id){
-var ids=[“s-home”,“s-overview”,“s-story”,“s-done”];
+var ids=[“s-home”,“s-ov”,“s-story”,“s-done”];
 for(var i=0;i<ids.length;i++){
 var el=document.getElementById(ids[i]);
 if(el){el.className=“screen”+(ids[i]===id?” active”:””);}
@@ -201,157 +200,182 @@ if(el){el.className=“screen”+(ids[i]===id?” active”:””);}
 window.scrollTo(0,0);
 }
 
-function renderHome(){
-prs=sg(“wt_prs”,{});
-stopTimers();
+function goHome(){PRS=sg(“wt_prs”,{});stopT();rHome();}
+
+function rHome(){
 var el=document.getElementById(“s-home”);
 if(!el){return;}
 var keys=[“push”,“pull”,“lower”,“upper”,“recovery”];
-var h=”<div class='home-wrap'>”;
-h+=”<div class='eyebrow'>Your Training System</div>”;
-h+=”<div class='title'>TRAINER<span>GO</span></div>”;
-h+=”<div class='subtitle'>Select your program</div>”;
+var h=”<div class="home-wrap">”;
+h+=”<div class="eyebrow">Your Training System</div>”;
+h+=”<div class="htitle">TRAINER<span>GO</span></div>”;
+h+=”<div class="hsub">Select your program</div>”;
 for(var i=0;i<keys.length;i++){
 var k=keys[i];
 var w=WK[k];
-h+=”<div class='wcard' onclick='openOverview(this.dataset.k)' data-k='"+k+"' >”;
-h+=”<div class='wcard-bar' style='background:"+w.color+";box-shadow:0 0 10px "+w.color+";'></div>”;
-h+=”<span style='font-size:28px;'>”+EMOJIS[k]+”</span>”;
-h+=”<div><div class='wcard-name'>”+w.name+”</div><div class='wcard-tag'>”+w.tag+”</div></div>”;
-h+=”<div class='wcard-arr' style='color:"+w.color+";'>›</div>”;
+h+=”<div class="wcard" id="wc-”+k+”">”;
+h+=”<div class="wcard-bar" style="background:”+w.color+”"></div>”;
+h+=”<span style="font-size:28px;">”+EM[k]+”</span>”;
+h+=”<div><div class="wcard-name">”+w.name+”</div><div class="wcard-tag">”+w.tag+”</div></div>”;
+h+=”<div class="wcard-arr" style="color:”+w.color+”;">›</div>”;
 h+=”</div>”;
 }
 h+=”</div>”;
 el.innerHTML=h;
+for(var j=0;j<keys.length;j++){
+(function(key){
+var card=document.getElementById(“wc-”+key);
+if(card){card.onclick=function(){rOv(key);};}
+}(keys[j]));
+}
 show(“s-home”);
 }
 
-function openOverview(key){
-curKey=key;
+function rOv(key){
+CK=key;
 var w=WK[key];
-var el=document.getElementById(“s-overview”);
+var el=document.getElementById(“s-ov”);
 if(!el){return;}
-var h=”<div class='ov-wrap'>”;
-h+=”<div class='ov-hero'>”;
-h+=”<div class='ov-back' onclick='renderHome()'>← BACK</div>”;
-h+=”<div class='ov-title' style='color:"+w.color+";'>”+EMOJIS[key]+” “+w.name.toUpperCase()+”</div>”;
-h+=”<div class='ov-tag'>”+w.tag+”</div>”;
+var h=”<div class="ov-wrap">”;
+h+=”<div class="ov-hero">”;
+h+=”<div class="ov-back" id="ov-back">← BACK</div>”;
+h+=”<div class="ov-title" style="color:”+w.color+”;">”+EM[key]+” “+w.name.toUpperCase()+”</div>”;
+h+=”<div class="ov-tag">”+w.tag+”</div>”;
 h+=”</div>”;
-h+=”<div class='ov-list'>”;
-var lastPhase=””;
+h+=”<div class="ov-list">”;
+var lp=””;
 for(var i=0;i<w.slides.length;i++){
-var sl=w.slides[i];
-if(sl.phase!==lastPhase){lastPhase=sl.phase;h+=”<div class='ov-phase'>”+sl.phase+”</div>”;}
-h+=”<div class='ov-group'>”;
-if(sl.exs.length===2){h+=”<div class='ov-pair' style='color:"+w.color+";background:"+w.color+"10;'>PAIRED EXERCISES</div>”;}
-for(var j=0;j<sl.exs.length;j++){
-var ex=sl.exs[j];
-var prI=prs[ex.name];
-h+=”<div class='ov-item'>”;
-h+=”<div class='ov-ltr' style='background:"+w.color+"15;border:1px solid "+w.color+"40;color:"+w.color+";'>”+(j===0?“A”:“B”)+”</div>”;
-h+=”<div><div class='ov-iname'>”+ex.name+”</div>”;
-h+=”<div class='ov-imeta'>”+ex.meta+(prI?” · PR: “+prI.weight+“lb x “+prI.reps:””)+”</div></div>”;
+var s=w.slides[i];
+if(s.phase!==lp){lp=s.phase;h+=”<div class="ov-phase">”+s.phase+”</div>”;}
+h+=”<div class="ov-group">”;
+if(s.exs.length===2){h+=”<div class="ov-pair" style="color:”+w.color+”;background:”+w.color+“10;">PAIRED EXERCISES</div>”;}
+for(var j=0;j<s.exs.length;j++){
+var e=s.exs[j];
+var pi=PRS[e.name];
+h+=”<div class="ov-item">”;
+h+=”<div class="ov-ltr" style="background:”+w.color+“15;border:1px solid “+w.color+“40;color:”+w.color+”;">”+( j===0?“A”:“B”)+”</div>”;
+h+=”<div><div class="ov-iname">”+e.name+”</div>”;
+h+=”<div class="ov-imeta">”+e.meta+(pi?” · PR: “+pi.weight+“lb x “+pi.reps:””)+”</div></div>”;
 h+=”</div>”;
 }
 h+=”</div>”;
 }
-h+=”</div><div style='height:120px;'></div></div>”;
-h+=”<div class='ov-bot'><button class='ov-btn' style='background:"+w.color+";' onclick='startStory()'>START WORKOUT</button></div>”;
+h+=”</div><div style="height:120px;"></div></div>”;
+h+=”<div class="ov-bot"><button class="ov-btn" id="ov-start" style="background:”+w.color+”;">START WORKOUT</button></div>”;
 el.innerHTML=h;
-show(“s-overview”);
+document.getElementById(“ov-back”).onclick=function(){goHome();};
+document.getElementById(“ov-start”).onclick=function(){startS();};
+show(“s-ov”);
 }
 
-function startStory(){slideIdx=0;setsDoneA=0;setsDoneB=0;renderStory();}
+function startS(){SI=0;SDA=0;SDB=0;rStory();}
 
-function renderStory(){
-stopTimers();
-var w=WK[curKey];
-var sl=w.slides[slideIdx];
-var total=w.slides.length;
+function rStory(){
+stopT();
+var w=WK[CK];
+var slide=w.slides[SI];
+var tot=w.slides.length;
 var el=document.getElementById(“s-story”);
 if(!el){return;}
 var bars=””;
-for(var i=0;i<total;i++){
-var pct=(i<slideIdx?100:0);
-bars+=”<div class='st-bar'><div class='st-fill' id='bar-"+i+"' style='width:"+pct+"%;background:"+w.color+";'></div></div>”;
+for(var i=0;i<tot;i++){
+bars+=”<div class="st-bar"><div class="st-fill" id="bar-”+i+”" style="width:”+(i<SI?100:0)+”%;background:”+w.color+”;"></div></div>”;
 }
-var isLast=(slideIdx===total-1);
 var bg=“linear-gradient(170deg,”+w.color+“28 0%,#060608 50%)”;
-var h=”<div class='st-wrap' style='background:"+bg+";'>”;
-h+=”<div class='st-bars'>”+bars+”</div>”;
-h+=”<div class='st-prev' onclick='prevSlide()'></div>”;
-h+=”<div class='st-next' onclick='nextSlide()'></div>”;
-h+=”<div class='st-body'>”;
-h+=”<div class='st-hud'><span class='st-badge' style='color:"+w.color+";border-color:"+w.color+"40;'>”+sl.phase+”</span>”;
-h+=”<span class='st-step'>”+(slideIdx+1)+” OF “+total+”</span></div>”;
-h+=buildBody(sl,w.color);
-h+=”<button class='st-btn' style='background:"+w.color+";' onclick='nextSlide()'>”+(isLast?“FINISH”:“NEXT ›”)+”</button>”;
+var h=”<div class="st-wrap" style="background:”+bg+”">”;
+h+=”<div class="st-bars">”+bars+”</div>”;
+h+=”<div class="st-prev" id="st-prev"></div>”;
+h+=”<div class="st-next" id="st-next"></div>”;
+h+=”<div class="st-body">”;
+h+=”<div class="st-hud"><span class="st-badge" style="color:”+w.color+”;border-color:”+w.color+“40;">”+slide.phase+”</span>”;
+h+=”<span class="st-step">”+(SI+1)+” OF “+tot+”</span></div>”;
+h+=buildBody(slide,w.color);
+h+=”<button class="st-btn" id="st-btn" style="background:”+w.color+”;">”+(SI===tot-1?“FINISH”:“NEXT ›”)+”</button>”;
 h+=”</div></div>”;
 el.innerHTML=h;
+document.getElementById(“st-prev”).onclick=function(){prevS();};
+document.getElementById(“st-next”).onclick=function(){nextS();};
+document.getElementById(“st-btn”).onclick=function(){nextS();};
+var pb=document.getElementById(“plank-btn”);
+if(pb){pb.onclick=function(){toggleP();};}
+var ps=document.getElementById(“pr-save-0”);
+if(ps){ps.onclick=function(){savePR(0);};}
+var ps2=document.getElementById(“pr-save-1”);
+if(ps2){ps2.onclick=function(){savePR(1);};}
+bindDots();
 show(“s-story”);
-plankLeft=180;plankRunning=false;
+PL=180;PR=false;
 }
 
-function buildBody(sl,color){
+function buildBody(slide,color){
 var h=””;
-if(sl.exs.length===1){
-h+=buildEx(sl.exs[0],“A”,color,0,setsDoneA,true);
+if(slide.exs.length===1){
+h+=buildEx(slide.exs[0],“A”,color,0,SDA,true);
 }else{
-h+=buildEx(sl.exs[0],“A”,color,0,setsDoneA,false);
-h+=”<div class='pair-div'>THEN</div>”;
-h+=buildEx(sl.exs[1],“B”,color,1,setsDoneB,false);
+h+=buildEx(slide.exs[0],“A”,color,0,SDA,false);
+h+=”<div class="pdiv">THEN</div>”;
+h+=buildEx(slide.exs[1],“B”,color,1,SDB,false);
 }
 return h;
 }
 
-function buildEx(ex,label,color,idx,done,big){
-var h=”<div class='ex-block' style='border-left:2px solid "+color+";'>”;
-h+=”<div style='margin-bottom:8px;'>”;
-h+=”<span class='ex-ltr' style='background:"+color+"20;border:1px solid "+color+"50;color:"+color+";'>”+label+”</span>”;
-h+=”<span class='ex-name' style='font-size:"+(big?"28":"22")+"px;color:"+color+";'>”+ex.name+”</span>”;
+function buildEx(e,label,color,idx,done,big){
+var h=”<div class="ex-block" style="border-left:2px solid “+color+”;">”;
+h+=”<div style="margin-bottom:8px;">”;
+h+=”<span class="ex-ltr" style="background:”+color+“20;border:1px solid “+color+“50;color:”+color+”;">”+label+”</span>”;
+h+=”<span class="ex-name" style="font-size:”+(big?“28”:“22”)+“px;color:”+color+”;">”+e.name+”</span>”;
 h+=”</div>”;
-var prI=prs[ex.name];
-if(prI){h+=”<div class='pr-badge' style='background:"+color+"15;color:"+color+";border-color:"+color+"35;'>PR: “+prI.weight+“lb x “+prI.reps+”</div>”;}
-h+=”<div class='ex-meta'>”+ex.meta+”</div>”;
-h+=”<div class='ex-cue'>”+ex.cue+”</div>”;
-if(ex.type===“plank”){
-h+=”<div class='plank-wrap' style='border-color:"+color+"30;'>”;
-h+=”<div class='plank-time' id='plank-disp' style='color:"+color+";'>3:00</div>”;
-h+=”<div class='plank-lbl'>hold</div>”;
-h+=”<div class='plank-btn' id='plank-btn' onclick='togglePlank()' style='color:"+color+";border-color:"+color+"50;background:"+color+"10;'>START TIMER</div>”;
+var pi=PRS[e.name];
+if(pi){h+=”<div class="pr-badge" style="background:”+color+“15;color:”+color+”;border-color:”+color+“35;">PR: “+pi.weight+“lb x “+pi.reps+”</div>”;}
+h+=”<div class="ex-meta">”+e.meta+”</div>”;
+h+=”<div class="ex-cue">”+e.cue+”</div>”;
+if(e.type===“plank”){
+h+=”<div class="plank-wrap" style="border-color:”+color+“30;">”;
+h+=”<div class="plank-time" id="plank-disp" style="color:”+color+”;">3:00</div>”;
+h+=”<div class="plank-lbl">hold</div>”;
+h+=”<div class="plank-btn" id="plank-btn" style="color:”+color+”;border-color:”+color+“50;background:”+color+“10;">START TIMER</div>”;
 h+=”</div>”;
 }
-if(ex.type===“weighted”||ex.type===“reps”){
-h+=”<div class='set-row' id='dots-"+idx+"'>”;
-for(var s=0;s<ex.sets;s++){
+if(e.type===“weighted”||e.type===“reps”){
+h+=”<div class="set-row" id="dots-”+idx+”">”;
+for(var s=0;s<e.sets;s++){
 var hit=(s<done);
 var ds=hit?“border-color:”+color+”;color:#000;background:”+color+”;box-shadow:0 0 10px “+color+“70;”:””;
-h+=”<div class='dot"+(hit?" hit":"")+"' id='dot-"+idx+"-"+s+"' style='"+ds+"' onclick='hitDot("+idx+","+s+","+ex.sets+","+ex.rest+")'>”+( s+1)+”</div>”;
+h+=”<div class="dot”+(hit?” hit”:””)+”" id="dot-”+idx+”-”+s+”" style="”+ds+”" data-idx="”+idx+”" data-dot="”+s+”" data-total="”+e.sets+”" data-rest="”+e.rest+”">”+( s+1)+”</div>”;
 }
 h+=”</div>”;
-h+=”<div class='pr-row'>”;
-h+=”<input class='pr-inp' id='pw-"+idx+"' type='number' placeholder='lbs'>”;
-h+=”<input class='pr-inp' id='pr-"+idx+"' type='number' placeholder='reps'>”;
-h+=”<div class='pr-save' onclick='savePR("+idx+")'>Save PR</div>”;
+h+=”<div class="pr-row">”;
+h+=”<input class="pr-inp" id="pw-”+idx+”" type="number" placeholder="lbs">”;
+h+=”<input class="pr-inp" id="prr-”+idx+”" type="number" placeholder="reps">”;
+h+=”<div class="pr-save" id="pr-save-”+idx+”">Save PR</div>”;
 h+=”</div>”;
 }
 h+=”</div>”;
 return h;
+}
+
+function bindDots(){
+var dots=document.querySelectorAll(”.dot”);
+for(var i=0;i<dots.length;i++){
+(function(d){
+d.onclick=function(){
+hitDot(parseInt(d.getAttribute(“data-idx”)),parseInt(d.getAttribute(“data-dot”)),parseInt(d.getAttribute(“data-total”)),parseInt(d.getAttribute(“data-rest”)));
+};
+}(dots[i]));
+}
 }
 
 function hitDot(idx,dot,total,restSecs){
-var color=WK[curKey].color;
-var cur=(idx===0?setsDoneA:setsDoneB);
+var color=WK[CK].color;
+var cur=(idx===0?SDA:SDB);
 var nd=(dot<cur?dot:dot+1);
-if(idx===0){setsDoneA=nd;}else{setsDoneB=nd;}
+if(idx===0){SDA=nd;}else{SDB=nd;}
 for(var s=0;s<total;s++){
 var d=document.getElementById(“dot-”+idx+”-”+s);
 if(!d){continue;}
 if(s<nd){
-d.className=“dot hit”;
 d.style.borderColor=color;d.style.color=”#000”;d.style.background=color;d.style.boxShadow=“0 0 10px “+color+“70”;
 }else{
-d.className=“dot”;
 d.style.borderColor=””;d.style.color=””;d.style.background=””;d.style.boxShadow=””;
 }
 }
@@ -359,105 +383,118 @@ if(nd>0&&nd<total&&restSecs>0){showRest(restSecs);}
 }
 
 function savePR(idx){
-var sl=WK[curKey].slides[slideIdx];
-if(!sl||!sl.exs[idx]){return;}
-var nm=sl.exs[idx].name;
+var slide=WK[CK].slides[SI];
+if(!slide||!slide.exs[idx]){return;}
+var nm=slide.exs[idx].name;
 var we=document.getElementById(“pw-”+idx);
-var re=document.getElementById(“pr-”+idx);
+var re=document.getElementById(“prr-”+idx);
 if(!we||!re){return;}
 var wv=parseFloat(we.value);
 var rv=parseInt(re.value);
 if(!wv||!rv){return;}
-prs[nm]={weight:wv,reps:rv,date:new Date().toISOString().split(“T”)[0]};
-ss(“wt_prs”,prs);
+PRS[nm]={weight:wv,reps:rv,date:new Date().toISOString().split(“T”)[0]};
+ss(“wt_prs”,PRS);
 we.value=””;re.value=””;
-var btn=document.querySelector(”.pr-save”);
-if(btn){btn.textContent=“Saved!”;setTimeout(function(){var b=document.querySelector(”.pr-save”);if(b){b.textContent=“Save PR”;}},1200);}
+var btn=document.getElementById(“pr-save-”+idx);
+if(btn){btn.textContent=“Saved!”;setTimeout(function(){var b=document.getElementById(“pr-save-”+idx);if(b){b.textContent=“Save PR”;}},1200);}
 }
 
-function togglePlank(){
-if(plankRunning){
-plankRunning=false;
-if(plankTimer){clearInterval(plankTimer);plankTimer=null;}
+function toggleP(){
+if(PR){
+PR=false;
+if(PT){clearInterval(PT);PT=null;}
 var b=document.getElementById(“plank-btn”);if(b){b.textContent=“RESUME”;}
 }else{
-plankRunning=true;
-if(plankLeft<=0){plankLeft=180;}
+PR=true;
+if(PL<=0){PL=180;}
 var b2=document.getElementById(“plank-btn”);if(b2){b2.textContent=“PAUSE”;}
-plankTimer=setInterval(function(){
-plankLeft–;
+PT=setInterval(function(){
+PL–;
 var d=document.getElementById(“plank-disp”);
-if(d){var m=Math.floor(plankLeft/60);var sc=plankLeft%60;d.textContent=m+”:”+(sc<10?“0”:””)+sc;}
-if(plankLeft<=0){
-clearInterval(plankTimer);plankTimer=null;plankRunning=false;
+if(d){var m=Math.floor(PL/60);var sc=PL%60;d.textContent=m+”:”+(sc<10?“0”:””)+sc;}
+if(PL<=0){
+clearInterval(PT);PT=null;PR=false;
 var d2=document.getElementById(“plank-disp”);if(d2){d2.textContent=“DONE!”;}
 var b3=document.getElementById(“plank-btn”);
-if(b3){b3.textContent=“RESET”;b3.onclick=function(){plankLeft=180;var d3=document.getElementById(“plank-disp”);if(d3){d3.textContent=“3:00”;}b3.textContent=“START TIMER”;b3.onclick=togglePlank;};}
+if(b3){
+b3.textContent=“RESET”;
+b3.onclick=function(){
+PL=180;PR=false;
+var d3=document.getElementById(“plank-disp”);if(d3){d3.textContent=“3:00”;}
+b3.textContent=“START TIMER”;
+b3.onclick=function(){toggleP();};
+};
+}
 }
 },1000);
 }
 }
 
-function nextSlide(){
-var total=WK[curKey].slides.length;
-if(slideIdx>=total-1){showDone();return;}
-slideIdx++;setsDoneA=0;setsDoneB=0;renderStory();
+function nextS(){
+var tot=WK[CK].slides.length;
+if(SI>=tot-1){rDone();return;}
+SI++;SDA=0;SDB=0;rStory();
 }
 
-function prevSlide(){
-if(slideIdx<=0){openOverview(curKey);return;}
-slideIdx–;setsDoneA=0;setsDoneB=0;renderStory();
+function prevS(){
+if(SI<=0){rOv(CK);return;}
+SI–;SDA=0;SDB=0;rStory();
 }
 
 function showRest(secs){
-restLeft=secs;
+RL=secs;
 var ov=document.getElementById(“rest-ov”);
 if(!ov){return;}
 ov.className=“rest-ov on”;
-updateRest();
-if(restTimer){clearInterval(restTimer);}
-restTimer=setInterval(function(){
-restLeft–;
-if(restLeft<=0){clearInterval(restTimer);restTimer=null;var ov2=document.getElementById(“rest-ov”);if(ov2){ov2.className=“rest-ov”;}}
-else{updateRest();}
+updR();
+if(RT){clearInterval(RT);}
+RT=setInterval(function(){
+RL–;
+if(RL<=0){clearInterval(RT);RT=null;var o=document.getElementById(“rest-ov”);if(o){o.className=“rest-ov”;}}
+else{updR();}
 },1000);
 }
 
-function updateRest(){var el=document.getElementById(“rest-num”);if(el){el.textContent=restLeft;}}
+function updR(){var el=document.getElementById(“rest-num”);if(el){el.textContent=RL;}}
 
 function skipRest(){
-if(restTimer){clearInterval(restTimer);restTimer=null;}
+if(RT){clearInterval(RT);RT=null;}
 var ov=document.getElementById(“rest-ov”);if(ov){ov.className=“rest-ov”;}
 }
 
-function stopTimers(){
-if(restTimer){clearInterval(restTimer);restTimer=null;}
-if(plankTimer){clearInterval(plankTimer);plankTimer=null;}
-plankRunning=false;
+function stopT(){
+if(RT){clearInterval(RT);RT=null;}
+if(PT){clearInterval(PT);PT=null;}
+PR=false;
 var ov=document.getElementById(“rest-ov”);if(ov){ov.className=“rest-ov”;}
 }
 
-function showDone(){
-stopTimers();
-var w=WK[curKey];
+function rDone(){
+stopT();
+var w=WK[CK];
 var el=document.getElementById(“s-done”);
 if(!el){return;}
-var total=0;
-for(var i=0;i<w.slides.length;i++){for(var j=0;j<w.slides[i].exs.length;j++){total+=w.slides[i].exs[j].sets;}}
-var h=”<div class='done-wrap'>”;
-h+=”<div class='done-icon'>⚡</div>”;
-h+=”<div class='done-title' style='color:"+w.color+";'>DONE!</div>”;
-h+=”<div class='done-stat'>”+total+”</div>”;
-h+=”<div class='done-lbl'>sets completed</div>”;
-h+=”<div class='done-sub'>”+w.name+” complete.</div>”;
-h+=”<button class='done-home' onclick='renderHome()'>BACK HOME</button>”;
+var tot=0;
+for(var i=0;i<w.slides.length;i++){for(var j=0;j<w.slides[i].exs.length;j++){tot+=w.slides[i].exs[j].sets;}}
+var h=”<div class="done-wrap">”;
+h+=”<div class="done-icon">⚡</div>”;
+h+=”<div class="done-title" style="color:”+w.color+”;">DONE!</div>”;
+h+=”<div class="done-stat">”+tot+”</div>”;
+h+=”<div class="done-lbl">sets completed</div>”;
+h+=”<div class="done-sub">”+w.name+” complete.</div>”;
+h+=”<button class="done-home" id="done-home">BACK HOME</button>”;
 h+=”</div>”;
 el.innerHTML=h;
+document.getElementById(“done-home”).onclick=function(){goHome();};
 show(“s-done”);
 }
 
-renderHome();
+document.getElementById(“rest-skip”).onclick=function(){skipRest();};
 
+goHome();
+
+}());
 </script>
+
 </body>
-</html>
+</html> 
