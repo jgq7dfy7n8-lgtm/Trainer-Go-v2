@@ -508,7 +508,22 @@ el.innerHTML=html;
 show(‘s-done’);
 }
 
+window.onerror = function(msg, src, line, col, err) {
+document.body.innerHTML = ‘<div style="padding:40px 20px;font-family:monospace;font-size:13px;color:#ff4444;background:#060608;min-height:100vh;">’
++ ‘<div style="color:#00e5ff;font-size:16px;margin-bottom:16px;">TRAINER GO - ERROR</div>’
++ ‘<div>’ + msg + ‘</div>’
++ ’<div style="color:#888;margin-top:8px;">Line: ’ + line + ‘</div>’
++ ‘</div>’;
+return true;
+};
+try {
 renderHome();
+} catch(e) {
+document.body.innerHTML = ‘<div style="padding:40px 20px;font-family:monospace;font-size:13px;color:#ff4444;background:#060608;min-height:100vh;">’
++ ‘<div style="color:#00e5ff;font-size:16px;margin-bottom:16px;">TRAINER GO - CATCH ERROR</div>’
++ ‘<div>’ + e.message + ‘</div>’
++ ‘</div>’;
+}
 </script>
 
 </body>
