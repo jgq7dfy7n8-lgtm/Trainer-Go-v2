@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -7,576 +8,106 @@
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-html{background:#04040a;}
-body{background:#04040a;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height:100vh;}
-.page{display:none;min-height:100vh;width:100%;background:#04040a;}
+html{background:#060608;}
+body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height:100vh;}
+/* NO position:fixed on pages - use display none/block only */
+.page{display:none;min-height:100vh;width:100%;background:#060608;}
 .page.on{display:block;}
-
-/* GRID BG */
-.gridbg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(rgba(0,229,255,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,229,255,.04) 1px,transparent 1px);
-  background-size:40px 40px;}
-.scanline{position:fixed;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,rgba(0,229,255,.5),transparent);
-  z-index:1;pointer-events:none;animation:scan 4s linear infinite;}
-@keyframes scan{0%{top:-3px;}100%{top:100vh;}}
-
 /* HOME */
-.home{padding:60px 18px 80px;position:relative;z-index:2;}
-.eyebrow{font-size:10px;letter-spacing:6px;color:#00e5ff;text-transform:uppercase;margin-bottom:8px;
-  text-shadow:0 0 12px rgba(0,229,255,.9);}
-.htitle{font-family:"Black Ops One",sans-serif;font-size:62px;letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:6px;
-  text-shadow:0 0 30px rgba(255,255,255,.25);}
-.htitle span{color:#00e5ff;text-shadow:0 0 20px rgba(0,229,255,.9),0 0 40px rgba(0,229,255,.5);}
-.hsub{font-size:12px;color:#8888b8;letter-spacing:4px;text-transform:uppercase;margin-bottom:36px;}
-
-.wcard{position:relative;cursor:pointer;margin-bottom:12px;border-radius:18px;padding:20px 20px 20px 24px;
-  background:linear-gradient(135deg,#111120 0%,#14141f 100%);
-  border:1px solid #2e2e48;display:flex;align-items:center;gap:16px;overflow:hidden;
-  transition:transform .15s,box-shadow .15s;}
-.wcard:active{transform:scale(.98);}
-.wcard::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;opacity:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.05),transparent);
-  border-radius:18px;transition:opacity .2s;}
-.wcard:hover::before{opacity:1;}
-.wglow{position:absolute;top:0;left:0;bottom:0;width:4px;border-radius:4px 0 0 4px;}
-.wcard-inner{display:flex;flex-direction:column;flex:1;min-width:0;}
-.wcard-top{display:flex;align-items:center;gap:14px;margin-bottom:2px;}
-.wemoji{font-size:26px;flex-shrink:0;}
-.wname{font-family:"Black Ops One",sans-serif;font-size:19px;color:#ffffff;letter-spacing:.5px;}
-.wtag{font-size:12px;color:#9090be;letter-spacing:2px;margin-top:2px;padding-left:40px;font-weight:600;}
-.warr{margin-left:auto;font-size:20px;flex-shrink:0;opacity:.9;}
-.wbadge{position:absolute;top:12px;right:40px;font-size:9px;font-weight:700;letter-spacing:2px;
-  padding:3px 8px;border-radius:20px;text-transform:uppercase;}
-
+.home{padding:60px 18px 60px;}
+.eyebrow{font-size:10px;letter-spacing:6px;color:#00e5ff;text-transform:uppercase;margin-bottom:6px;}
+.htitle{font-family:"Black Ops One",sans-serif;font-size:56px;letter-spacing:3px;color:#fff;line-height:.95;margin-bottom:4px;}
+.htitle span{color:#00e5ff;}
+.hsub{font-size:12px;color:#6a6a8a;letter-spacing:3px;text-transform:uppercase;margin-bottom:32px;}
+.wcard{position:relative;cursor:pointer;margin-bottom:10px;border-radius:16px;padding:18px 18px 18px 22px;background:#12121a;border:1px solid #2a2a3e;display:flex;align-items:center;gap:14px;overflow:hidden;}
+.wbar{position:absolute;left:0;top:0;bottom:0;width:3px;}
+.wname{font-family:"Black Ops One",sans-serif;font-size:18px;color:#fff;}
+.wtag{font-size:11px;color:#6a6a8a;margin-top:3px;}
+.warr{margin-left:auto;font-size:22px;flex-shrink:0;}
 /* OVERVIEW */
-.ovhero{padding:56px 20px 22px;position:relative;z-index:2;border-bottom:1px solid #1e1e38;}
-.ovhero-bg{position:absolute;top:0;left:0;right:0;bottom:0;opacity:.12;z-index:-1;}
-.ovback{font-size:11px;color:#8888aa;cursor:pointer;margin-bottom:16px;letter-spacing:3px;
-  text-transform:uppercase;display:inline-flex;align-items:center;gap:6px;transition:color .2s;}
-.ovback:hover{color:#00e5ff;}
-.ovtitle{font-family:"Black Ops One",sans-serif;font-size:38px;letter-spacing:2px;line-height:1;}
-.ovtag{font-size:12px;color:#9090be;margin-top:6px;letter-spacing:3px;text-transform:uppercase;font-weight:600;}
-.ovlist{padding:16px 18px 140px;position:relative;z-index:2;}
-.ovphase{font-size:9px;font-weight:700;letter-spacing:5px;color:#5a5a8a;text-transform:uppercase;padding:18px 0 10px;
-  display:flex;align-items:center;gap:10px;}
-.ovphase::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,#2a2a3e,transparent);}
-.ovgroup{border-radius:16px;background:linear-gradient(135deg,#111120,#14141f);
-  border:1px solid #2e2e48;margin-bottom:10px;overflow:hidden;}
-.ovpair{padding:8px 16px;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
-  border-bottom:1px solid #1e1e38;display:flex;align-items:center;gap:8px;}
-.ovpair::before{content:"⚡";font-size:12px;}
-.ovitem{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #1e1e38;}
+.ovhero{padding:52px 20px 20px;background:#060608;border-bottom:1px solid #1e1e2e;}
+.ovback{font-size:12px;color:#6a6a8a;cursor:pointer;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;display:inline-block;}
+.ovtitle{font-family:"Black Ops One",sans-serif;font-size:34px;letter-spacing:2px;line-height:1;}
+.ovtag{font-size:11px;color:#6a6a8a;margin-top:5px;letter-spacing:2px;text-transform:uppercase;}
+.ovlist{padding:16px 18px 140px;}
+.ovphase{font-size:9px;font-weight:700;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;padding:16px 0 8px;}
+.ovgroup{border-radius:14px;background:#12121a;border:1px solid #2a2a3e;margin-bottom:10px;overflow:hidden;}
+.ovpair{padding:8px 14px;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border-bottom:1px solid #1e1e2e;}
+.ovitem{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #1e1e2e;}
 .ovitem:last-child{border-bottom:none;}
-.ovltr{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;flex-shrink:0;}
-.oviname{font-size:16px;font-weight:700;letter-spacing:.3px;color:#f0f0ff;}
-.ovimeta{font-size:12px;color:#9090be;margin-top:3px;font-weight:600;}
-.ovpr{font-size:10px;font-weight:700;margin-top:3px;}
-.ovbot{padding:16px 18px 48px;position:relative;z-index:2;}
-.ovbtn{width:100%;padding:19px;border:none;border-radius:16px;font-family:"Black Ops One",sans-serif;
-  font-size:21px;letter-spacing:5px;color:#000;cursor:pointer;position:relative;overflow:hidden;
-  transition:transform .15s,box-shadow .15s;}
-.ovbtn::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
-  animation:shimmer 2.5s infinite;}
-@keyframes shimmer{0%{left:-100%;}100%{left:150%;}}
-.ovbtn:active{transform:scale(.97);}
-
+.ovltr{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.oviname{font-size:14px;font-weight:600;}
+.ovimeta{font-size:11px;color:#6a6a8a;margin-top:2px;}
+.ovbot{padding:16px 18px 40px;}
+.ovbtn{width:100%;padding:17px;border:none;border-radius:14px;font-family:"Black Ops One",sans-serif;font-size:20px;letter-spacing:4px;color:#000;cursor:pointer;}
 /* STORY */
-.stbars{display:flex;gap:5px;padding:52px 18px 10px;position:relative;z-index:2;}
-.stbar{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;}
-.stfill{height:100%;border-radius:999px;transition:width .3s;}
-.stbody{padding:0 18px 40px;position:relative;z-index:2;}
-.sthud{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-top:14px;}
-.stbadge{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;
-  padding:4px 10px;border-radius:6px;border:1px solid;}
-.ststep{font-size:12px;color:#9090be;letter-spacing:2px;margin-left:auto;font-weight:700;}
-
-.exblock{border-radius:16px;padding:18px;margin-bottom:12px;
-  background:linear-gradient(135deg,rgba(255,255,255,.05) 0%,rgba(255,255,255,.02) 100%);
-  border:1px solid #2e2e48;position:relative;overflow:hidden;}
-.exblock::before{content:"";position:absolute;top:0;left:0;width:100%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);}
-.exltr{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
-  border-radius:6px;font-size:10px;font-weight:700;margin-right:10px;vertical-align:middle;}
-.exname{font-family:"Black Ops One",sans-serif;letter-spacing:1px;line-height:1.1;margin-bottom:4px;vertical-align:middle;}
-.exmeta{font-size:13px;color:#a0a0cc;margin-bottom:10px;letter-spacing:.5px;font-weight:700;}
-.excue{font-size:13px;line-height:1.8;color:rgba(255,255,255,.8);
-  background:rgba(0,0,0,.5);border-radius:12px;padding:14px 16px;margin-bottom:12px;
-  border-left:3px solid rgba(255,255,255,.2);}
-.prbadge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;
-  display:inline-flex;align-items:center;gap:5px;margin-bottom:10px;border:1px solid;}
-.prbadge::before{content:"🏆";font-size:10px;}
-
-.setrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
-.dot{width:52px;height:52px;border-radius:12px;border:1.5px solid rgba(255,255,255,.18);
-  display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;
-  color:rgba(255,255,255,.4);cursor:pointer;transition:all .2s;position:relative;}
-.dot.done{color:#000 !important;transform:scale(1.05);}
-.dot::after{content:"";position:absolute;inset:0;border-radius:12px;opacity:0;
-  background:rgba(255,255,255,.1);transition:opacity .1s;}
-.dot:active::after{opacity:1;}
-
-.pdiv{text-align:center;font-size:9px;letter-spacing:5px;color:#5a5a8a;text-transform:uppercase;
-  margin:8px 0;display:flex;align-items:center;gap:10px;}
-.pdiv::before,.pdiv::after{content:"";flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,#2e2e48,transparent);}
-
-.plankwrap{border-radius:16px;padding:24px;margin-bottom:12px;text-align:center;
-  background:rgba(0,0,0,.5);border:1px solid;position:relative;overflow:hidden;}
-.plankwrap::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:200px;height:200px;border-radius:50%;opacity:.05;
-  background:radial-gradient(circle,currentColor,transparent);}
-.planktime{font-family:"Black Ops One",sans-serif;font-size:76px;line-height:1;margin-bottom:4px;
-  text-shadow:0 0 30px currentColor;}
-.planklbl{font-size:10px;letter-spacing:5px;color:#9090be;text-transform:uppercase;margin-bottom:18px;font-weight:600;}
-.plankbtn{display:inline-block;padding:13px 34px;border-radius:12px;font-family:"Black Ops One",sans-serif;
-  font-size:15px;letter-spacing:3px;cursor:pointer;border:1.5px solid;transition:all .2s;}
-
-.prrow{display:flex;gap:8px;margin-top:10px;}
-.prinp{flex:1;padding:11px 12px;border-radius:12px;background:rgba(0,0,0,.6);
-  border:1.5px solid #2e2e48;color:#f0f0ff;font-size:15px;font-family:Rajdhani,sans-serif;
-  font-weight:700;-webkit-appearance:none;transition:border-color .2s;}
-.prinp:focus{outline:none;border-color:#00e5ff;box-shadow:0 0 0 3px rgba(0,229,255,.12);}
-.prsave{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.3);border-radius:12px;
-  padding:11px 16px;color:#00e5ff;font-size:12px;font-weight:700;cursor:pointer;
-  white-space:nowrap;transition:all .2s;letter-spacing:1px;}
-.prsave:hover{background:rgba(0,229,255,.15);border-color:rgba(0,229,255,.5);}
-
-.navrow{display:flex;gap:12px;margin-top:18px;}
-.stprev{flex:1;padding:16px;border:1.5px solid #2e2e48;border-radius:14px;
-  font-family:"Black Ops One",sans-serif;font-size:16px;letter-spacing:2px;
-  color:#8888aa;cursor:pointer;background:rgba(255,255,255,.03);text-align:center;transition:all .2s;}
-.stprev:active{background:rgba(255,255,255,.07);}
-.stnext{flex:2;padding:16px;border:none;border-radius:14px;font-family:"Black Ops One",sans-serif;
-  font-size:19px;letter-spacing:4px;color:#000;cursor:pointer;text-align:center;
-  position:relative;overflow:hidden;transition:transform .15s,box-shadow .15s;}
-.stnext::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
-  animation:shimmer 2s infinite;}
-.stnext:active{transform:scale(.97);}
-
+.stbars{display:flex;gap:4px;padding:52px 16px 12px;background:#060608;}
+.stbar{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden;}
+.stfill{height:100%;border-radius:999px;}
+.stbody{padding:0 18px 40px;}
+.sthud{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-top:16px;}
+.stbadge{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:3px 8px;border-radius:4px;border:1px solid;}
+.ststep{font-size:11px;color:#6a6a8a;letter-spacing:1px;}
+.exblock{border-radius:14px;padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid #2a2a3e;}
+.exltr{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:5px;font-size:9px;font-weight:700;margin-right:8px;vertical-align:middle;}
+.exname{font-family:"Black Ops One",sans-serif;letter-spacing:1px;line-height:1.1;margin-bottom:3px;}
+.exmeta{font-size:12px;color:#6a6a8a;margin-bottom:8px;}
+.excue{font-size:12px;line-height:1.6;color:rgba(255,255,255,.5);background:rgba(0,0,0,.35);border-radius:10px;padding:10px 12px;margin-bottom:10px;}
+.prbadge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:8px;border:1px solid;}
+.setrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.dot{width:48px;height:48px;border-radius:10px;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:rgba(255,255,255,.3);cursor:pointer;}
+.pdiv{text-align:center;font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin:6px 0;display:flex;align-items:center;gap:8px;}
+.pdiv::before,.pdiv::after{content:"";flex:1;height:1px;background:#1e1e2e;}
+.plankwrap{border-radius:14px;padding:20px;margin-bottom:10px;text-align:center;background:rgba(0,0,0,.4);border:1px solid #2a2a3e;}
+.planktime{font-family:"Black Ops One",sans-serif;font-size:68px;line-height:1;margin-bottom:4px;}
+.planklbl{font-size:9px;letter-spacing:4px;color:#4a4a6a;text-transform:uppercase;margin-bottom:14px;}
+.plankbtn{display:inline-block;padding:11px 28px;border-radius:10px;font-family:"Black Ops One",sans-serif;font-size:15px;letter-spacing:2px;cursor:pointer;border:1.5px solid;}
+.prrow{display:flex;gap:7px;margin-top:8px;}
+.prinp{flex:1;padding:9px 10px;border-radius:10px;background:rgba(0,0,0,.5);border:1.5px solid #2a2a3e;color:#f0f0ff;font-size:14px;font-family:Rajdhani,sans-serif;font-weight:600;-webkit-appearance:none;}
+.prinp:focus{outline:none;border-color:#00e5ff;}
+.prsave{background:rgba(0,229,255,.08);border:1.5px solid rgba(0,229,255,.25);border-radius:10px;padding:9px 14px;color:#00e5ff;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.navrow{display:flex;gap:10px;margin-top:16px;}
+.stprev{flex:1;padding:15px;border:1.5px solid #2a2a3e;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:16px;letter-spacing:2px;color:#6a6a8a;cursor:pointer;background:transparent;text-align:center;}
+.stnext{flex:2;padding:15px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:4px;color:#000;cursor:pointer;text-align:center;}
+/* REST - position fixed still needed here but with the iOS26 fix */
+.restov{display:none;position:fixed;top:0;left:0;width:100%;height:100%;z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.restov.on{display:flex;background-color:#000000;}
+.restlbl{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#6a6a8a;}
+.restnum{font-family:"Black Ops One",sans-serif;font-size:110px;line-height:1;color:#00e5ff;}
+.restskip{margin-top:28px;padding:13px 40px;background:#1a1a1a;border:1px solid #2a2a3e;border-radius:12px;color:#6a6a8a;font-size:13px;font-weight:700;cursor:pointer;letter-spacing:2px;text-transform:uppercase;}
 /* DONE */
-.donepage{min-height:100vh;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;padding:40px 24px;text-align:center;background:#04040a;
-  position:relative;overflow:hidden;}
-.done-rays{position:absolute;top:50%;left:50%;width:600px;height:600px;
-  transform:translate(-50%,-60%);opacity:.06;
-  background:conic-gradient(from 0deg,transparent 0deg,#00e5ff 2deg,transparent 4deg,
-    transparent 30deg,#00e5ff 32deg,transparent 34deg,transparent 60deg,
-    #00e5ff 62deg,transparent 64deg,transparent 90deg,#00e5ff 92deg,transparent 94deg,
-    transparent 120deg,#00e5ff 122deg,transparent 124deg,transparent 150deg,
-    #00e5ff 152deg,transparent 154deg,transparent 180deg,#00e5ff 182deg,transparent 184deg,
-    transparent 210deg,#00e5ff 212deg,transparent 214deg,transparent 240deg,
-    #00e5ff 242deg,transparent 244deg,transparent 270deg,#00e5ff 272deg,transparent 274deg,
-    transparent 300deg,#00e5ff 302deg,transparent 304deg,transparent 330deg,
-    #00e5ff 332deg,transparent 334deg,transparent 360deg);
-  animation:spin-rays 20s linear infinite;}
-@keyframes spin-rays{from{transform:translate(-50%,-60%) rotate(0deg);}
-  to{transform:translate(-50%,-60%) rotate(360deg);}}
-.doneicon{font-size:72px;margin-bottom:16px;animation:pop .5s cubic-bezier(.34,1.56,.64,1);}
-@keyframes pop{0%{transform:scale(0);}100%{transform:scale(1);}}
-.donetitle{font-family:"Black Ops One",sans-serif;font-size:58px;letter-spacing:6px;
-  margin-bottom:8px;text-shadow:0 0 40px currentColor;}
-.donestat{font-family:"Black Ops One",sans-serif;font-size:64px;color:#00e5ff;
-  line-height:1;text-shadow:0 0 30px rgba(0,229,255,.7),0 0 60px rgba(0,229,255,.3);}
-.donelbl{font-size:11px;letter-spacing:4px;color:#9090be;text-transform:uppercase;
-  margin-bottom:8px;margin-top:4px;font-weight:600;}
-.donesub{font-size:16px;color:#a0a0c8;margin-bottom:48px;line-height:1.8;margin-top:24px;}
-.donehome{padding:16px 48px;border:none;border-radius:16px;font-family:"Black Ops One",sans-serif;
-  font-size:19px;letter-spacing:4px;color:#000;cursor:pointer;background:#00e5ff;
-  box-shadow:0 0 30px rgba(0,229,255,.4);transition:all .2s;}
-.donehome:active{transform:scale(.97);}
+.donepage{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;background:#060608;}
+.doneicon{font-size:64px;margin-bottom:12px;}
+.donetitle{font-family:"Black Ops One",sans-serif;font-size:52px;letter-spacing:5px;margin-bottom:6px;}
+.donestat{font-family:"Black Ops One",sans-serif;font-size:36px;color:#00e5ff;margin-bottom:4px;}
+.donelbl{font-size:10px;letter-spacing:3px;color:#4a4a6a;text-transform:uppercase;margin-bottom:32px;}
+.donesub{font-size:14px;color:#6a6a8a;margin-bottom:40px;line-height:1.7;}
+.donehome{padding:15px 44px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:3px;color:#000;cursor:pointer;background:#00e5ff;}
 
-/* UTILS */
-.wtype{font-family:Rajdhani,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;
-  padding:4px 8px;border-radius:6px;text-transform:uppercase;}
+.wtype{font-family:Rajdhani,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 8px;border-radius:6px;text-transform:uppercase;}
 </style>
+
 </head>
 <body>
-<div class="gridbg"></div>
-<div class="scanline"></div>
 <div id="app">
   <div id="p-home" class="page on"></div>
   <div id="p-ov" class="page"></div>
   <div id="p-story" class="page"></div>
   <div id="p-done" class="page"></div>
 </div>
-<script>
-var CK=null,SI=0,SDA=0,SDB=0,PRS={},PT=null,PL=180,PIR=false;
-
-function sg(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
-function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-function ex(a,b,c,d,e,f){return {name:a,meta:b,rest:c,type:d,sets:e,cue:f};}
-function mk(p,e){return {phase:p,exs:e};}
-
-var WK={
-push:{name:"Push Day",tag:"Chest / Shoulders / Triceps",color:"#e8533a",emoji:"🔥",slides:[
-mk("WARMUP",[ex("Arm Circles","2 × 10 reps each direction",0,"reps",2,"Stand tall with arms extended to your sides. Make slow, deliberate circles — 10 forward, then 10 backward. Increase the size of each circle as you go. This opens the rotator cuff and prepares the shoulder joint for pressing movements.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes total",0,"plank",1,"Place forearms on the floor with elbows directly under your shoulders. Keep your body in a straight line from head to heels — no sagging hips, no raised butt. Squeeze your glutes and brace your abs like you're about to take a punch. Breathe steadily. 3 full unbroken minutes.")]),
-mk("WARMUP",[ex("Pushup Warm-Up","2 × 10 reps",0,"reps",2,"Use a controlled 2-second descent and a 1-second pause at the bottom. This isn't a max-effort set — focus on feeling your chest, front delts, and triceps engage. Arms at 45 degrees from your torso, not flared wide.")]),
-mk("WORKOUT",[
-ex("Bench Press","4 sets × 8–10 reps",0,"weighted",4,"Arch your upper back slightly, plant your feet, and pull the bar out of the rack with control. Lower the bar to your mid-chest over 2 seconds — elbows at roughly 45 degrees from your body. Pause lightly at the chest, then press explosively. Squeeze the bar like you're trying to bend it. Drive your feet into the floor for full-body tension."),
-ex("Incline DB Press","3 sets × 10–12 reps",0,"weighted",3,"Set the bench to 30–45 degrees. Bring the dumbbells to shoulder level with palms facing forward. Lower them slowly until you feel a deep stretch across your upper chest — do not bounce at the bottom. Press back to full extension without letting the dumbbells touch at the top, which keeps tension on the muscle the entire time.")
-]),
-mk("WORKOUT",[
-ex("Lateral Raise","3 sets × 15 reps",0,"weighted",3,"Use lighter weight than you think you need — this is an isolation movement. Lead with your elbows, not your hands. Raise until your arms are parallel to the floor, pause for half a second, then lower slowly over 3 seconds. No shrugging or momentum swinging. If you're rocking, go lighter."),
-ex("Tricep Pushdown","3 sets × 12–15 reps",0,"weighted",3,"Pin your elbows to your sides and do not let them drift forward at any point. Push the bar or rope down to full lockout — squeeze hard at the bottom for 1 second. Return slowly under control. Your elbows should be the only joint moving. This is the most common cable movement butchered in gyms — stay strict.")
-]),
-mk("WORKOUT",[
-ex("Overhead Tricep Extension","3 sets × 12 reps",0,"weighted",3,"Hold the dumbbell or cable attachment overhead with both hands. Keep your elbows pointing forward — do not let them flare out to the sides. Lower the weight behind your head until you feel the long head of the tricep fully stretched, then press to full lockout overhead. The long head only gets this stretch when your arm is raised, so this movement is irreplaceable."),
-ex("Core Finisher","10 minutes",0,"timed",1,"Cycle through: 60s plank, 20 dead bugs each side, 30s hollow hold, 20 bicycle crunches. Rest 20 seconds between each. Keep it moving — 10 minutes is the minimum. Your core is involved in every pressing movement; training it here carries over directly to your lifts.")
-])
-]},
-pull:{name:"Pull Day",tag:"Back / Biceps",color:"#2a9aff",emoji:"💪",slides:[
-mk("WARMUP",[ex("Shoulder Rolls","10 reps each direction",0,"reps",1,"Big, slow, deliberate circles — forward 10 times, backward 10 times. Feel the shoulder blade move through its full range. This primes the scapular muscles that control every pulling movement you're about to do.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes total",0,"plank",1,"Forearms flat, elbows under shoulders. Maintain a rigid plank — no piking up, no sagging. Your core bracing here directly transfers to how well you can transmit force through your spine during rows and pulldowns. 3 full minutes.")]),
-mk("WARMUP",[ex("Light Pulldowns","2 × 15 reps — 50% of working weight",0,"reps",2,"Before each rep, actively depress your shoulder blades — pull them down and together. This 'lat engagement' cue is the most important thing in all pulling work. Use light weight here to practice the movement pattern, not to fatigue. Full stretch at the top, full contraction at the bottom.")]),
-mk("WORKOUT",[
-ex("Wide Grip Lat Pulldown","4 sets × 8–10 reps",0,"weighted",4,"Depress and retract your shoulder blades before you initiate the pull — this activates the lats rather than the biceps. Pull the bar to your upper chest by driving your elbows down and back toward your hip pockets. Lean back slightly (10–15 degrees) for better lat engagement. Control the return — a 3-second negative builds more muscle than rushing back up."),
-ex("Seated Cable Row","3 sets × 10–12 reps",0,"weighted",3,"Sit tall with a slight natural arch in your lower back. Pull to your navel, not your chest. Drive your elbows behind your torso as far as possible and hold the contraction for 1 full second. Then extend your arms under control — do not let the weight yank you forward. Your torso should barely move. If it's rocking a lot, the weight is too heavy.")
-]),
-mk("WORKOUT",[
-ex("Close Grip Lat Pulldown","3 sets × 10–12 reps",0,"weighted",3,"Use a parallel close-grip handle. Sit tall and pull to your sternum — the close grip allows you to pull slightly lower than the wide grip, which hits the lower lats harder. Focus on the squeeze at the bottom: elbows back, chest up, shoulder blades pinched together. Slow negative."),
-ex("Cable Bicep Curl","3 sets × 12–15 reps",0,"weighted",3,"Stand facing the low cable pulley. Pin your elbows to your sides — they must not drift forward during the curl. Curl fully to the top and squeeze hard, then lower all the way to full extension at the bottom. The full extension is where most people cheat — partial reps at the top mean you're skipping the most productive part of the movement. Use a lighter weight and do it right.")
-]),
-mk("WORKOUT",[
-ex("Hammer Curl","3 sets × 12 reps each arm",0,"weighted",3,"Hold dumbbells with a neutral 'hammer' grip — thumbs pointing up. This targets the brachialis, a muscle underneath the bicep that, when developed, actually pushes your bicep higher and makes your arm look bigger. Curl smoothly without twisting your wrist. Alternate arms or do them simultaneously. 2-second up, 3-second down."),
-ex("Core Finisher","10 minutes",0,"timed",1,"After heavy back work, your spine needs some direct stabilization work to maintain longevity. Cycle through: 60s plank, 20 dead bugs, 30s hollow hold, 15 hanging knee raises if you have a bar. Keep rest under 20 seconds between movements. This isn't optional — back training without core training is a long-term injury waiting to happen.")
-])
-]},
-lower:{name:"Lower Body",tag:"Quads / Hamstrings / Glutes",color:"#3aaa5a",emoji:"⚡",slides:[
-mk("WARMUP",[ex("Leg Swings","10 reps each direction",0,"reps",1,"Stand next to a wall for balance. Swing each leg forward and back 10 times to mobilize the hip flexors and hamstrings. Then swing each leg side to side 10 times to open the hip abductors. This is the single best warmup for squat and hinge patterns — don't skip it.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes total",0,"plank",1,"Core bracing is essential for heavy lower body work. A strong brace under load protects your spine and transfers force from your legs to the bar. 3 full minutes — think of it as practicing the exact same brace you'll use during squats and deadlifts.")]),
-mk("WARMUP",[ex("Bodyweight Squat","2 × 15 reps — slow tempo",0,"reps",2,"Feet shoulder-width, toes slightly out. Sit back and down to full depth — crease of your hip should pass below your knee. 3-second descent, pause 1 second at the bottom, stand up with control. This warms the knees, hips, and ankles and establishes the motor pattern before you add load.")]),
-mk("WORKOUT",[
-ex("Back Squat","4 sets × 6–8 reps",0,"weighted",4,"Take a big breath into your belly — not your chest — before you unrack the bar. Brace your entire core as if you're about to be hit. Feet shoulder-width, toes 15–30 degrees out. Break at the hips and knees simultaneously. Push your knees out in the direction of your toes. Descend until your hip crease passes below your knees. Drive up through your entire foot — not just your toes."),
-ex("Romanian Deadlift","3 sets × 10 reps",0,"weighted",3,"Start standing with the bar at hip height. Push your hips backward while keeping the bar close to your body — it should practically drag down your legs. Your back stays neutral (not rounded) throughout. You should feel a deep stretch in your hamstrings at the bottom. Stop when your back starts to round. Drive your hips forward to stand up, squeezing your glutes at the top. This is a hinge, not a squat.")
-]),
-mk("WORKOUT",[
-ex("Walking Lunges","3 sets × 10 reps each leg",0,"weighted",3,"Hold dumbbells at your sides or a barbell on your back. Step forward and lower your back knee toward the floor without letting it slam down. Front knee stays above your ankle — never caving inward. Keep your torso tall and upright throughout. The glute of your front leg should be doing most of the work. Drive through the heel of your front foot to step forward into the next rep."),
-ex("Leg Press","3 sets × 12–15 reps",0,"weighted",3,"Set the seat so your knees form a 90-degree angle at the bottom. Place your feet shoulder-width at the center of the platform. Do not lock out your knees at the top — keep a slight bend to maintain tension on the quads throughout the set. Lower the platform slowly until your knees approach your chest, then press back powerfully. Never let your lower back round off the pad — if it does, you've gone too deep for your flexibility.")
-]),
-mk("WORKOUT",[
-ex("Lying Leg Curl","3 sets × 12–15 reps",0,"weighted",3,"Lie face down and align your knees with the machine's pivot point. Curl the weight all the way up — hamstrings should be fully contracted at the top. Lower slowly over 3 seconds to full extension. The negative (lowering) phase builds as much or more muscle than the curl itself — don't let it drop. If you can't control the weight down, it's too heavy. Point your toes slightly outward to shift the load to the biceps femoris."),
-ex("Standing Calf Raise","3 sets × 20 reps",0,"weighted",3,"Stand on the edge of a step or raise platform so your heel hangs off. Lower your heel below the platform level for a full stretch — this is where most people cheat by not going low enough. Then rise all the way to your toes and pause for 1 full second. Lower in 2 seconds. The calf is a stubborn muscle that responds to high reps and full range of motion — short-range bouncing does nothing.")
-])
-]},
-upper:{name:"Upper Body",tag:"Chest / Back / Arms",color:"#9a5aff",emoji:"🎯",slides:[
-mk("WARMUP",[ex("Arm Circles","10 reps each direction",0,"reps",1,"Arms straight out to your sides, make progressively larger circles — 10 forward, 10 backward. Then make 10 small circles in each direction for fine motor warm-up. Primes the rotator cuff and deltoids for both pressing and pulling movements in the session ahead.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes total",0,"plank",1,"Your foundation for everything in this workout. Squeeze your abs, glutes, and thighs simultaneously. Breathe slowly and steadily — do not hold your breath. 3 full minutes builds the core endurance you need to maintain form when pressing and rowing under fatigue.")]),
-mk("WARMUP",[ex("Pushups","2 × 10 reps",0,"reps",2,"Controlled 2-second descent. Feel the chest stretch at the bottom. This isn't just a warmup — it's also a movement screen. If your shoulders or wrists ache, adjust your hand position. Arms at 45 degrees, full range of motion, full lockout at top.")]),
-mk("WORKOUT",[
-ex("Bench Press","4 sets × 8–10 reps",0,"weighted",4,"Think about driving your chest to meet the bar, not pushing the bar away. This mental cue shifts the load from your front delts and triceps to your pecs where it belongs. Maintain a slight arch in your upper back and keep your shoulder blades pinched together on the bench throughout the entire set. Bar path goes from chest slightly down toward the navel at lockout — not straight up."),
-ex("Wide Grip Lat Pulldown","3 sets × 10–12 reps",0,"weighted",3,"Actively pull your shoulder blades down and together before the movement starts. If you skip this, your biceps take over and your lats barely work. Think of your hands as hooks — your arms are just transmitting the force your back generates. Pull the bar to your upper chest and squeeze your lats hard. A slow 3-second return is where the real growth happens.")
-]),
-mk("WORKOUT",[
-ex("Dumbbell Shoulder Press","3 sets × 10–12 reps",0,"weighted",3,"Sit upright on a bench with back support. Brace your core hard before every single rep — a loose core under overhead pressing loads is how shoulders get hurt. Start with dumbbells at ear level, palms facing forward. Press to full lockout overhead, but don't let the dumbbells touch at the top — keep tension on the deltoids. Lower slowly back to ear level."),
-ex("Seated Cable Row","3 sets × 10–12 reps",0,"weighted",3,"Every rep starts with tall posture and a neutral spine. Pull to your navel with elbows driving past your torso. Hold the peak contraction for 1 full second — this is the most important part that most people skip. Then let the weight travel forward into a full stretch before the next rep. The stretch-contraction cycle is what makes cable rows so effective for back thickness.")
-]),
-mk("WORKOUT",[
-ex("Bicep & Tricep Superset","3 rounds: 12 curls + 12 pushdowns",0,"weighted",3,"Do 12 barbell or dumbbell curls immediately followed by 12 cable pushdowns with zero rest between exercises — then rest 75 seconds before the next round. Supersets for opposing muscle groups are highly efficient and actually improve performance on both movements since the resting muscle acts as an active recovery. Use a moderate weight — you need to complete all 12 reps on both exercises every round."),
-ex("Core Finisher","10 minutes",0,"timed",1,"Close out with 10 minutes of non-negotiable core work. Rotate between planks, dead bugs (20 per side), hollow holds, and ab wheel rollouts if available. Keep rest under 20 seconds. Upper body training transfers directly to athletic performance only when paired with core training — this is the piece most people skip and then wonder why their lifts stall.")
-])
-]},
-recovery:{name:"Active Recovery",tag:"Mobility / Flexibility",color:"#ffaa2a",emoji:"🧘",slides:[
-mk("WARMUP",[ex("Easy Walk or Light Jog","5–10 minutes",0,"timed",1,"This isn't about intensity — it's about getting blood moving gently through stiff muscles. Walk at a pace where you could hold a full conversation. This increases circulation to your joints, warms the connective tissue, and prepares your body for the deeper stretching ahead. If you feel any pain, slow down further.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes total",0,"plank",1,"Even on recovery days, the plank is your spine's best friend. Gentle sustained core activation helps reset posture and relieve lower back tightness that often accumulates from training. Focus on breathing here — inhale deeply through the nose, exhale fully through the mouth.")]),
-mk("WORKOUT",[
-ex("Hip Flexor Stretch","2 × 45 seconds each side",0,"timed",2,"Kneel on one knee in a half-lunge position. Push your hips forward gently until you feel a stretch through the front of your back leg's hip and thigh. Keep your torso upright — do not lean forward. Hold and breathe deeply for 45 seconds. Hip flexors tighten from both sitting and heavy squatting — tight hip flexors tilt your pelvis forward and cause lower back pain, so this stretch is essential."),
-ex("Pigeon Pose","2 × 60 seconds each side",0,"timed",2,"From a kneeling position, bring one leg forward and rotate the shin roughly parallel to the front of your mat. Extend the opposite leg straight behind you. Lower your torso toward the floor over your front leg. Let gravity do the work — do not force it. This is the most effective single stretch for the piriformis and glute, which when tight can cause sciatic pain and limit squat depth. Hold 60 full seconds and breathe into the tension.")
-]),
-mk("WORKOUT",[
-ex("Hamstring Stretch","2 × 45 seconds each side",0,"timed",2,"Sit on the floor with one leg extended and the other bent. Hinge forward from your hips — not your spine. The key is keeping a flat back while reaching toward your foot. If your back rounds immediately, your hamstrings are very tight and you should hold at a lesser depth. You should feel the stretch in the belly of your hamstring, not behind your knee. Over time, this stretch should travel further down as flexibility improves."),
-ex("Foam Roll","5 minutes total",0,"timed",1,"Work through your quads, IT bands, hamstrings, upper back, and glutes. When you find a tender spot, pause directly on it for 20–30 seconds — the initial discomfort will fade as the tissue releases. Do not roll quickly back and forth — that's just massage, not myofascial release. The goal is sustained pressure on tight spots. Cover each area for 30–60 seconds before moving on.")
-])
-]},
-hiit:{name:"HIIT Full Body",tag:"Conditioning / Fat Burn",color:"#ff3366",emoji:"🏋️",slides:[
-mk("WARMUP",[ex("High Knees","2 × 30 seconds",0,"timed",2,"Run in place, driving your knees up to hip height with each step. Pump your arms aggressively in opposition to your legs. This elevates your heart rate quickly and warms up the hip flexors, quads, and calves you'll be hammering throughout this session. Keep your core tight and your posture upright — do not lean back.")]),
-mk("WARMUP",[ex("Plank Hold","2 minutes",0,"plank",1,"Build your base before you go hard. Core stability is your engine in HIIT work — every jump, sprint, and explosive move runs through your core first. 2 minutes today since this session has its own intensity. Breathe steadily; do not hold your breath.")]),
-mk("WARMUP",[ex("World's Greatest Stretch","5 reps each side",0,"reps",2,"Start in a pushup position. Step your right foot outside your right hand into a lunge. Drop your right elbow toward the floor for a hip flexor and groin stretch. Then rotate that same arm up toward the ceiling to open your thoracic spine. Hold 2 seconds at each position. This single stretch mobilizes your hips, thoracic spine, and ankles simultaneously — it's the most efficient pre-HIIT mobility movement you can do.")]),
-mk("WORKOUT",[
-ex("Burpee","4 sets × 10 reps",0,"reps",4,"Stand, drop your hands to the floor, jump or step your feet back to a plank position, perform a full pushup, jump your feet back to your hands, then explode into a jump with arms overhead. That is one rep. The key is maintaining full range of motion — chest to floor on the pushup, full extension on the jump. Do not half-rep your way through. If you need to slow down, slow down — don't cut the range."),
-ex("Jump Squat","3 sets × 15 reps",0,"reps",3,"Lower into a full squat — hips below knees — then explode upward as powerfully as possible. Your arms should swing behind you on the descent and drive forward and up during the jump. Land softly by absorbing impact through your ankles, knees, and hips simultaneously — never land stiff-legged. Land and immediately load into the next squat. The goal is maximum power output per rep, not just going through the motion.")
-]),
-mk("WORKOUT",[
-ex("Mountain Climbers","4 sets × 30 seconds",0,"timed",4,"Start in a pushup position with arms locked out. Drive alternating knees toward your chest as fast as possible while keeping your hips level — do not let them pike up. Your hands should stay under your shoulders. The faster you go, the harder your core has to work to prevent your hips from bouncing. Keep your breathing rhythmic: exhale on the knee drive, inhale on the extension."),
-ex("Dumbbell Thruster","3 sets × 12 reps",0,"weighted",3,"Hold dumbbells at shoulder height. Descend into a full squat, then use the momentum from standing to press the dumbbells overhead in one fluid, powerful movement. At the top, arms are fully extended overhead. Lower the dumbbells back to shoulders as you descend into the next rep. The thruster is a full-body power movement — it combines a squat and an overhead press into one explosive rep and drives your heart rate to max.")
-]),
-mk("WORKOUT",[
-ex("Push-Up to Renegade Row","3 sets × 8 reps each side",0,"reps",3,"Start in a pushup position with hands on dumbbells. Perform a full pushup. At the top, row one dumbbell to your hip while keeping your body from rotating. Lower it, do another pushup, row the other side. That's one rep. Keeping your hips square while rowing is the hardest part — brace everything. This builds pushing strength, pulling strength, and anti-rotation core stability simultaneously."),
-ex("Sprint Intervals","6 rounds: 20s max / 10s walk",0,"timed",1,"Six rounds of 20-second all-out sprints followed by 10 seconds of walking recovery. This is Tabata-style conditioning — research shows 4 minutes of this protocol improves aerobic and anaerobic capacity simultaneously. On each 20-second sprint, you must hit the same intensity as the first sprint. If you're sandbagging by round 3, you're not going hard enough on round 1.")
-])
-]},
-core:{name:"Core & Abs",tag:"Strength / Stability / Definition",color:"#06d6a0",emoji:"🔩",slides:[
-mk("WARMUP",[ex("Cat-Cow","10 slow reps",0,"reps",1,"Start on all fours with your wrists under your shoulders and knees under your hips. Exhale and round your spine toward the ceiling — chin to chest, tailbone tucked. That's cat. Then inhale and drop your belly toward the floor, lift your head and tailbone. That's cow. Move slowly and breathe into each position. This mobilizes your entire spine and activates the deep spinal stabilizers before loading them.")]),
-mk("WARMUP",[ex("Plank Hold","3 minutes",0,"plank",1,"Your primary warmup for this entire workout. Every movement in this session is a variation or progression of the plank. Build maximum tension — squeeze your fists, flex your quads, clench your glutes, brace your abs. This is not passive holding. 3 minutes of active, full-body tension.")]),
-mk("WORKOUT",[
-ex("Dead Bug","3 sets × 15 reps each side",0,"reps",3,"Lie on your back with arms pointed straight up at the ceiling and knees bent at 90 degrees (like a dead bug). Press your lower back into the floor — this is essential, do not skip it. Slowly lower your right arm and left leg toward the floor simultaneously without letting your lower back arch away from the floor. Return slowly, then repeat with the opposite arm and leg. The goal is anti-extension core stability — preventing your spine from extending under load. Used by elite athletes and rehab specialists alike."),
-ex("Ab Wheel Rollout","3 sets × 10–12 reps",0,"reps",3,"Kneel on the floor holding the ab wheel handles. Brace your core maximally — harder than you think you need to. Roll forward slowly, keeping your hips in line with your torso. Go as far forward as you can while maintaining a neutral spine. Rolling too far before you have the strength will dump load into your lower back. Roll back by pulling your abs in, not pushing with your arms. This is the most demanding anti-extension core exercise available without equipment beyond the wheel.")
-]),
-mk("WORKOUT",[
-ex("Hanging Leg Raise","3 sets × 12 reps",0,"reps",3,"Hang from a pullup bar with arms fully extended. Brace your core and raise your legs — for maximum difficulty, keep them straight; for beginners, bend your knees. Raise until your legs are parallel to the floor or higher. The key is to not swing — control the movement entirely. Lower slowly under control over 3 seconds. If you swing, you're using momentum instead of your core. This targets the lower abs and hip flexors together in a compound movement."),
-ex("Russian Twist","3 sets × 20 reps each side",0,"weighted",3,"Sit on the floor and lean back to a 45-degree angle — your torso should form a V shape with your thighs. Hold a weight with both hands. Brace your core and rotate your torso side to side, touching the weight to the floor on each side. Keep your feet raised for more difficulty. The rotation must come from your torso, not your arms. Move with control — speed without control on rotational movements puts your spine at risk.")
-]),
-mk("WORKOUT",[
-ex("Plank to Pike","3 sets × 12 reps",0,"reps",3,"Start in a high plank position (hands on floor, arms extended). Keep your legs straight and raise your hips toward the ceiling to form an inverted V — this is the pike position. Your core must do the work of controlling this movement, not momentum. Hold the pike for 1 second, then lower back to plank with control. If you have a stability ball or sliders, perform this with your feet on the surface and roll them in to your hands. Advanced version: add a pushup between each pike."),
-ex("Bicycle Crunch","3 sets × 25 reps each side",0,"reps",3,"Lie on your back with hands lightly behind your head — fingers barely touching, not pulling on your neck. Alternate bringing your opposite elbow toward your opposite knee as you extend the other leg out. The key is thoracic rotation — your shoulder blade should come off the ground as you rotate, not just your elbow. Slow down: 2 seconds on each side. Quality bicycle crunches at slow tempo are harder and more effective than fast, sloppy ones.")
-])
-]},
-cardio:{name:"Cardio & Conditioning",tag:"Endurance / Athleticism",color:"#ffd60a",emoji:"🚀",slides:[
-mk("WARMUP",[ex("Jump Rope or Jumping Jacks","3 minutes easy",0,"timed",1,"If you have a jump rope, use it at an easy, steady pace. If not, jumping jacks work just as well. The goal is to gradually elevate your heart rate over these 3 minutes — start slow and end at a moderate pace. Your joints need time to warm up before impact work. By the end of 3 minutes you should be lightly sweating and breathing noticeably harder than at rest.")]),
-mk("WARMUP",[ex("Plank Hold","2 minutes",0,"plank",1,"Core on before cardio. Conditioning work demands core stability on every stride, every jump, every direction change. 2 minutes here with full tension — brace like you're expecting a punch, hold it, breathe around the tension.")]),
-mk("WARMUP",[ex("Leg Swings & Hip Circles","10 reps each movement",0,"reps",1,"Forward-back leg swings, side-to-side leg swings, and slow hip circles in each direction. Cardio and conditioning sessions put high demand on the hip joint — mobilizing it before loading prevents injury. 10 of each per side, move deliberately.")]),
-mk("WORKOUT",[
-ex("Box Jumps","4 sets × 8 reps",0,"reps",4,"Stand in front of a sturdy box or platform. Dip into a quarter squat while swinging your arms back, then explosively extend your hips, knees, and ankles simultaneously as you swing your arms forward and up. Land softly on top of the box with both feet at the same time, absorbing the impact by bending your knees on contact. Step down — do not jump down from height unless you're very experienced. Box jumps train explosive power, which is the foundation of all athletic movement."),
-ex("Assault Bike or Row Ergometer","3 × 2 minute intervals",0,"timed",3,"Set a 2-minute clock and go hard — aim for 85–90% of your max effort. Your pace should feel unsustainable past 3 minutes. If you're on a rowing machine, drive with your legs first (60% of the power), then lean back, then pull your arms in — legs, lean, arms. Reverse it on the recovery stroke. The rowing machine is the most complete cardio tool in the gym: it trains upper body, lower body, and core simultaneously under cardiovascular load.")
-]),
-mk("WORKOUT",[
-ex("Sled Push or Loaded Carry","4 sets × 30 meters",0,"timed",4,"If you have a sled, load it moderately heavy — heavy enough that you have to lean into it and drive hard. Push by driving your feet into the floor powerfully with each step, maintaining a forward lean with your arms extended on the sled handles. If no sled is available, do a farmer carry: hold heavy dumbbells at your sides and walk 30 meters. Keep your shoulders packed and your core braced. Loaded carries build grip strength, shoulder stability, and conditioning simultaneously."),
-ex("Kettlebell Swing","3 sets × 20 reps",0,"weighted",3,"Hinge at the hips with the kettlebell between your feet. Hike the bell back like a football snap, then explosively drive your hips forward to propel the bell upward. The power comes from your hips, glutes, and hamstrings — your arms are just guides. At the top, your hips should be fully extended and glutes squeezed hard. Let the bell fall back naturally as you hinge again. Do not squat the movement — it's a hip hinge. The swing trains explosive hip extension, which transfers to sprinting, jumping, and deadlifting.")
-]),
-mk("WORKOUT",[
-ex("Treadmill Hill Sprints","6 × 30 second sprints at 8–10% incline",0,"timed",1,"Set the treadmill to 8–10% incline. Sprint for 30 seconds at near-max effort, then step off the sides or drop the speed to a walk for 60 seconds of recovery. Hill sprints recruit more glute and hamstring than flat sprints and are lower impact on your knees than flat sprinting. By sprint 4 your lungs should be burning. If they're not, increase the speed or incline. Six rounds is the minimum — add more if you have gas left."),
-ex("Cool Down Walk & Stretch","5 minutes walking + 5 minutes stretching",0,"timed",1,"Walk at an easy pace for 5 minutes to bring your heart rate down gradually — stopping abruptly after high-intensity cardio pools blood in your lower body and can make you dizzy. Then spend 5 minutes on hip flexor stretches, quad stretches, and calf stretches. Cardio sessions shorten the hip flexors, quads, and calves — stretching immediately after while muscles are warm is the most effective time to improve flexibility.")
-])
-]
-};
-
-var EM={push:"PUSH",pull:"PULL",lower:"LEGS",upper:"UPPER",recovery:"REST",hiit:"HIIT",core:"CORE",cardio:"CARDIO"};
-
-function pg(id){
-var ids=["p-home","p-ov","p-story","p-done"];
-for(var i=0;i<ids.length;i++){
-var e=document.getElementById(ids[i]);
-if(e)e.className="page"+(ids[i]===id?" on":"");
-}
-window.scrollTo(0,0);
-}
-
-function goHome(){
-PRS=sg("wt_prs",{});
-stopT();
-var el=document.getElementById("p-home");
-if(!el)return;
-var keys=["push","pull","lower","upper","recovery","hiit","core","cardio"];
-var h="<div class='home'>";
-h+="<div class='eyebrow'>Your Training System</div>";
-h+="<div class='htitle'>TRAINER<span>GO</span></div>";
-h+="<div class='hsub'>Select your program</div>";
-for(var i=0;i<keys.length;i++){
-var k=keys[i],w=WK[k];
-var glowcss="box-shadow:0 4px 24px "+w.color+"28,0 0 0 1px "+w.color+"35;border-color:"+w.color+"35;";
-h+="<div class='wcard' id='wc-"+k+"' style='"+glowcss+"'>";
-h+="<div class='wglow' style='background:linear-gradient(180deg,"+w.color+","+w.color+"88);box-shadow:0 0 14px "+w.color+";'></div>";
-h+="<div class='wcard-inner'>";
-h+="<div class='wcard-top'>";
-h+="<span class='wemoji'>"+w.emoji+"</span>";
-h+="<div><div class='wname'>"+w.name+"</div></div>";
-h+="</div>";
-h+="<div class='wtag'>"+w.tag+"</div>";
-h+="</div>";
-h+="<div class='warr' style='color:"+w.color+";text-shadow:0 0 10px "+w.color+";font-size:22px;'>›</div>";
-h+="</div>";
-}
-h+="</div>";
-el.innerHTML=h;
-for(var j=0;j<keys.length;j++){
-(function(key){
-var c=document.getElementById("wc-"+key);
-if(c)c.onclick=function(){goOv(key);};
-}(keys[j]));
-}
-pg("p-home");
-}
-
-function goOv(key){
-CK=key;
-var w=WK[key];
-var el=document.getElementById("p-ov");
-if(!el)return;
-var h="<div class='ovhero' style='background:linear-gradient(180deg,"+w.color+"20 0%,#04040a 100%);'>";
-h+="<div class='ovback' id='ovback'>← BACK</div>";
-h+="<div style='font-size:48px;margin-bottom:8px;'>"+w.emoji+"</div>";
-h+="<div class='ovtitle' style='color:"+w.color+";text-shadow:0 0 20px "+w.color+"88;'>"+EM[key]+" / "+w.name.toUpperCase()+"</div>";
-h+="<div class='ovtag'>"+w.tag+"</div>";
-h+="</div>";
-h+="<div class='ovlist'>";
-var lp="";
-for(var i=0;i<w.slides.length;i++){
-var s=w.slides[i];
-if(s.phase!==lp){lp=s.phase;h+="<div class='ovphase' style='color:"+w.color+"88;'>"+s.phase+"</div>";}
-h+="<div class='ovgroup' style='border-color:"+w.color+"25;'>";
-if(s.exs.length===2)h+="<div class='ovpair' style='color:"+w.color+";background:"+w.color+"12;border-bottom-color:"+w.color+"25;'>PAIRED EXERCISES</div>";
-for(var j=0;j<s.exs.length;j++){
-var e=s.exs[j],pi=PRS[e.name];
-h+="<div class='ovitem'>";
-h+="<div class='ovltr' style='background:"+w.color+"20;border:1px solid "+w.color+"50;color:"+w.color+";box-shadow:0 0 8px "+w.color+"28;'>"+(j===0?"A":"B")+"</div>";
-h+="<div style='flex:1;'><div class='oviname'>"+e.name+"</div>";
-h+="<div class='ovimeta'>"+e.meta+"</div>";
-if(pi)h+="<div class='ovpr' style='color:"+w.color+";'>🏆 PR: "+pi.weight+"lb × "+pi.reps+" reps</div>";
-h+="</div></div>";
-}
-h+="</div>";
-}
-h+="</div>";
-h+="<div class='ovbot'><button class='ovbtn' id='ovstart' style='background:linear-gradient(135deg,"+w.color+","+w.color+"cc);box-shadow:0 8px 32px "+w.color+"66,0 0 0 1px "+w.color+"44;'>START WORKOUT</button></div>";
-el.innerHTML=h;
-document.getElementById("ovback").onclick=function(){goHome();};
-document.getElementById("ovstart").onclick=function(){SI=0;SDA=0;SDB=0;goStory();};
-pg("p-ov");
-}
-
-function goStory(){
-stopT();
-var w=WK[CK],slide=w.slides[SI],tot=w.slides.length;
-var el=document.getElementById("p-story");
-if(!el)return;
-var bars="";
-for(var i=0;i<tot;i++){
-bars+="<div class='stbar'><div class='stfill' style='width:"+(i<SI?100:0)+"%;background:linear-gradient(90deg,"+w.color+","+w.color+"cc);box-shadow:0 0 6px "+w.color+";'></div></div>";
-}
-var h="<div style='background:linear-gradient(180deg,"+w.color+"28 0%,#04040a 50%);'>";
-h+="<div class='stbars'>"+bars+"</div>";
-h+="<div class='stbody'>";
-h+="<div class='sthud'><span class='stbadge' style='color:"+w.color+";border-color:"+w.color+"55;background:"+w.color+"15;text-shadow:0 0 8px "+w.color+"88;'>"+slide.phase+"</span>";
-h+="<span class='ststep'>"+(SI+1)+" / "+tot+"</span></div>";
-if(slide.exs.length===1){
-h+=bEx(slide.exs[0],"A",w.color,0,SDA,true);
-}else{
-h+=bEx(slide.exs[0],"A",w.color,0,SDA,false);
-h+="<div class='pdiv'>THEN</div>";
-h+=bEx(slide.exs[1],"B",w.color,1,SDB,false);
-}
-h+="<div class='navrow'>";
-h+="<button class='stprev' id='stprev'>← BACK</button>";
-h+="<button class='stnext' id='stnext' style='background:linear-gradient(135deg,"+w.color+","+w.color+"cc);box-shadow:0 6px 24px "+w.color+"55;color:#000;'>"+(SI===tot-1?"✓ FINISH":"NEXT →")+"</button>";
-h+="</div></div></div>";
-el.innerHTML=h;
-document.getElementById("stprev").onclick=function(){if(SI<=0){goOv(CK);}else{SI-=1;SDA=0;SDB=0;goStory();}};
-document.getElementById("stnext").onclick=function(){if(SI>=WK[CK].slides.length-1){goDone();}else{SI+=1;SDA=0;SDB=0;goStory();}};
-var pb=document.getElementById("plankbtn");
-if(pb)pb.onclick=function(){toggleP();};
-bDots();bPR();
-pg("p-story");
-PL=180;PIR=false;
-}
-
-function bEx(e,label,color,idx,done,big){
-var h="<div class='exblock' style='border-left:3px solid "+color+";box-shadow:0 2px 20px "+color+"18,inset 0 0 0 1px "+color+"18;'>";
-h+="<div style='margin-bottom:6px;'><span class='exltr' style='background:"+color+"28;border:1px solid "+color+"60;color:"+color+";'>"+label+"</span>";
-h+="<span class='exname' style='font-size:"+(big?"30":"22")+"px;color:"+color+";text-shadow:0 0 14px "+color+"66;'>"+e.name+"</span></div>";
-var pi=PRS[e.name];
-if(pi)h+="<div class='prbadge' style='background:"+color+"18;color:"+color+";border-color:"+color+"40;'>PR: "+pi.weight+"lb × "+pi.reps+" reps</div>";
-h+="<div class='exmeta'>"+e.meta+"</div><div class='excue'>"+e.cue+"</div>";
-if(e.type==="plank"){
-h+="<div class='plankwrap' style='border-color:"+color+"50;box-shadow:0 0 30px "+color+"22;'>";
-h+="<div class='planktime' id='plankdisp' style='color:"+color+";'>3:00</div>";
-h+="<div class='planklbl'>hold</div>";
-h+="<div class='plankbtn' id='plankbtn' style='color:"+color+";border-color:"+color+"70;background:"+color+"15;'>▶ START TIMER</div>";
-h+="</div>";
-}
-if(e.type==="weighted"||e.type==="reps"){
-h+="<div class='setrow' id='dr-"+idx+"'>";
-for(var s=0;s<e.sets;s++){
-var hit=(s<done),ds=hit?"border-color:"+color+";color:#000;background:"+color+";box-shadow:0 0 14px "+color+"99;"  :"";
-var cls=hit?"dot done":"dot";
-h+="<div class='"+cls+"' id='d-"+idx+"-"+s+"' style='"+ds+"' data-i='"+idx+"' data-s='"+s+"' data-t='"+e.sets+"'>"+(s+1)+"</div>";
-}
-h+="</div>";
-h+="<div class='prrow'><input class='prinp' id='pw"+idx+"' type='number' placeholder='lbs'>";
-h+="<input class='prinp' id='prr"+idx+"' type='number' placeholder='reps'>";
-h+="<div class='prsave' id='prs"+idx+"'>Save PR</div></div>";
-}
-return h+"</div>";
-}
-
-function bDots(){
-var dots=document.querySelectorAll(".dot");
-for(var i=0;i<dots.length;i++){
-(function(d){
-d.onclick=function(){
-var idx=parseInt(d.getAttribute("data-i")),s=parseInt(d.getAttribute("data-s")),t=parseInt(d.getAttribute("data-t"));
-var color=WK[CK].color,cur=(idx===0?SDA:SDB),nd=(s<cur?s:s+1);
-if(idx===0)SDA=nd;else SDB=nd;
-for(var x=0;x<t;x++){
-var dot=document.getElementById("d-"+idx+"-"+x);
-if(!dot)continue;
-if(x<nd){dot.style.borderColor=color;dot.style.color="#000";dot.style.background=color;dot.style.boxShadow="0 0 14px "+color+"99";dot.className="dot done";}
-else{dot.style.borderColor="";dot.style.color="";dot.style.background="";dot.style.boxShadow="";dot.className="dot";}
-}
-};
-}(dots[i]));
-}
-}
-
-function bPR(){
-for(var i=0;i<2;i++){
-(function(idx){
-var btn=document.getElementById("prs"+idx);
-if(!btn)return;
-btn.onclick=function(){
-var sl=WK[CK].slides[SI];
-if(!sl||!sl.exs[idx])return;
-var we=document.getElementById("pw"+idx),re=document.getElementById("prr"+idx);
-if(!we||!re)return;
-var wv=parseFloat(we.value),rv=parseInt(re.value);
-if(!wv||!rv)return;
-PRS[sl.exs[idx].name]={weight:wv,reps:rv,date:new Date().toISOString().split("T")[0]};
-ss("wt_prs",PRS);we.value="";re.value="";
-btn.textContent="✓ Saved!";
-setTimeout(function(){btn.textContent="Save PR";},1400);
-};
-}(i));
-}
-}
-
-function toggleP(){
-if(PIR){
-PIR=false;if(PT){clearInterval(PT);PT=null;}
-var b=document.getElementById("plankbtn");if(b)b.textContent="▶ RESUME";
-}else{
-PIR=true;if(PL<=0)PL=180;
-var b2=document.getElementById("plankbtn");if(b2)b2.textContent="⏸ PAUSE";
-PT=setInterval(function(){
-PL-=1;
-var d=document.getElementById("plankdisp");
-if(d){var m=Math.floor(PL/60),sc=PL%60;d.textContent=m+":"+(sc<10?"0":"")+sc;}
-if(PL<=0){
-clearInterval(PT);PT=null;PIR=false;
-var d2=document.getElementById("plankdisp");if(d2)d2.textContent="DONE!";
-var b3=document.getElementById("plankbtn");
-if(b3){b3.textContent="↺ RESET";b3.onclick=function(){PL=180;var d3=document.getElementById("plankdisp");if(d3)d3.textContent="3:00";b3.textContent="▶ START TIMER";b3.onclick=function(){toggleP();};};}
-}
-},1000);
-}
-}
-
-function stopT(){
-if(PT){clearInterval(PT);PT=null;}
-PIR=false;
-}
-
-function goDone(){
-stopT();
-var w=WK[CK],el=document.getElementById("p-done");if(!el)return;
-var tot=0;
-for(var i=0;i<w.slides.length;i++)for(var j=0;j<w.slides[i].exs.length;j++)tot+=w.slides[i].exs[j].sets;
-var h="<div class='done-rays'></div>";
-h+="<div class='doneicon'>"+w.emoji+"</div>";
-h+="<div class='donetitle' style='color:"+w.color+";'>DONE!</div>";
-h+="<div class='donestat'>"+tot+"</div>";
-h+="<div class='donelbl'>sets completed</div>";
-h+="<div class='donesub'>"+w.name+" complete.<br>You showed up. That's everything.</div>";
-h+="<button class='donehome' id='donehome' style='background:"+w.color+";box-shadow:0 8px 40px "+w.color+"66;'>← BACK HOME</button>";
-el.innerHTML=h;
-document.getElementById("donehome").onclick=function(){goHome();};
-pg("p-done");
-}
-
-try{goHome();}catch(err){document.body.style.background="#fff";document.body.style.color="#000";document.body.style.padding="40px";document.body.style.fontSize="16px";document.body.innerHTML="<h2>JS Error</h2><pre>"+err.message+"</pre><pre>"+err.stack+"</pre>";}
+<div class="restov" id="restov">
+  <div class="restlbl">Rest</div>
+  <div class="restnum" id="restnum">90</div>
+  <div class="restlbl">seconds</div>
+  <button class="restskip" id="restskip">SKIP REST</button>
+</div>
+<script type="text/javascript">window.onerror=function(msg,url,line,col,err){document.body.style.background="#fff";document.body.style.color="#000";document.body.style.padding="40px";document.body.style.fontSize="14px";document.body.innerHTML="<h2>JS ERROR</h2><p>"+msg+"</p><p>Line: "+line+" Col: "+col+"</p><pre>"+(err?err.stack:"no stack")+"</pre>";return true;};</script>
+<script type="text/javascript">
+var _s=atob("CnZhciBDSz1udWxsLFNJPTAsU0RBPTAsU0RCPTAsUFJTPXt9LFJUPW51bGwsUkw9MCxQVD1udWxsLFBMPTE4MCxQSVI9ZmFsc2U7CgpmdW5jdGlvbiBzZyhrLGQpe3RyeXt2YXIgdj1sb2NhbFN0b3JhZ2UuZ2V0SXRlbShrKTtyZXR1cm4gdj9KU09OLnBhcnNlKHYpOmQ7fWNhdGNoKGUpe3JldHVybiBkO319CmZ1bmN0aW9uIHNzKGssdil7dHJ5e2xvY2FsU3RvcmFnZS5zZXRJdGVtKGssSlNPTi5zdHJpbmdpZnkodikpO31jYXRjaChlKXt9fQpmdW5jdGlvbiBleChhLGIsYyxkLGUsZil7cmV0dXJuIHtuYW1lOmEsbWV0YTpiLHJlc3Q6Yyx0eXBlOmQsc2V0czplLGN1ZTpmfTt9CmZ1bmN0aW9uIG1rKHAsZSl7cmV0dXJuIHtwaGFzZTpwLGV4czplfTt9Cgp2YXIgV0s9ewpwdXNoOntuYW1lOiJQdXNoIERheSIsdGFnOiJDaGVzdCAvIFNob3VsZGVycyAvIFRyaWNlcHMiLGNvbG9yOiIjZTg1MzNhIixzbGlkZXM6WwptaygiV0FSTVVQIixbZXgoIkFybSBDaXJjbGVzIiwiMiB4IDEwIGVhY2giLDAsInJlcHMiLDIsIlJvbGwgc2hvdWxkZXJzIGZvcndhcmQgMTAgdGltZXMgdGhlbiBiYWNrd2FyZC4gT3BlbnMgdGhlIHJvdGF0b3IgY3VmZi4iKV0pLAptaygiV0FSTVVQIixbZXgoIlBsYW5rIiwiMyBtaW51dGVzIiwwLCJwbGFuayIsMSwiRWxib3dzIHVuZGVyIHNob3VsZGVycy4gU3F1ZWV6ZSBnbHV0ZXMgYW5kIGFicy4gMyBmdWxsIG1pbnV0ZXMsIG5vIGJyZWFrcy4iKV0pLAptaygiV0FSTVVQIixbZXgoIlB1c2h1cCBXYXJtLVVwIiwiMiB4IDEwIHJlcHMiLDMwLCJyZXBzIiwyLCJDb250cm9sbGVkIHRlbXBvLiBHZXRzIGJsb29kIGludG8gY2hlc3QsIHNob3VsZGVycywgYW5kIHRyaWNlcHMuIildKSwKbWsoIldPUktPVVQiLFsKZXgoIkJlbmNoIFByZXNzIiwiNCBzZXRzIHggOC0xMCByZXBzIiw5MCwid2VpZ2h0ZWQiLDQsIkJhciB0byBtaWQtY2hlc3QsIGVsYm93cyA0NSBkZWdyZWVzLiBMb3dlciAyIHNlY29uZHMsIHByZXNzIGV4cGxvc2l2ZWx5LiIpLApleCgiSW5jbGluZSBEQiBQcmVzcyIsIjMgc2V0cyB4IDEwLTEyIHJlcHMiLDc1LCJ3ZWlnaHRlZCIsMywiMzAtNDUgZGVncmVlIGJlbmNoLiBGZWVsIHRoZSBzdHJldGNoIGF0IHRoZSBib3R0b20uIikKXSksCm1rKCJXT1JLT1VUIixbCmV4KCJMYXRlcmFsIFJhaXNlIiwiMyBzZXRzIHggMTUgcmVwcyIsNjAsIndlaWdodGVkIiwzLCJMZWFkIHdpdGggZWxib3dzIG5vdCBoYW5kcy4gTGlnaHRlciB0aGFuIHlvdSB0aGluay4iKSwKZXgoIlRyaWNlcCBQdXNoZG93biIsIjMgc2V0cyB4IDEyLTE1IHJlcHMiLDYwLCJ3ZWlnaHRlZCIsMywiRWxib3dzIHBpbm5lZC4gRnVsbCBsb2Nrb3V0IGV2ZXJ5IHJlcC4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIk92ZXJoZWFkIFRyaWNlcCBFeHQiLCIzIHNldHMgeCAxMiByZXBzIiw2MCwid2VpZ2h0ZWQiLDMsIkVsYm93cyBmb3J3YXJkLCBkbyBub3QgZmxhcmUuIERlZXAgc3RyZXRjaCBhdCB0aGUgdG9wLiIpLApleCgiQ29yZSIsIjEwIG1pbnV0ZXMiLDAsInRpbWVkIiwxLCJQbGFuaywgZGVhZCBidWdzLCBob2xsb3cgaG9sZHMuIE5vbi1uZWdvdGlhYmxlLiIpCl0pCl19LApwdWxsOntuYW1lOiJQdWxsIERheSIsdGFnOiJCYWNrIC8gQmljZXBzIixjb2xvcjoiIzJhN2FhYSIsc2xpZGVzOlsKbWsoIldBUk1VUCIsW2V4KCJTaG91bGRlciBSb2xscyIsIjEwIGVhY2ggZGlyZWN0aW9uIiwwLCJyZXBzIiwxLCJCaWcgc2xvdyBjaXJjbGVzIGZvcndhcmQgdGhlbiBiYWNrLiIpXSksCm1rKCJXQVJNVVAiLFtleCgiUGxhbmsiLCIzIG1pbnV0ZXMiLDAsInBsYW5rIiwxLCJFbGJvd3MgdW5kZXIgc2hvdWxkZXJzLiBDb3JlIGJyYWNlZC4gMyBmdWxsIG1pbnV0ZXMuIildKSwKbWsoIldBUk1VUCIsW2V4KCJMaWdodCBQdWxsZG93bnMiLCIyIHggMTUgcmVwcyIsMzAsInJlcHMiLDIsIkxpZ2h0IHdlaWdodCwgZnVsbCByYW5nZS4gRGVwcmVzcyBzaG91bGRlciBibGFkZXMgYmVmb3JlIGVhY2ggcHVsbC4iKV0pLAptaygiV09SS09VVCIsWwpleCgiV2lkZSBHcmlwIFB1bGxkb3duIiwiNCBzZXRzIHggOC0xMCByZXBzIiw5MCwid2VpZ2h0ZWQiLDQsIkRlcHJlc3Mgc2hvdWxkZXIgYmxhZGVzLiBEcml2ZSBlbGJvd3MgdG8gaGlwIHBvY2tldHMuIiksCmV4KCJTZWF0ZWQgQ2FibGUgUm93IiwiMyBzZXRzIHggMTAtMTIgcmVwcyIsNzUsIndlaWdodGVkIiwzLCJQdWxsIHRvIG5hdmVsLiBFbGJvd3MgYmVoaW5kIHRvcnNvLiAxIHNlY29uZCBwYXVzZS4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIkNsb3NlIEdyaXAgUHVsbGRvd24iLCIzIHNldHMgeCAxMC0xMiByZXBzIiw3NSwid2VpZ2h0ZWQiLDMsIkNoZXN0IHRhbGwsIHB1bGwgdG8gc3Rlcm51bS4gSGl0cyBsb3dlciBsYXRzLiIpLApleCgiQ2FibGUgQmljZXAgQ3VybCIsIjMgc2V0cyB4IDEyLTE1IHJlcHMiLDYwLCJ3ZWlnaHRlZCIsMywiRWxib3dzIHBpbm5lZC4gRnVsbCBleHRlbnNpb24gYXQgdGhlIGJvdHRvbS4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIkhhbW1lciBDdXJsIiwiMyBzZXRzIHggMTIgcmVwcyIsNjAsIndlaWdodGVkIiwzLCJOZXV0cmFsIGdyaXAuIEJ1aWxkcyB0aGUgYnJhY2hpYWxpcy4iKSwKZXgoIkNvcmUiLCIxMCBtaW51dGVzIiwwLCJ0aW1lZCIsMSwiQ29yZSBhZnRlciBiYWNrIHByb3RlY3RzIHlvdXIgc3BpbmUuIikKXSkKXX0sCmxvd2VyOntuYW1lOiJMb3dlciBCb2R5Iix0YWc6IlF1YWRzIC8gSGFtc3RyaW5ncyAvIEdsdXRlcyIsY29sb3I6IiM1YThhM2EiLHNsaWRlczpbCm1rKCJXQVJNVVAiLFtleCgiTGVnIFN3aW5ncyIsIjEwIGVhY2ggZGlyZWN0aW9uIiwwLCJyZXBzIiwxLCJTd2luZyBlYWNoIGxlZyBmb3J3YXJkLWJhY2sgdGhlbiBzaWRlLXRvLXNpZGUuIildKSwKbWsoIldBUk1VUCIsW2V4KCJQbGFuayIsIjMgbWludXRlcyIsMCwicGxhbmsiLDEsIkVsYm93cyB1bmRlciBzaG91bGRlcnMuIDMgZnVsbCBtaW51dGVzLiIpXSksCm1rKCJXQVJNVVAiLFtleCgiQm9keXdlaWdodCBTcXVhdCIsIjIgeCAxNSByZXBzIiwzMCwicmVwcyIsMiwiRnVsbCBkZXB0aCwgc2xvdy4gV2FybXMga25lZXMsIGhpcHMsIGFuZCBhbmtsZXMuIildKSwKbWsoIldPUktPVVQiLFsKZXgoIkJhY2sgU3F1YXQiLCI0IHNldHMgeCA2LTggcmVwcyIsMTIwLCJ3ZWlnaHRlZCIsNCwiQmlnIGJyZWF0aCwgYnJhY2UgaGFyZC4gS25lZXMgb3V0LiBIaXQgcGFyYWxsZWwgZXZlcnkgcmVwLiIpLApleCgiUm9tYW5pYW4gRGVhZGxpZnQiLCIzIHNldHMgeCAxMCByZXBzIiw5MCwid2VpZ2h0ZWQiLDMsIkhpbmdlIGF0IGhpcHMsIHB1c2ggdGhlbSBiYWNrLiBGZWVsIGhhbXN0cmluZ3MgbG9hZC4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIldhbGtpbmcgTHVuZ2VzIiwiMyBzZXRzIHggMTAgZWFjaCBsZWciLDc1LCJ3ZWlnaHRlZCIsMywiVG9yc28gdXByaWdodC4gRnJvbnQga25lZSBvdmVyIHRvZXMuIiksCmV4KCJMZWcgUHJlc3MiLCIzIHNldHMgeCAxMi0xNSByZXBzIiw3NSwid2VpZ2h0ZWQiLDMsIkRvIG5vdCBsb2NrIG91dCBhdCB0b3AuIEtlZXAgdGVuc2lvbi4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIkxlZyBDdXJsIiwiMyBzZXRzIHggMTItMTUgcmVwcyIsNjAsIndlaWdodGVkIiwzLCIyIHNlY29uZHMgdXAsIDMgc2Vjb25kcyBkb3duLiBGdWxsIHJhbmdlLiIpLApleCgiQ2FsZiBSYWlzZXMiLCIzIHNldHMgeCAyMCByZXBzIiw0NSwid2VpZ2h0ZWQiLDMsIkZ1bGwgc3RyZXRjaCBhdCBib3R0b20uIDJzIHVwLCAxcyBob2xkLCAycyBkb3duLiIpCl0pCl19LAp1cHBlcjp7bmFtZToiVXBwZXIgQm9keSIsdGFnOiJDaGVzdCAvIEJhY2sgLyBBcm1zIixjb2xvcjoiIzhhNWFjOCIsc2xpZGVzOlsKbWsoIldBUk1VUCIsW2V4KCJBcm0gQ2lyY2xlcyIsIjEwIGVhY2ggZGlyZWN0aW9uIiwwLCJyZXBzIiwxLCJGb3J3YXJkIGFuZCBiYWNrd2FyZC4gR2V0cyB0aGUgc2hvdWxkZXIgam9pbnQgd2FybS4iKV0pLAptaygiV0FSTVVQIixbZXgoIlBsYW5rIiwiMyBtaW51dGVzIiwwLCJwbGFuayIsMSwiRWxib3dzIHVuZGVyIHNob3VsZGVycy4gMyBmdWxsIG1pbnV0ZXMuIildKSwKbWsoIldBUk1VUCIsW2V4KCJQdXNodXBzIiwiMiB4IDEwIHJlcHMiLDMwLCJyZXBzIiwyLCJDb250cm9sbGVkIHRlbXBvLiBXYXJtcyBjaGVzdCwgc2hvdWxkZXJzLCBhbmQgdHJpY2Vwcy4iKV0pLAptaygiV09SS09VVCIsWwpleCgiQmVuY2ggUHJlc3MiLCI0IHNldHMgeCA4LTEwIHJlcHMiLDkwLCJ3ZWlnaHRlZCIsNCwiQ2hlc3QgZHJpdmVzIHRoZSBiYXIsIG5vdCBzaG91bGRlcnMgb3IgdHJpY2Vwcy4iKSwKZXgoIldpZGUgR3JpcCBQdWxsZG93biIsIjMgc2V0cyB4IDEwLTEyIHJlcHMiLDc1LCJ3ZWlnaHRlZCIsMywiU2hvdWxkZXIgYmxhZGVzIGRvd24gYmVmb3JlIHB1bGxpbmcuIikKXSksCm1rKCJXT1JLT1VUIixbCmV4KCJEQiBTaG91bGRlciBQcmVzcyIsIjMgc2V0cyB4IDEwLTEyIHJlcHMiLDc1LCJ3ZWlnaHRlZCIsMywiQnJhY2UgY29yZSBiZWZvcmUgZXZlcnkgcmVwLiBGdWxsIGxvY2tvdXQgb3ZlcmhlYWQuIiksCmV4KCJTZWF0ZWQgQ2FibGUgUm93IiwiMyBzZXRzIHggMTAtMTIgcmVwcyIsNzUsIndlaWdodGVkIiwzLCIxIHNlY29uZCBwYXVzZSBhdCBjb250cmFjdGlvbi4gRWxib3dzIGJlaGluZCB0b3Jzby4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIkJpY2VwIGFuZCBUcmljZXAgU3VwZXJzZXQiLCIzIHNldHMgeCAxMiBlYWNoIiw3NSwid2VpZ2h0ZWQiLDMsIjEyIGN1cmxzIHRoZW4gaW1tZWRpYXRlbHkgMTIgcHVzaGRvd25zLiBaZXJvIHJlc3QgYmV0d2Vlbi4gVGhlbiByZXN0IDc1IHNlY29uZHMuIiksCmV4KCJDb3JlIiwiMTAgbWludXRlcyIsMCwidGltZWQiLDEsIlBsYW5rLCBkZWFkIGJ1Z3MsIGhvbGxvdyBob2xkcy4iKQpdKQpdfSwKcmVjb3Zlcnk6e25hbWU6IkFjdGl2ZSBSZWNvdmVyeSIsdGFnOiJNb2JpbGl0eSAvIEZsZXhpYmlsaXR5Iixjb2xvcjoiI2M4ODgyYSIsc2xpZGVzOlsKbWsoIldBUk1VUCIsW2V4KCJFYXN5IFdhbGsiLCI1IG1pbnV0ZXMiLDAsInRpbWVkIiwxLCJTbG93IHBhY2UuIEdldHMgYmxvb2QgbW92aW5nIGJlZm9yZSBzdHJldGNoaW5nLiIpXSksCm1rKCJXQVJNVVAiLFtleCgiUGxhbmsiLCIzIG1pbnV0ZXMiLDAsInBsYW5rIiwxLCJFdmVuIG9uIHJlY292ZXJ5IGRheXMuIDMgZnVsbCBtaW51dGVzLiIpXSksCm1rKCJXT1JLT1VUIixbCmV4KCJIaXAgRmxleG9yIFN0cmV0Y2giLCIyIHggNDVzIGVhY2ggc2lkZSIsMzAsInRpbWVkIiwyLCJLbmVlbGluZyBsdW5nZSwgc2hpZnQgaGlwcyBmb3J3YXJkLiBIb2xkIGFuZCBicmVhdGhlLiIpLApleCgiUGlnZW9uIFBvc2UiLCIyIHggNjBzIGVhY2ggc2lkZSIsMzAsInRpbWVkIiwyLCJMZXQgZ3Jhdml0eSBwdWxsIHlvdSBkb3duLiBCZXN0IGhpcCBzdHJldGNoIGF2YWlsYWJsZS4iKQpdKSwKbWsoIldPUktPVVQiLFsKZXgoIkhhbXN0cmluZyBTdHJldGNoIiwiMiB4IDQ1cyBlYWNoIHNpZGUiLDMwLCJ0aW1lZCIsMiwiRmxhdCBiYWNrLiBIaW5nZSBmcm9tIGhpcHMgbm90IHNwaW5lLiIpLApleCgiRm9hbSBSb2xsIiwiNSBtaW51dGVzIiwwLCJ0aW1lZCIsMSwiSG9sZCAyMC0zMCBzZWNvbmRzIG9uIHRlbmRlciBzcG90cy4iKQpdKQpdCn0KfTsKCnZhciBFTT17cHVzaDoiUFVTSCIscHVsbDoiUFVMTCIsbG93ZXI6IkxFR1MiLHVwcGVyOiJVUFBFUiIscmVjb3Zlcnk6IlJFU1QifTsKCmZ1bmN0aW9uIHBnKGlkKXsKdmFyIGlkcz1bInAtaG9tZSIsInAtb3YiLCJwLXN0b3J5IiwicC1kb25lIl07CmZvcih2YXIgaT0wO2k8aWRzLmxlbmd0aDtpKyspewp2YXIgZT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZChpZHNbaV0pOwppZihlKWUuY2xhc3NOYW1lPSJwYWdlIisoaWRzW2ldPT09aWQ/IiBvbiI6IiIpOwp9CndpbmRvdy5zY3JvbGxUbygwLDApOwp9CgpmdW5jdGlvbiBnb0hvbWUoKXsKUFJTPXNnKCJ3dF9wcnMiLHt9KTsKc3RvcFQoKTsKdmFyIGVsPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwLWhvbWUiKTsKaWYoIWVsKXJldHVybjsKdmFyIGtleXM9WyJwdXNoIiwicHVsbCIsImxvd2VyIiwidXBwZXIiLCJyZWNvdmVyeSJdOwp2YXIgaD0iPGRpdiBjbGFzcz0naG9tZSc+IjsKaCs9IjxkaXYgY2xhc3M9J2V5ZWJyb3cnPllvdXIgVHJhaW5pbmcgU3lzdGVtPC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J2h0aXRsZSc+VFJBSU5FUjxzcGFuPkdPPC9zcGFuPjwvZGl2PiI7CmgrPSI8ZGl2IGNsYXNzPSdoc3ViJz5TZWxlY3QgeW91ciBwcm9ncmFtPC9kaXY+IjsKZm9yKHZhciBpPTA7aTxrZXlzLmxlbmd0aDtpKyspewp2YXIgaz1rZXlzW2ldLHc9V0tba107CmgrPSI8ZGl2IGNsYXNzPSd3Y2FyZCcgaWQ9J3djLSIraysiJz4iOwpoKz0iPGRpdiBjbGFzcz0nd2Jhcicgc3R5bGU9J2JhY2tncm91bmQ6Iit3LmNvbG9yKyI7Jz48L2Rpdj4iOwpoKz0iPHNwYW4gc3R5bGU9J2ZvbnQtc2l6ZToyOHB4Oyc+IitFTVtrXSsiPC9zcGFuPiI7CmgrPSI8ZGl2PjxkaXYgY2xhc3M9J3duYW1lJz4iK3cubmFtZSsiPC9kaXY+PGRpdiBjbGFzcz0nd3RhZyc+Iit3LnRhZysiPC9kaXY+PC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J3dhcnInIHN0eWxlPSdjb2xvcjoiK3cuY29sb3IrIjsnPj48L2Rpdj4iOwpoKz0iPC9kaXY+IjsKfQpoKz0iPC9kaXY+IjsKZWwuaW5uZXJIVE1MPWg7CmZvcih2YXIgaj0wO2o8a2V5cy5sZW5ndGg7aisrKXsKKGZ1bmN0aW9uKGtleSl7CnZhciBjPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJ3Yy0iK2tleSk7CmlmKGMpYy5vbmNsaWNrPWZ1bmN0aW9uKCl7Z29PdihrZXkpO307Cn0oa2V5c1tqXSkpOwp9CnBnKCJwLWhvbWUiKTsKfQoKZnVuY3Rpb24gZ29PdihrZXkpewpDSz1rZXk7CnZhciB3PVdLW2tleV07CnZhciBlbD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicC1vdiIpOwppZighZWwpcmV0dXJuOwp2YXIgaD0iPGRpdiBjbGFzcz0nb3ZoZXJvJz4iOwpoKz0iPGRpdiBjbGFzcz0nb3ZiYWNrJyBpZD0nb3ZiYWNrJz48IEJBQ0s8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0nb3Z0aXRsZScgc3R5bGU9J2NvbG9yOiIrdy5jb2xvcisiOyc+Iit3Lm5hbWUudG9VcHBlckNhc2UoKSsiPC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J292dGFnJz4iK3cudGFnKyI8L2Rpdj4iOwpoKz0iPC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J292bGlzdCc+IjsKdmFyIGxwPSIiOwpmb3IodmFyIGk9MDtpPHcuc2xpZGVzLmxlbmd0aDtpKyspewp2YXIgcz13LnNsaWRlc1tpXTsKaWYocy5waGFzZSE9PWxwKXtscD1zLnBoYXNlO2grPSI8ZGl2IGNsYXNzPSdvdnBoYXNlJz4iK3MucGhhc2UrIjwvZGl2PiI7fQpoKz0iPGRpdiBjbGFzcz0nb3Zncm91cCc+IjsKaWYocy5leHMubGVuZ3RoPT09MiloKz0iPGRpdiBjbGFzcz0nb3ZwYWlyJyBzdHlsZT0nY29sb3I6Iit3LmNvbG9yKyI7YmFja2dyb3VuZDoiK3cuY29sb3IrIjEwOyc+UEFJUkVEIEVYRVJDSVNFUzwvZGl2PiI7CmZvcih2YXIgaj0wO2o8cy5leHMubGVuZ3RoO2orKyl7CnZhciBlPXMuZXhzW2pdLHBpPVBSU1tlLm5hbWVdOwpoKz0iPGRpdiBjbGFzcz0nb3ZpdGVtJz4iOwpoKz0iPGRpdiBjbGFzcz0nb3ZsdHInIHN0eWxlPSdiYWNrZ3JvdW5kOiIrdy5jb2xvcisiMTU7Ym9yZGVyOjFweCBzb2xpZCAiK3cuY29sb3IrIjQwO2NvbG9yOiIrdy5jb2xvcisiOyc+Iisoaj09PTA/IkEiOiJCIikrIjwvZGl2PiI7CmgrPSI8ZGl2PjxkaXYgY2xhc3M9J292aW5hbWUnPiIrZS5uYW1lKyI8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0nb3ZpbWV0YSc+IitlLm1ldGErKHBpPyIgLSBQUjogIitwaS53ZWlnaHQrImxiIHggIitwaS5yZXBzOiIiKSsiPC9kaXY+PC9kaXY+IjsKaCs9IjwvZGl2PiI7Cn0KaCs9IjwvZGl2PiI7Cn0KaCs9IjwvZGl2PiI7CmgrPSI8ZGl2IGNsYXNzPSdvdmJvdCc+PGJ1dHRvbiBjbGFzcz0nb3ZidG4nIGlkPSdvdnN0YXJ0JyBzdHlsZT0nYmFja2dyb3VuZDoiK3cuY29sb3IrIjsnPlNUQVJUIFdPUktPVVQ8L2J1dHRvbj48L2Rpdj4iOwplbC5pbm5lckhUTUw9aDsKZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoIm92YmFjayIpLm9uY2xpY2s9ZnVuY3Rpb24oKXtnb0hvbWUoKTt9Owpkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgib3ZzdGFydCIpLm9uY2xpY2s9ZnVuY3Rpb24oKXtTST0wO1NEQT0wO1NEQj0wO2dvU3RvcnkoKTt9OwpwZygicC1vdiIpOwp9CgpmdW5jdGlvbiBnb1N0b3J5KCl7CnN0b3BUKCk7CnZhciB3PVdLW0NLXSxzbGlkZT13LnNsaWRlc1tTSV0sdG90PXcuc2xpZGVzLmxlbmd0aDsKdmFyIGVsPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwLXN0b3J5Iik7CmlmKCFlbClyZXR1cm47CnZhciBiYXJzPSIiOwpmb3IodmFyIGk9MDtpPHRvdDtpKyspewpiYXJzKz0iPGRpdiBjbGFzcz0nc3RiYXInPjxkaXYgY2xhc3M9J3N0ZmlsbCcgc3R5bGU9J3dpZHRoOiIrKGk8U0k/MTAwOjApKyIlO2JhY2tncm91bmQ6Iit3LmNvbG9yKyI7Jz48L2Rpdj48L2Rpdj4iOwp9CnZhciBoPSI8ZGl2IHN0eWxlPSdiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxODBkZWcsIit3LmNvbG9yKyIyMCAwJSwjMDYwNjA4IDQwJSk7Jz4iOwpoKz0iPGRpdiBjbGFzcz0nc3RiYXJzJz4iK2JhcnMrIjwvZGl2PiI7CmgrPSI8ZGl2IGNsYXNzPSdzdGJvZHknPiI7CmgrPSI8ZGl2IGNsYXNzPSdzdGh1ZCc+PHNwYW4gY2xhc3M9J3N0YmFkZ2UnIHN0eWxlPSdjb2xvcjoiK3cuY29sb3IrIjtib3JkZXItY29sb3I6Iit3LmNvbG9yKyI0MDsnPiIrc2xpZGUucGhhc2UrIjwvc3Bhbj4iOwpoKz0iPHNwYW4gY2xhc3M9J3N0c3RlcCc+IisoU0krMSkrIiBPRiAiK3RvdCsiPC9zcGFuPjwvZGl2PiI7CmlmKHNsaWRlLmV4cy5sZW5ndGg9PT0xKXsKaCs9YkV4KHNsaWRlLmV4c1swXSwiQSIsdy5jb2xvciwwLFNEQSx0cnVlKTsKfWVsc2V7CmgrPWJFeChzbGlkZS5leHNbMF0sIkEiLHcuY29sb3IsMCxTREEsZmFsc2UpOwpoKz0iPGRpdiBjbGFzcz0ncGRpdic+VEhFTjwvZGl2PiI7CmgrPWJFeChzbGlkZS5leHNbMV0sIkIiLHcuY29sb3IsMSxTREIsZmFsc2UpOwp9CmgrPSI8ZGl2IGNsYXNzPSduYXZyb3cnPiI7CmgrPSI8YnV0dG9uIGNsYXNzPSdzdHByZXYnIGlkPSdzdHByZXYnPjwgQkFDSzwvYnV0dG9uPiI7CmgrPSI8YnV0dG9uIGNsYXNzPSdzdG5leHQnIGlkPSdzdG5leHQnIHN0eWxlPSdiYWNrZ3JvdW5kOiIrdy5jb2xvcisiOyc+IisoU0k9PT10b3QtMT8iRklOSVNIIjoiTkVYVCA+IikrIjwvYnV0dG9uPiI7CmgrPSI8L2Rpdj48L2Rpdj48L2Rpdj4iOwplbC5pbm5lckhUTUw9aDsKZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInN0cHJldiIpLm9uY2xpY2s9ZnVuY3Rpb24oKXtpZihTSTw9MCl7Z29PdihDSyk7fWVsc2V7U0ktPTE7U0RBPTA7U0RCPTA7Z29TdG9yeSgpO319Owpkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgic3RuZXh0Iikub25jbGljaz1mdW5jdGlvbigpe2lmKFNJPj1XS1tDS10uc2xpZGVzLmxlbmd0aC0xKXtnb0RvbmUoKTt9ZWxzZXtTSSs9MTtTREE9MDtTREI9MDtnb1N0b3J5KCk7fX07CnZhciBwYj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicGxhbmtidG4iKTsKaWYocGIpcGIub25jbGljaz1mdW5jdGlvbigpe3RvZ2dsZVAoKTt9OwpiRG90cygpO2JQUigpOwpwZygicC1zdG9yeSIpOwpQTD0xODA7UElSPWZhbHNlOwp9CgpmdW5jdGlvbiBiRXgoZSxsYWJlbCxjb2xvcixpZHgsZG9uZSxiaWcpewp2YXIgaD0iPGRpdiBjbGFzcz0nZXhibG9jaycgc3R5bGU9J2JvcmRlci1sZWZ0OjNweCBzb2xpZCAiK2NvbG9yKyI7Jz4iOwpoKz0iPGRpdiBzdHlsZT0nbWFyZ2luLWJvdHRvbTo4cHg7Jz48c3BhbiBjbGFzcz0nZXhsdHInIHN0eWxlPSdiYWNrZ3JvdW5kOiIrY29sb3IrIjIwO2JvcmRlcjoxcHggc29saWQgIitjb2xvcisiNTA7Y29sb3I6Iitjb2xvcisiOyc+IitsYWJlbCsiPC9zcGFuPiI7CmgrPSI8c3BhbiBjbGFzcz0nZXhuYW1lJyBzdHlsZT0nZm9udC1zaXplOiIrKGJpZz8iMjgiOiIyMiIpKyJweDtjb2xvcjoiK2NvbG9yKyI7Jz4iK2UubmFtZSsiPC9zcGFuPjwvZGl2PiI7CnZhciBwaT1QUlNbZS5uYW1lXTsKaWYocGkpaCs9IjxkaXYgY2xhc3M9J3ByYmFkZ2UnIHN0eWxlPSdiYWNrZ3JvdW5kOiIrY29sb3IrIjE1O2NvbG9yOiIrY29sb3IrIjtib3JkZXItY29sb3I6Iitjb2xvcisiMzU7Jz5QUjogIitwaS53ZWlnaHQrImxiIHggIitwaS5yZXBzKyI8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0nZXhtZXRhJz4iK2UubWV0YSsiPC9kaXY+PGRpdiBjbGFzcz0nZXhjdWUnPiIrZS5jdWUrIjwvZGl2PiI7CmlmKGUudHlwZT09PSJwbGFuayIpewpoKz0iPGRpdiBjbGFzcz0ncGxhbmt3cmFwJyBzdHlsZT0nYm9yZGVyLWNvbG9yOiIrY29sb3IrIjMwOyc+IjsKaCs9IjxkaXYgY2xhc3M9J3BsYW5rdGltZScgaWQ9J3BsYW5rZGlzcCcgc3R5bGU9J2NvbG9yOiIrY29sb3IrIjsnPjM6MDA8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0ncGxhbmtsYmwnPmhvbGQ8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0ncGxhbmtidG4nIGlkPSdwbGFua2J0bicgc3R5bGU9J2NvbG9yOiIrY29sb3IrIjtib3JkZXItY29sb3I6Iitjb2xvcisiNTA7YmFja2dyb3VuZDoiK2NvbG9yKyIxMDsnPlNUQVJUIFRJTUVSPC9kaXY+IjsKaCs9IjwvZGl2PiI7Cn0KaWYoZS50eXBlPT09IndlaWdodGVkInx8ZS50eXBlPT09InJlcHMiKXsKaCs9IjxkaXYgY2xhc3M9J3NldHJvdycgaWQ9J2RyLSIraWR4KyInPiI7CmZvcih2YXIgcz0wO3M8ZS5zZXRzO3MrKyl7CnZhciBoaXQ9KHM8ZG9uZSksZHM9aGl0PyJib3JkZXItY29sb3I6Iitjb2xvcisiO2NvbG9yOiMwMDA7YmFja2dyb3VuZDoiK2NvbG9yKyI7IiAgOiIiOwpoKz0iPGRpdiBjbGFzcz0nZG90JyBpZD0nZC0iK2lkeCsiLSIrcysiJyBzdHlsZT0nIitkcysiJyBkYXRhLWk9JyIraWR4KyInIGRhdGEtcz0nIitzKyInIGRhdGEtdD0nIitlLnNldHMrIicgZGF0YS1yPSciK2UucmVzdCsiJz4iKyggcysxKSsiPC9kaXY+IjsKfQpoKz0iPC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J3Bycm93Jz48aW5wdXQgY2xhc3M9J3ByaW5wJyBpZD0ncHciK2lkeCsiJyB0eXBlPSdudW1iZXInIHBsYWNlaG9sZGVyPSdsYnMnPiI7CmgrPSI8aW5wdXQgY2xhc3M9J3ByaW5wJyBpZD0ncHJyIitpZHgrIicgdHlwZT0nbnVtYmVyJyBwbGFjZWhvbGRlcj0ncmVwcyc+IjsKaCs9IjxkaXYgY2xhc3M9J3Byc2F2ZScgaWQ9J3BycyIraWR4KyInPlNhdmUgUFI8L2Rpdj48L2Rpdj4iOwp9CnJldHVybiBoKyI8L2Rpdj4iOwp9CgpmdW5jdGlvbiBiRG90cygpewp2YXIgZG90cz1kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCIuZG90Iik7CmZvcih2YXIgaT0wO2k8ZG90cy5sZW5ndGg7aSsrKXsKKGZ1bmN0aW9uKGQpewpkLm9uY2xpY2s9ZnVuY3Rpb24oKXsKdmFyIGlkeD1wYXJzZUludChkLmdldEF0dHJpYnV0ZSgiZGF0YS1pIikpLHM9cGFyc2VJbnQoZC5nZXRBdHRyaWJ1dGUoImRhdGEtcyIpKSx0PXBhcnNlSW50KGQuZ2V0QXR0cmlidXRlKCJkYXRhLXQiKSkscj1wYXJzZUludChkLmdldEF0dHJpYnV0ZSgiZGF0YS1yIikpOwp2YXIgY29sb3I9V0tbQ0tdLmNvbG9yLGN1cj0oaWR4PT09MD9TREE6U0RCKSxuZD0oczxjdXI/czpzKzEpOwppZihpZHg9PT0wKVNEQT1uZDtlbHNlIFNEQj1uZDsKZm9yKHZhciB4PTA7eDx0O3grKyl7CnZhciBkb3Q9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoImQtIitpZHgrIi0iK3gpOwppZighZG90KWNvbnRpbnVlOwppZih4PG5kKXtkb3Quc3R5bGUuYm9yZGVyQ29sb3I9Y29sb3I7ZG90LnN0eWxlLmNvbG9yPSIjMDAwIjtkb3Quc3R5bGUuYmFja2dyb3VuZD1jb2xvcjt9CmVsc2V7ZG90LnN0eWxlLmJvcmRlckNvbG9yPSIiO2RvdC5zdHlsZS5jb2xvcj0iIjtkb3Quc3R5bGUuYmFja2dyb3VuZD0iIjt9Cn0KaWYobmQ+MCYmbmQ8dCYmcj4wKXNob3dSZXN0KHIpOwp9Owp9KGRvdHNbaV0pKTsKfQp9CgpmdW5jdGlvbiBiUFIoKXsKZm9yKHZhciBpPTA7aTwyO2krKyl7CihmdW5jdGlvbihpZHgpewp2YXIgYnRuPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwcnMiK2lkeCk7CmlmKCFidG4pcmV0dXJuOwpidG4ub25jbGljaz1mdW5jdGlvbigpewp2YXIgc2w9V0tbQ0tdLnNsaWRlc1tTSV07CmlmKCFzbHx8IXNsLmV4c1tpZHhdKXJldHVybjsKdmFyIHdlPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwdyIraWR4KSxyZT1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicHJyIitpZHgpOwppZighd2V8fCFyZSlyZXR1cm47CnZhciB3dj1wYXJzZUZsb2F0KHdlLnZhbHVlKSxydj1wYXJzZUludChyZS52YWx1ZSk7CmlmKCF3dnx8IXJ2KXJldHVybjsKUFJTW3NsLmV4c1tpZHhdLm5hbWVdPXt3ZWlnaHQ6d3YscmVwczpydixkYXRlOm5ldyBEYXRlKCkudG9JU09TdHJpbmcoKS5zcGxpdCgiVCIpWzBdfTsKc3MoInd0X3BycyIsUFJTKTt3ZS52YWx1ZT0iIjtyZS52YWx1ZT0iIjsKYnRuLnRleHRDb250ZW50PSJTYXZlZCEiOwpzZXRUaW1lb3V0KGZ1bmN0aW9uKCl7YnRuLnRleHRDb250ZW50PSJTYXZlIFBSIjt9LDEyMDApOwp9Owp9KGkpKTsKfQp9CgpmdW5jdGlvbiB0b2dnbGVQKCl7CmlmKFBJUil7ClBJUj1mYWxzZTtpZihQVCl7Y2xlYXJJbnRlcnZhbChQVCk7UFQ9bnVsbDt9CnZhciBiPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwbGFua2J0biIpO2lmKGIpYi50ZXh0Q29udGVudD0iUkVTVU1FIjsKfWVsc2V7ClBJUj10cnVlO2lmKFBMPD0wKVBMPTE4MDsKdmFyIGIyPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJwbGFua2J0biIpO2lmKGIyKWIyLnRleHRDb250ZW50PSJQQVVTRSI7ClBUPXNldEludGVydmFsKGZ1bmN0aW9uKCl7ClBMLT0xOwp2YXIgZD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicGxhbmtkaXNwIik7CmlmKGQpe3ZhciBtPU1hdGguZmxvb3IoUEwvNjApLHNjPVBMJTYwO2QudGV4dENvbnRlbnQ9bSsiOiIrKHNjPDEwPyIwIjoiIikrc2M7fQppZihQTDw9MCl7CmNsZWFySW50ZXJ2YWwoUFQpO1BUPW51bGw7UElSPWZhbHNlOwp2YXIgZDI9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInBsYW5rZGlzcCIpO2lmKGQyKWQyLnRleHRDb250ZW50PSJET05FISI7CnZhciBiMz1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicGxhbmtidG4iKTsKaWYoYjMpe2IzLnRleHRDb250ZW50PSJSRVNFVCI7YjMub25jbGljaz1mdW5jdGlvbigpe1BMPTE4MDt2YXIgZDM9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInBsYW5rZGlzcCIpO2lmKGQzKWQzLnRleHRDb250ZW50PSIzOjAwIjtiMy50ZXh0Q29udGVudD0iU1RBUlQgVElNRVIiO2IzLm9uY2xpY2s9ZnVuY3Rpb24oKXt0b2dnbGVQKCk7fTt9O30KfQp9LDEwMDApOwp9Cn0KCmZ1bmN0aW9uIHNob3dSZXN0KHNlY3MpewpSTD1zZWNzOwp2YXIgb3Y9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlc3RvdiIpO2lmKCFvdilyZXR1cm47Cm92LmNsYXNzTmFtZT0icmVzdG92IG9uIjsKdmFyIHJuPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJyZXN0bnVtIik7aWYocm4pcm4udGV4dENvbnRlbnQ9Ukw7CmlmKFJUKWNsZWFySW50ZXJ2YWwoUlQpOwpSVD1zZXRJbnRlcnZhbChmdW5jdGlvbigpewpSTC09MTsKdmFyIHJuMj1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgicmVzdG51bSIpO2lmKHJuMilybjIudGV4dENvbnRlbnQ9Ukw7CmlmKFJMPD0wKXtjbGVhckludGVydmFsKFJUKTtSVD1udWxsO3ZhciBvPWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJyZXN0b3YiKTtpZihvKW8uY2xhc3NOYW1lPSJyZXN0b3YiO30KfSwxMDAwKTsKfQoKZnVuY3Rpb24gc3RvcFQoKXsKaWYoUlQpe2NsZWFySW50ZXJ2YWwoUlQpO1JUPW51bGw7fQppZihQVCl7Y2xlYXJJbnRlcnZhbChQVCk7UFQ9bnVsbDt9ClBJUj1mYWxzZTsKdmFyIG92PWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJyZXN0b3YiKTtpZihvdilvdi5jbGFzc05hbWU9InJlc3RvdiI7Cn0KCmZ1bmN0aW9uIGdvRG9uZSgpewpzdG9wVCgpOwp2YXIgdz1XS1tDS10sZWw9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInAtZG9uZSIpO2lmKCFlbClyZXR1cm47CnZhciB0b3Q9MDsKZm9yKHZhciBpPTA7aTx3LnNsaWRlcy5sZW5ndGg7aSsrKWZvcih2YXIgaj0wO2o8dy5zbGlkZXNbaV0uZXhzLmxlbmd0aDtqKyspdG90Kz13LnNsaWRlc1tpXS5leHNbal0uc2V0czsKdmFyIGg9IjxkaXYgY2xhc3M9J2RvbmVwYWdlJz48ZGl2IGNsYXNzPSdkb25laWNvbic+ITwvZGl2PiI7CmgrPSI8ZGl2IGNsYXNzPSdkb25ldGl0bGUnIHN0eWxlPSdjb2xvcjoiK3cuY29sb3IrIjsnPkRPTkUhPC9kaXY+IjsKaCs9IjxkaXYgY2xhc3M9J2RvbmVzdGF0Jz4iK3RvdCsiPC9kaXY+PGRpdiBjbGFzcz0nZG9uZWxibCc+c2V0cyBjb21wbGV0ZWQ8L2Rpdj4iOwpoKz0iPGRpdiBjbGFzcz0nZG9uZXN1Yic+Iit3Lm5hbWUrIiBjb21wbGV0ZS48L2Rpdj4iOwpoKz0iPGJ1dHRvbiBjbGFzcz0nZG9uZWhvbWUnIGlkPSdkb25laG9tZSc+QkFDSyBIT01FPC9idXR0b24+PC9kaXY+IjsKZWwuaW5uZXJIVE1MPWg7CmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJkb25laG9tZSIpLm9uY2xpY2s9ZnVuY3Rpb24oKXtnb0hvbWUoKTt9OwpwZygicC1kb25lIik7Cn0KCmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCJyZXN0c2tpcCIpLm9uY2xpY2s9ZnVuY3Rpb24oKXsKaWYoUlQpe2NsZWFySW50ZXJ2YWwoUlQpO1JUPW51bGw7fQp2YXIgb3Y9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoInJlc3RvdiIpO2lmKG92KW92LmNsYXNzTmFtZT0icmVzdG92IjsKfTsKCnRyeXtnb0hvbWUoKTt9Y2F0Y2goZXJyKXtkb2N1bWVudC5ib2R5LnN0eWxlLmJhY2tncm91bmQ9IiNmZmYiO2RvY3VtZW50LmJvZHkuc3R5bGUuY29sb3I9IiMwMDAiO2RvY3VtZW50LmJvZHkuc3R5bGUucGFkZGluZz0iNDBweCI7ZG9jdW1lbnQuYm9keS5zdHlsZS5mb250U2l6ZT0iMTZweCI7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IjxoMj5KUyBFcnJvcjwvaDI+PHByZT4iK2Vyci5tZXNzYWdlKyI8L3ByZT48cHJlPiIrZXJyLnN0YWNrKyI8L3ByZT4iO30K");
+var _e=document.createElement("script");
+_e.textContent=_s;
+document.body.appendChild(_e);
 </script>
+
 </body>
 </html>
