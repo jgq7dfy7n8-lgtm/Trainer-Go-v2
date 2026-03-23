@@ -85,6 +85,22 @@ body{background:#060608;color:#f0f0ff;font-family:Rajdhani,sans-serif;min-height
 .donehome{padding:15px 44px;border:none;border-radius:13px;font-family:"Black Ops One",sans-serif;font-size:18px;letter-spacing:3px;color:#000;cursor:pointer;background:#00e5ff;}
 
 .wtype{font-family:Rajdhani,sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 8px;border-radius:6px;text-transform:uppercase;}
+
+/* SPOTIFY */
+.sp-card{padding:0 18px 16px;}
+.sp-inner{background:#12121a;border:1px solid #2a2a3e;border-radius:14px;padding:14px;}
+.sp-label{font-size:9px;letter-spacing:3px;color:#1db954;text-transform:uppercase;margin-bottom:10px;font-weight:700;}
+.sp-connect-wrap{display:flex;align-items:center;gap:12px;cursor:pointer;}
+.sp-connect-wrap:active{opacity:.7;}
+.sp-prow{display:flex;gap:12px;align-items:center;}
+.sp-art{width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.sp-pname{font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sp-pmeta{font-size:11px;color:#6a6a8a;margin-top:2px;}
+.sp-open{display:block;margin-top:10px;padding:10px;background:#1db954;border-radius:10px;text-align:center;font-size:13px;font-weight:700;color:#000;letter-spacing:1px;text-decoration:none;}
+.sp-open:active{opacity:.8;}
+.sp-loading{font-size:12px;color:#6a6a8a;}
+.sp-shuffle{display:inline-block;margin-top:10px;font-size:11px;color:#1db954;cursor:pointer;letter-spacing:1px;text-transform:uppercase;}
+.sp-shuffle:active{opacity:.7;}
 </style>
 
 </head>
@@ -107,6 +123,161 @@ var _s=atob("CnZhciBDSz1udWxsLFNJPTAsU0RBPTAsU0RCPTAsUFJTPXt9LFJUPW51bGwsUkw9MCx
 var _e=document.createElement("script");
 _e.textContent=_s;
 document.body.appendChild(_e);
+</script>
+
+
+<script>
+// ── Spotify Integration ─────────────────────────────────────────────────────
+// ✅ Set your Spotify app Client ID here after creating one at:
+//    https://developer.spotify.com/dashboard
+var SP_CLIENT_ID = 'SPOTIFY_CLIENT_ID_PLACEHOLDER';
+var SP_REDIRECT = (window.location.origin + window.location.pathname).replace(/\/+$/, '');
+var SP_SCOPES   = 'playlist-read-private playlist-read-collaborative';
+
+var SP_QUERIES = {
+  push:     'push day chest shoulders workout pump',
+  pull:     'pull day back biceps gym',
+  lower:    'leg day squat workout power',
+  upper:    'upper body lifting workout',
+  recovery: 'yoga recovery stretch relax calm'
+};
+
+// PKCE helpers
+function _spRand(n){
+  var c='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~',
+      r='',v=crypto.getRandomValues(new Uint8Array(n));
+  for(var i=0;i<n;i++)r+=c[v[i]%c.length];
+  return r;
+}
+async function _spChallenge(v){
+  var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
+  return btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+
+async function spLogin(){
+  var v=_spRand(64);
+  localStorage.setItem('sp_cv',v);
+  var ch=await _spChallenge(v);
+  var p=new URLSearchParams({client_id:SP_CLIENT_ID,response_type:'code',redirect_uri:SP_REDIRECT,scope:SP_SCOPES,code_challenge_method:'S256',code_challenge:ch});
+  window.location='https://accounts.spotify.com/authorize?'+p;
+}
+
+async function _spCallback(){
+  var p=new URLSearchParams(window.location.search),code=p.get('code');
+  if(!code)return;
+  history.replaceState({},'',window.location.pathname);
+  var cv=localStorage.getItem('sp_cv');if(!cv)return;
+  var body=new URLSearchParams({grant_type:'authorization_code',code:code,redirect_uri:SP_REDIRECT,client_id:SP_CLIENT_ID,code_verifier:cv});
+  var r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
+  var d=await r.json();
+  if(d.access_token){
+    localStorage.setItem('sp_token',d.access_token);
+    localStorage.setItem('sp_token_exp',Date.now()+d.expires_in*1000);
+    if(d.refresh_token)localStorage.setItem('sp_rt',d.refresh_token);
+  }
+}
+
+async function _spRefresh(){
+  var rt=localStorage.getItem('sp_rt');if(!rt)return null;
+  var body=new URLSearchParams({grant_type:'refresh_token',refresh_token:rt,client_id:SP_CLIENT_ID});
+  var r=await fetch('https://accounts.spotify.com/api/token',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString()});
+  var d=await r.json();
+  if(d.access_token){
+    localStorage.setItem('sp_token',d.access_token);
+    localStorage.setItem('sp_token_exp',Date.now()+d.expires_in*1000);
+    if(d.refresh_token)localStorage.setItem('sp_rt',d.refresh_token);
+    return d.access_token;
+  }
+  return null;
+}
+
+function _spLiveToken(){var t=localStorage.getItem('sp_token'),e=localStorage.getItem('sp_token_exp');return(t&&e&&Date.now()<+e)?t:null;}
+async function _spGetToken(){return _spLiveToken()||(await _spRefresh());}
+
+async function spFetch(workoutKey,offset){
+  var t=await _spGetToken();if(!t)return null;
+  var q=SP_QUERIES[workoutKey]||'workout music';
+  var o=(offset!=null)?offset:Math.floor(Math.random()*15);
+  var r=await fetch('https://api.spotify.com/v1/search?q='+encodeURIComponent(q)+'&type=playlist&limit=1&offset='+o,{headers:{'Authorization':'Bearer '+t}});
+  var d=await r.json();
+  if(d.error&&d.error.status===401){localStorage.removeItem('sp_token');return null;}
+  var items=(d.playlists&&d.playlists.items)?d.playlists.items.filter(Boolean):[];
+  return items[0]||null;
+}
+
+function _spPlaylistHTML(p,key){
+  var img=p.images&&p.images[0]?p.images[0].url:'';
+  var h='<div class="sp-label">🎵 Recommended Playlist</div>';
+  h+='<div class="sp-prow">';
+  if(img)h+='<img class="sp-art" src="'+img+'">';
+  h+='<div style="flex:1;min-width:0;"><div class="sp-pname">'+p.name+'</div>';
+  var m=[];
+  if(p.owner&&p.owner.display_name)m.push(p.owner.display_name);
+  if(p.tracks)m.push(p.tracks.total+' tracks');
+  if(m.length)h+='<div class="sp-pmeta">'+m.join(' · ')+'</div>';
+  h+='</div></div>';
+  h+='<a class="sp-open" href="'+p.external_urls.spotify+'" target="_blank">▶ OPEN IN SPOTIFY</a>';
+  h+='<div class="sp-shuffle" id="sp-shuffle" data-key="'+key+'">↻ Different playlist</div>';
+  return h;
+}
+
+function _spRenderConnectBtn(sec,msg){
+  sec.innerHTML='<div class="sp-card"><div class="sp-inner"><div class="sp-connect-wrap" id="sp-cbtn">'
+    +'<div style="font-size:22px;">🎵</div>'
+    +'<div><div style="font-size:14px;font-weight:700;">Connect Spotify</div>'
+    +'<div style="font-size:11px;color:#6a6a8a;margin-top:2px;">'+(msg||'Get a playlist for this workout')+'</div>'
+    +'</div></div></div></div>';
+  var btn=document.getElementById('sp-cbtn');
+  if(btn)btn.onclick=spLogin;
+}
+
+function spRender(key){
+  var sec=document.getElementById('sp-section');if(!sec)return;
+  sec.setAttribute('data-key',key);
+  if(SP_CLIENT_ID==='SPOTIFY_CLIENT_ID_PLACEHOLDER'){sec.innerHTML='';return;}
+  if(!_spLiveToken()&&!localStorage.getItem('sp_rt')){_spRenderConnectBtn(sec);return;}
+  sec.innerHTML='<div class="sp-card"><div class="sp-inner sp-loading-inner"><div class="sp-label">🎵 Recommended Playlist</div><div class="sp-loading">Finding your playlist…</div></div></div>';
+  spFetch(key).then(function(p){
+    var sec2=document.getElementById('sp-section');if(!sec2)return;
+    if(!p){_spRenderConnectBtn(sec2,'Session expired — tap to reconnect');return;}
+    sec2.innerHTML='<div class="sp-card"><div class="sp-inner" id="sp-inner">'+_spPlaylistHTML(p,key)+'</div></div>';
+    _spBindShuffle();
+  });
+}
+
+function _spBindShuffle(){
+  var sh=document.getElementById('sp-shuffle');
+  if(!sh)return;
+  sh.onclick=function(){
+    var key=this.getAttribute('data-key');
+    var inner=document.getElementById('sp-inner');
+    if(inner)inner.innerHTML='<div class="sp-label">🎵 Recommended Playlist</div><div class="sp-loading">Finding another…</div>';
+    spFetch(key,Math.floor(Math.random()*30)).then(function(p){
+      var inner2=document.getElementById('sp-inner');if(!inner2||!p)return;
+      inner2.innerHTML=_spPlaylistHTML(p,key);
+      _spBindShuffle();
+    });
+  };
+}
+
+// Wrap goOv on load
+window.addEventListener('load',function(){
+  _spCallback().then(function(){
+    var origGoOv=window.goOv;
+    if(!origGoOv)return;
+    window.goOv=function(key){
+      origGoOv(key);
+      // Insert #sp-section before the start button
+      if(document.getElementById('sp-section'))document.getElementById('sp-section').remove();
+      var spDiv=document.createElement('div');
+      spDiv.id='sp-section';
+      var ovBot=document.querySelector('#p-ov .ovbot');
+      if(ovBot)ovBot.parentNode.insertBefore(spDiv,ovBot);
+      else{var pOv=document.getElementById('p-ov');if(pOv)pOv.appendChild(spDiv);}
+      spRender(key);
+    };
+  });
+});
 </script>
 
 </body>
